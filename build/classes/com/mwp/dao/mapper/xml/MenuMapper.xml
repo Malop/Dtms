@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mwp.dao.mapper.MenuMapper">
+  <resultMap id="BaseResultMap" type="com.mwp.dao.model.Menu">
+    <id column="menuid" jdbcType="INTEGER" property="menuid" />
+    <result column="parentid" jdbcType="INTEGER" property="parentid" />
+    <result column="menuname" jdbcType="VARCHAR" property="menuname" />
+    <result column="type" jdbcType="VARCHAR" property="type" />
+    <result column="uri" jdbcType="VARCHAR" property="uri" />
+    <result column="icon" jdbcType="VARCHAR" property="icon" />
+    <result column="cttime" jdbcType="DATE" property="cttime" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    menuid, parentid, menuname, type, uri, icon, cttime
+  </sql>
+  <select id="selectByExample" parameterType="com.mwp.dao.model.MenuExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from menu
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from menu
+    where menuid = #{menuid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from menu
+    where menuid = #{menuid,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.mwp.dao.model.MenuExample">
+    delete from menu
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.mwp.dao.model.Menu">
+    insert into menu (menuid, parentid, menuname, 
+      type, uri, icon, cttime
+      )
+    values (#{menuid,jdbcType=INTEGER}, #{parentid,jdbcType=INTEGER}, #{menuname,jdbcType=VARCHAR}, 
+      #{type,jdbcType=VARCHAR}, #{uri,jdbcType=VARCHAR}, #{icon,jdbcType=VARCHAR}, #{cttime,jdbcType=DATE}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.mwp.dao.model.Menu">
+    insert into menu
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="menuid != null">
+        menuid,
+      </if>
+      <if test="parentid != null">
+        parentid,
+      </if>
+      <if test="menuname != null">
+        menuname,
+      </if>
+      <if test="type != null">
+        type,
+      </if>
+      <if test="uri != null">
+        uri,
+      </if>
+      <if test="icon != null">
+        icon,
+      </if>
+      <if test="cttime != null">
+        cttime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="menuid != null">
+        #{menuid,jdbcType=INTEGER},
+      </if>
+      <if test="parentid != null">
+        #{parentid,jdbcType=INTEGER},
+      </if>
+      <if test="menuname != null">
+        #{menuname,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="uri != null">
+        #{uri,jdbcType=VARCHAR},
+      </if>
+      <if test="icon != null">
+        #{icon,jdbcType=VARCHAR},
+      </if>
+      <if test="cttime != null">
+        #{cttime,jdbcType=DATE},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.mwp.dao.model.MenuExample" resultType="java.lang.Long">
+    select count(*) from menu
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update menu
+    <set>
+      <if test="record.menuid != null">
+        menuid = #{record.menuid,jdbcType=INTEGER},
+      </if>
+      <if test="record.parentid != null">
+        parentid = #{record.parentid,jdbcType=INTEGER},
+      </if>
+      <if test="record.menuname != null">
+        menuname = #{record.menuname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.type != null">
+        type = #{record.type,jdbcType=VARCHAR},
+      </if>
+      <if test="record.uri != null">
+        uri = #{record.uri,jdbcType=VARCHAR},
+      </if>
+      <if test="record.icon != null">
+        icon = #{record.icon,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cttime != null">
+        cttime = #{record.cttime,jdbcType=DATE},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update menu
+    set menuid = #{record.menuid,jdbcType=INTEGER},
+      parentid = #{record.parentid,jdbcType=INTEGER},
+      menuname = #{record.menuname,jdbcType=VARCHAR},
+      type = #{record.type,jdbcType=VARCHAR},
+      uri = #{record.uri,jdbcType=VARCHAR},
+      icon = #{record.icon,jdbcType=VARCHAR},
+      cttime = #{record.cttime,jdbcType=DATE}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.mwp.dao.model.Menu">
+    update menu
+    <set>
+      <if test="parentid != null">
+        parentid = #{parentid,jdbcType=INTEGER},
+      </if>
+      <if test="menuname != null">
+        menuname = #{menuname,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        type = #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="uri != null">
+        uri = #{uri,jdbcType=VARCHAR},
+      </if>
+      <if test="icon != null">
+        icon = #{icon,jdbcType=VARCHAR},
+      </if>
+      <if test="cttime != null">
+        cttime = #{cttime,jdbcType=DATE},
+      </if>
+    </set>
+    where menuid = #{menuid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.mwp.dao.model.Menu">
+    update menu
+    set parentid = #{parentid,jdbcType=INTEGER},
+      menuname = #{menuname,jdbcType=VARCHAR},
+      type = #{type,jdbcType=VARCHAR},
+      uri = #{uri,jdbcType=VARCHAR},
+      icon = #{icon,jdbcType=VARCHAR},
+      cttime = #{cttime,jdbcType=DATE}
+    where menuid = #{menuid,jdbcType=INTEGER}
+  </update>
+</mapper>

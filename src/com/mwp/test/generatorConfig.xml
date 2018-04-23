@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN" "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd" >
+<generatorConfiguration>
+    <context id="MysqlContext" targetRuntime="MyBatis3" defaultModelType="flat">
+
+        <property name="javaFileEncoding" value="UTF-8"/>
+        <!-- 由于beginningDelimiter和endingDelimiter的默认值为双引号(")，在Mysql中不能这么写，所以还要将这两个默认值改为`  -->
+        <property name="beginningDelimiter" value="`"/>
+        <property name="endingDelimiter" value="`"/>
+
+        <!-- 为生成的Java模型创建一个toString方法 -->
+        <plugin type="org.mybatis.generator.plugins.ToStringPlugin"></plugin>
+
+        <!-- 为生成的Java模型类添加序列化接口，并生成serialVersionUID字段 -->
+        <plugin type="com.mwp.test.SerializablePlugin">
+            <property name="suppressJavaInterface" value="false"/>
+        </plugin>
+
+        <!-- Java模型生成equals和hashcode方法 -->
+        <plugin type="org.mybatis.generator.plugins.EqualsHashCodePlugin"></plugin>
+        
+        <!-- 生成的代码去掉注释 -->
+        <commentGenerator type="com.mwp.test.CommentGenerator">
+            <property name="suppressAllComments" value="true" />
+            <property name="suppressDate" value="true"/>
+        </commentGenerator>
+        
+        <!-- 数据库连接 -->
+        <jdbcConnection driverClass="com.mysql.jdbc.Driver"
+                        connectionURL="jdbc:mysql://localhost/dtms"
+                        userId="root"
+                        password="root" />
+
+        <!-- model生成 -->
+        <javaModelGenerator targetPackage="com.mwp.dao.model" targetProject="/Users/mwp/WorkSpace/Dtms/src"/>
+
+        <!-- MapperXML生成 -->
+        <sqlMapGenerator targetPackage="com.mwp.dao.mapper.xml" targetProject="/Users/mwp/WorkSpace/Dtms/src"/>
+
+        <!-- Mapper接口生成 -->
+        <javaClientGenerator type="XMLMAPPER" targetPackage="com.mwp.dao.mapper" targetProject="/Users/mwp/WorkSpace/Dtms/src"/>
+		
+
+		
+		<!-- <table tableName="market_task_t" domainObjectName="MarketTask"> 
+			<columnOverride column="business_type" javaType="com.czbank.market.dao.enums.BusinessType" />
+			<columnOverride column="stock_circul_flag" javaType="com.czbank.market.dao.enums.StockCirculFlag" />
+			<columnOverride column="valid_flag" javaType="com.czbank.market.dao.enums.ValidFlag" />
+        </table> -->
+        <!--<table tableName="market_remind_t" domainObjectName="MarketRemind">
+			<columnOverride column="remind_type" javaType="com.czbank.market.dao.enums.RemindType" />
+			<columnOverride column="deal_status" javaType="com.czbank.market.dao.enums.DealStatus" />
+			<columnOverride column="on_time_flag" javaType="com.czbank.market.dao.enums.YesOrNo" />
+			<columnOverride column="deal_action" javaType="com.czbank.market.dao.enums.DealAction" />
+			<columnOverride column="valid_flag" javaType="com.czbank.market.dao.enums.ValidFlag" />
+        </table>-->
+        <!-- <table tableName="market_task_tmp" domainObjectName="MarketTaskTmp"/> -->
+        <!-- <table tableName="market_result_t" domainObjectName="MarketResult"> 
+			<columnOverride column="business_type" javaType="com.czbank.market.dao.enums.BusinessType" />
+			<columnOverride column="mm_type" javaType="com.czbank.market.dao.enums.MmType" />
+			<columnOverride column="mm_result" javaType="com.czbank.market.dao.enums.Status" />
+			<columnOverride column="exception_type" javaType="com.czbank.market.dao.enums.ExceptionType" />
+        </table> -->
+        <!-- <table tableName="market_port_price_t" domainObjectName="MarketPortPrice"> 
+			<columnOverride column="valid_flag" javaType="com.czbank.market.dao.enums.ValidFlag" />
+        </table>
+        <table tableName="market_port_price_sub_t" domainObjectName="MarketPortPriceSub"> 
+			<columnOverride column="valid_flag" javaType="com.czbank.market.dao.enums.ValidFlag" />
+        </table> -->
+        <!-- <table tableName="market_message_t" domainObjectName="MarketMessage"> 
+			<columnOverride column="read_flag" javaType="com.czbank.market.dao.enums.ReadFlag" />
+        </table> -->
+        
+        <!-- 需要映射的表 
+        <table tableName="upms_system" domainObjectName="UpmsSystem">
+        	<columnOverride column="status" javaType="com.hdong.upms.dao.enums.SystemStatus" />
+        </table>
+        <table tableName="sys_dict" domainObjectName="SysDict"/> 
+		<table tableName="upms_log" domainObjectName="UpmsLog"/> 
+		<table tableName="upms_organization" domainObjectName="UpmsOrganization"/> 
+		-->
+		
+		<!--
+		<table tableName="upms_role" domainObjectName="UpmsRole"/> 
+		
+		<table tableName="upms_role_permission" domainObjectName="UpmsRolePermission"/> 
+		<table tableName="upms_user" domainObjectName="UpmsUser"/> 
+		<table tableName="upms_user_organization" domainObjectName="UpmsUserOrganization"/> 
+		
+		<table tableName="upms_user_role" domainObjectName="UpmsUserRole"/>
+		-->
+        <table tableName="user" domainObjectName="User">
+        </table>
+	</context>
+</generatorConfiguration>

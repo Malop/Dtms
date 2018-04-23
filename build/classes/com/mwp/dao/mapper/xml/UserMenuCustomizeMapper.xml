@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mwp.dao.mapper.UserMenuCustomizeMapper">
+	<resultMap id="MenuResultMap" type="com.mwp.dao.model.Menu">
+	    <id column="menuid" jdbcType="INTEGER" property="menuid" />
+	    <result column="parentid" jdbcType="INTEGER" property="parentid" />
+	    <result column="menuname" jdbcType="VARCHAR" property="menuname" />
+	    <result column="type" jdbcType="VARCHAR" property="type" />
+	    <result column="uri" jdbcType="VARCHAR" property="uri" />
+	    <result column="icon" jdbcType="VARCHAR" property="icon" />
+	    <result column="cttime" jdbcType="DATE" property="cttime" />
+	</resultMap>
+	<resultMap id="UserResultMap" type="com.mwp.dao.model.User">
+		<id column="userid" jdbcType="VARCHAR" property="userid" />
+	    <result column="username" jdbcType="VARCHAR" property="username" />
+	    <result column="password" jdbcType="VARCHAR" property="password" />
+	    <result column="realname" jdbcType="VARCHAR" property="realname" />
+	    <result column="sex" jdbcType="VARCHAR" property="sex" />
+	    <result column="cttime" jdbcType="BIGINT" property="cttime" />
+	</resultMap>
+	<sql id="Menu_Column_List">
+    	menuid, parentid, menuname, type, uri, icon, cttime
+  	</sql>
+  	<sql id="User_Coumn_list">
+  		userid, username, password, realname, sex, cttime
+  	</sql>
+  	<!-- 根据userid查询菜单 -->
+	<select id="selectMenuByUser" parameterType="com.mwp.dao.model.User" resultMap="MenuResultMap">
+   		<![CDATA[
+   		select 
+   			m.menuid, m.parentid, m.menuname, m.type, m.uri, m.icon, m.cttime
+   		from menu m,user_menu um 
+   		where um.menuid=m.menuid 
+   			and um.userid= #{userid}
+   		]]>
+  	</select>
+
+</mapper>
