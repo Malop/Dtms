@@ -28,6 +28,8 @@
     <!-- 扫描含有注解的control -->
 	<context:component-scan base-package="com.mwp.control" />
 	
+	<!-- 文件导入的必需包 -->
+	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver" />
 	<mvc:default-servlet-handler />
 	
 	<!-- 返回ResponseBody响应类型 -->

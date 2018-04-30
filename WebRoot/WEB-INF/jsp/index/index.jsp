@@ -20,6 +20,7 @@
 <!-- Bootstrap 3.3.7 -->
 <link href="${basePath}/resources/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
 <link href="${basePath}/resources/bootstrap/css/bootstrap-table.min.css" rel="stylesheet" />
+<link href="${basePath}/resources/bootstrap/css/fileinput.min.css" rel="stylesheet" />
 <link href="${basePath}/resources/bootstrap/css/bootstrap-multiselect.css" rel="stylesheet" />
 <link href="${basePath}/resources/bootstrap/css/bootstrap-datetimepicker.min.css" rel="stylesheet" />
 <!-- jquery confirm -->
@@ -203,6 +204,10 @@
 <!-- Bootstrap 3.3.7 -->
 <script src="${basePath}/resources/bootstrap/js/bootstrap.min.js"></script>
 <script src="${basePath}/resources/bootstrap/js/bootstrap-table.js"></script>
+<script src="${basePath}/resources/bootstrap/js/bootstrap-table-export.js"></script>
+<script src="${basePath}/resources/bootstrap/js/tableExport.js"></script>
+<script src="${basePath}/resources/bootstrap/js/fileinput.min.js"></script>
+<script src="${basePath}/resources/bootstrap/js/zh.js"></script>
 <script src="${basePath}/resources/bootstrap/js/bootstrap-multiselect.js"></script>
 <script src="${basePath}/resources/bootstrap/js/bootstrap-table-zh-CN.min.js"></script>
 <script src="${basePath}/resources/bootstrap/js/bootstrap-datetimepicker.js"></script>

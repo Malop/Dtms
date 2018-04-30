@@ -2,8 +2,10 @@ package com.mwp.dao.model;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 public class User implements Serializable {
+	
     private String userid;
 
     private String username;
@@ -11,6 +13,14 @@ public class User implements Serializable {
     private String password;
 
     private String realname;
+    
+    public User(){};
+    public User(List<String> list){
+		this.userid = list.get(1);
+		this.username = list.get(2);
+		this.password = list.get(3);
+		this.realname = list.get(4);
+	}
 
     /**
      * 01男 02 女

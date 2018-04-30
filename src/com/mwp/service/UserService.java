@@ -26,4 +26,7 @@ public interface UserService {
 	public int countForOffsetPage(Map<String,Comparable> map);
 	//查询分页用户信息
 	public List<User> selectUserForOffsetPage(Map<String,Comparable> map);
+	
+	//按excel导入用户信息
+	public int importUser(List<String> userList);
 }

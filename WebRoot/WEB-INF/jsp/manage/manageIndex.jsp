@@ -4,27 +4,48 @@
 
 <!-- 单一页面不用写html,head,body标签 -->
 <div class="panel panel-default">
-	<div class="panel-body" style="padding-left:0px;padding-right:15px">
-		<form id="query_form" class="form-horizontal">
+	<div class="panel-body" style="padding-left:5px;padding-right:5px">
+	<div class="accordion-group">
+		<div class="accordion-heading">
+			<span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>
+			<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseOne">
+				查询条件
+			</a>
+		</div>
+		<div id="collapseOne" class="accordion-body collapse" style="height: 0px; ">
+			<form id="query_form" class="form-horizontal">
 			<div class="form-group form-group-sm">
-				<label class="control-label col-sm-1" for="userid">用户号</label>
-				<div class="col-sm-3">
+				<label class="control-label col-md-1" for="userid">用户号</label>
+				<div class="col-md-2">
 					<input type="text" class="form-control" id="userid">
 				</div>
-				<label class="control-label col-sm-1" for="username">用户名</label>
-				<div class="col-sm-3">
+				<label class="control-label col-md-1" for="username">用户名</label>
+				<div class="col-md-2">
 					<input type="text" class="form-control" id="username">
 				</div>
-				<label class="control-label col-sm-1" for="query_cretId">其他查询条件</label>
-				<div class="col-sm-3">
+				<label class="control-label col-md-1" for="query_cretId">其他</label>
+				<div class="col-md-2">
+					<input type="text" class="form-control" id="query_cretId" readonly>
+				</div>
+				<label class="control-label col-md-1" for="query_cretId">其他</label>
+				<div class="col-md-2">
 					<input type="text" class="form-control" id="query_cretId" readonly>
 				</div>
 			</div>
-		</form>
-		<div id="toolbar" class="btn-toolbar pull-right" style="margin-bottom:3px">
 			<button id="btn_query" type="button" class="btn btn-success btn-sm">
 				<span class="glyphicon glyphicon-search" aria-hidden="true"></span>查询
 			</button>
+			<button id="btn_reset" type="button" class="btn btn-success btn-sm">
+				<span class="glyphicon glyphicon-search" aria-hidden="true"></span>重置
+			</button>
+			</form>
+		</div>
+	</div>
+		
+		<div id="toolbar" class="btn-toolbar pull-right" style="margin-bottom:3px">
+			<button id="btn_scan" type="button" class="btn btn-success btn-sm">
+	            <span class="glyphicon glyphicon-inbox" aria-hidden="true"></span>扫描档案
+	        </button>
 			<button id="btn_create" type="button" class="btn btn-success btn-sm">
 	            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>新增
 	        </button>
@@ -37,6 +58,9 @@
 	        <button id="btn_delete" type="button" class="btn btn-success btn-sm">
 	            <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>删除
 	        </button>
+	        <button id="btn_import" type="button" class="btn btn-success btn-sm">
+	            <span class="glyphicon glyphicon-import" aria-hidden="true"></span>导入excel
+	        </button>
 		</div>
 		<table id="tb_departments"></table>
 	</div>
@@ -45,45 +69,38 @@
 
 <script>
 $(function () {
-	var themeMap = {};
-	themeMap["skin-black"] = '白暗';
-	themeMap["skin-black-light"] = '白亮';
-	themeMap["skin-blue"] = '蓝暗';
-	themeMap["skin-blue-light"] = '蓝亮';
-	themeMap["skin-green"] = '绿暗';
-	themeMap["skin-green-light"] = '绿亮';
-	themeMap["skin-red"] = '红暗';
-	themeMap["skin-red-light"] = '红亮';
-	themeMap["skin-yellow"] = '黄暗';
-	themeMap["skin-yellow-light"] = '黄亮';
-	themeMap["skin-purple"] = '紫暗';
-	themeMap["skin-purple-light"] = '紫亮';
 	
 	$('#tb_departments').bootstrapTable({
-        url: '${basePath}/manage/list',         //请求后台的URL（*）
+        url: '${basePath}/manage/list',     //请求后台的URL（*）
         method: 'get',                      //请求方式（*）
         toolbar: '#toolbar',                //工具按钮用哪个容器
         toolbarAlign:"right",
         striped: true,                      //是否显示行间隔色
         cache: false,                       //是否使用缓存，默认为true，所以一般情况下需要设置一下这个属性（*）
         pagination: true,                   //是否显示分页（*）
-        sortable: false,                     //是否启用排序
+        sortable: false,                    //是否启用排序
         sortOrder: "asc",                   //排序方式
         sidePagination: "server",           //分页方式：client客户端分页，server服务端分页（*）
         pageNumber:1,                       //初始化加载第一页，默认第一页
         pageSize: 10,                       //每页的记录行数（*）
         pageList: [10, 25, 50, 100],        //可供选择的每页的行数（*）
-        search: false,                       //是否显示表格搜索，此搜索是客户端搜索，不会进服务端，所以，个人感觉意义不大
+        search: false,                      //是否显示表格搜索，此搜索是客户端搜索，不会进服务端，所以个人感觉意义不大
         strictSearch: false,
-        showColumns: false,                  //是否显示所有的列
-        showRefresh: false,                  //是否显示刷新按钮
+        showColumns: false,                 //是否显示所有的列
+        showRefresh: false,                 //是否显示刷新按钮
         minimumCountColumns: 2,             //最少允许的列数
         clickToSelect: true,                //是否启用点击选中行
-        height: 'auto',                      //行高，如果没有设置height属性，表格自动根据记录条数觉得表格高度
-        uniqueId: "systemId",               //每一行的唯一标识，一般为主键列
-        showToggle:false,                    //是否显示详细视图和列表视图的切换按钮
+        height: 'auto',                     //行高，如果没有设置height属性，表格自动根据记录条数觉得表格高度
+        uniqueId: "userid",               	//每一行的唯一标识，一般为主键列
+        showToggle:false,                   //是否显示详细视图和列表视图的切换按钮
         cardView: false,                    //是否显示详细视图
-        detailView: false,                   //是否显示父子表
+        detailView: false,                  //是否显示父子表
+		showExport: true,  					//是否显示excel导出按钮 
+        exportDataType:'all',				//导出数据 basic:当前页 selected:选中 all:所有
+        buttonsAlign:"left",  			//按钮位置  
+        exportTypes:['json', 'xml', 'csv', 'txt', 'sql', 'excel'],  			//导出文件类型  
+        Icons:'glyphicon-export',  
+        
         queryParams: function (params) {
             return {
                 limit: params.limit,   //页面大小
@@ -106,16 +123,37 @@ $(function () {
     });
 	
 	//初始化页面上面的按钮事件
-    $("#toolbar #btn_query").click(function(){
+    $("#btn_query").click(function(){
         $('#tb_departments').bootstrapTable('getOptions').pageNumber = 1;
         $('#tb_departments').bootstrapTable('refresh');
     });
-	$("#toolbar #btn_create").click(function(){
-	    $.hdDialog({
-			title: '新增系统信息',
+
+	//重置查询条件
+	$("#btn_reset").click(function(){
+		$(".form-control").val("");
+	});
+	
+	//扫描档案文件
+	$(btn_scan).click(function(){
+		$.hdDialog({
+			title:'OCX文档扫描',
 			columnClass:'col-md-offset-2 col-md-8',//配合col-md-offset-x居中
-			//containerFluid:true,//最大化
-			content: 'url:${basePath}/manage/system/create',
+			containerFluid:true,//最大化
+			content: 'url:${basePath}/scan/index',
+			onClose: function(){
+			    if(HdDialog.getValue()){
+			    	$('#tb_departments').bootstrapTable('refresh');
+			    }
+			}
+		});
+	});
+	//导入excel
+    $("#toolbar #btn_import").click(function(){
+    	$.hdDialog({
+			title: 'Excel文件导入',
+			columnClass:'col-md-offset-2 col-md-8',//配合col-md-offset-x居中
+			containerFluid:true,//最大化
+			content: 'url:${basePath}/manage/fileInput',
 			onClose: function(){
 			    if(HdDialog.getValue()){
 			    	$('#tb_departments').bootstrapTable('refresh');
@@ -123,6 +161,37 @@ $(function () {
 			}
 		});
     });
+	
+	//新增按钮
+	$("#toolbar #btn_create").click(function(){
+	    $.hdDialog({
+			title: '新增系统信息',
+			columnClass:'col-md-offset-2 col-md-8',//配合col-md-offset-x居中
+			//containerFluid:true,//最大化
+			content: 'url:${basePath}/manage/create',
+			onClose: function(){
+			    if(HdDialog.getValue()){
+			    	$('#tb_departments').bootstrapTable('refresh');
+			    }
+			}
+		});
+    });
+	
+	//详情按钮
+	$("#toolbar #btn_info").click(function(){
+		$.hdDialog({
+			title: '用户详情',
+			columnClass:'col-md-offset-2 col-md-8',//配合col-md-offset-x居中
+			//containerFluid:true,//最大化
+			content: 'url:${basePath}/manage/info',
+			onClose: function(){
+			    if(HdDialog.getValue()){
+			    	$('#tb_departments').bootstrapTable('refresh');
+			    }
+			}
+		});
+	});
+	//修改更新按钮
 	$("#toolbar #btn_update").click(function(){
 	    var rows = $('#tb_departments').bootstrapTable('getSelections');
 		if (rows.length != 1) {
@@ -140,7 +209,7 @@ $(function () {
 				title: '系统信息修改',
 				columnClass:'col-md-offset-2 col-md-8',//配合col-md-offset-x居中
 				//containerFluid:true,//最大化
-				content: 'url:${basePath}/manage/system/update/' + rows[0].systemId,
+				content: 'url:${basePath}/manage/update/' + rows[0].systemId,
 				onClose: function(){
 				    if(HdDialog.getValue()){
 				    	$('#tb_departments').bootstrapTable('refresh');
@@ -181,7 +250,7 @@ $(function () {
 							}
 							$.ajax({
 								type: 'get',
-								url: '${basePath}/manage/system/delete/' + ids.join("-"),
+								url: '${basePath}/manage/delete/' + ids.join("-"),
 								success: function(result) {
 									if (result.code == 1) {
 										$.hdConfirm({
@@ -212,5 +281,6 @@ $(function () {
 			});
 		}
 	});
+	
 });
 </script>

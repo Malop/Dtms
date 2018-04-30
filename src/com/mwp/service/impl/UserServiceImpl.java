@@ -70,6 +70,23 @@ public class UserServiceImpl implements UserService{
 	}
 	
 	@Transactional
+	@Description("按excel数据导入用户")
+	public int importUser(List<String> userList){
+		User userFromExcel  = new User(userList);
+		
+		
+		UserExample ue = new UserExample();
+		ue.createCriteria().andUseridEqualTo(userFromExcel.getUserid());
+		User userExists = userMapper.selectByPrimaryKey(userFromExcel.getUserid());
+		if(userExists != null){
+			_log.info("user "+userExists.getUserid()+" is exist!");
+			return 0;
+		}
+		userMapper.insert(userFromExcel);
+		return 1;
+	}
+	
+	@Transactional
 	@Description(value="修改用户信息")
 	public String updateUser(User user){
 		int count = userMapper.updateByPrimaryKeySelective(user);
