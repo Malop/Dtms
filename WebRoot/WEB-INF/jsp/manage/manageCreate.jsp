@@ -82,7 +82,7 @@ $(function () {
 		if(!$("#createForm").valid())return;
 		$.ajax({
 	        type: 'post',
-	        url: '${basePath}/manage/system/create',
+	        url: '${basePath}/manage/create',
 	        data: $('#createForm').serialize(),
 	        success: function(result) {
 	        	if(result.code == 1){

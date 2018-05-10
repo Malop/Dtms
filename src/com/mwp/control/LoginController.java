@@ -83,4 +83,9 @@ public class LoginController extends BaseController{
 		return "/index/index.jsp";
 	}
 
+	@RequestMapping(value="/redirectHome",method=RequestMethod.GET)
+	public String redirectHome(){
+		
+		return "/index/redirect_index.jsp";
+	}
 }

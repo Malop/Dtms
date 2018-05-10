@@ -134,12 +134,14 @@ $(function () {
 	});
 	
 	//扫描档案文件
-	$(btn_scan).click(function(){
+	$("#btn_scan").click(function(){
+		var rows = $('#tb_departments').bootstrapTable('getSelections');
 		$.hdDialog({
 			title:'OCX文档扫描',
 			columnClass:'col-md-offset-2 col-md-8',//配合col-md-offset-x居中
 			containerFluid:true,//最大化
-			content: 'url:${basePath}/scan/index',
+			content: 'url:${basePath}/scan/index/' + rows[0].userid,
+			//content: 'url:${basePath}/scan/index',
 			onClose: function(){
 			    if(HdDialog.getValue()){
 			    	$('#tb_departments').bootstrapTable('refresh');
@@ -183,7 +185,7 @@ $(function () {
 			title: '用户详情',
 			columnClass:'col-md-offset-2 col-md-8',//配合col-md-offset-x居中
 			//containerFluid:true,//最大化
-			content: 'url:${basePath}/manage/info',
+			content: 'url:${basePath}/manage/info' + rows[0].userid,
 			onClose: function(){
 			    if(HdDialog.getValue()){
 			    	$('#tb_departments').bootstrapTable('refresh');

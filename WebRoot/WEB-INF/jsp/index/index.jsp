@@ -151,6 +151,7 @@
 						<p>${user.realname}[${user.username}]</p>
 					</div>
 				</div>
+				 
 				<form action="#" method="get" class="sidebar-form">
 					<div class="input-group">
 						<input type="text" name="q" class="form-control" placeholder="搜索..."> 
@@ -161,11 +162,15 @@
 						</span>
 					</div>
 				</form>
+				
 				<ul class="sidebar-menu" data-widget="tree">
+					<li class="treeview system_menus menu_home">
+						<a href="javascript:void(0);" data-url="/index/redirectHome"><i class="fa fa-home"></i><span>首页</span></a>
+					</li>
 					<c:forEach var="parentmenu" items="${listMenus}" varStatus="status">
 						<c:if test="${parentmenu.parentid == 0}">
 						<li class="treeview system_menus menu_${parentmenu.menuid}" >
-							<a href="#"><span>${parentmenu.menuname}</span></a>
+							<a href="#"><i class="fa fa-user"></i><span>${parentmenu.menuname}</span></a>
 							<ul class="treeview-menu">
 								<c:forEach var="childmenu" items="${listMenus}">
 									<c:if test="${childmenu.parentid == parentmenu.menuid}">
@@ -233,6 +238,11 @@ $(function(){
 	    $("ul.treeview-menu li").removeClass("active");
 	    $(this).parent().addClass("active");
     });
+	
+	//首页4块豆腐干导航
+	$(".menu_home a[data-url]").click(function(){
+		loadPage("${basePath}/"+$(this).data("url"));
+	});
 	//初始化
     HD_CONTENT.fullHeight = $(".content-wrapper").height();
 	HD_CONTENT.title = 41;

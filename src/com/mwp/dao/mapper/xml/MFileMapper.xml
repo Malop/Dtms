@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mwp.dao.mapper.MFileMapper">
+  <resultMap id="BaseResultMap" type="com.mwp.dao.model.MFile">
+    <id column="mfileid" jdbcType="VARCHAR" property="mfileid" />
+    <result column="userid" jdbcType="VARCHAR" property="userid" />
+    <result column="mfiletype" jdbcType="VARCHAR" property="mfiletype" />
+    <result column="mfileurl" jdbcType="VARCHAR" property="mfileurl" />
+    <result column="cttime" jdbcType="TIMESTAMP" property="cttime" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    mfileid, userid, mfiletype, mfileurl, cttime
+  </sql>
+  <select id="selectByExample" parameterType="com.mwp.dao.model.MFileExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from mfile
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from mfile
+    where mfileid = #{mfileid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from mfile
+    where mfileid = #{mfileid,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.mwp.dao.model.MFileExample">
+    delete from mfile
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.mwp.dao.model.MFile">
+    insert into mfile (mfileid, userid, mfiletype, 
+      mfileurl, cttime)
+    values (#{mfileid,jdbcType=VARCHAR}, #{userid,jdbcType=VARCHAR}, #{mfiletype,jdbcType=VARCHAR}, 
+      #{mfileurl,jdbcType=VARCHAR}, #{cttime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.mwp.dao.model.MFile">
+    insert into mfile
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="mfileid != null">
+        mfileid,
+      </if>
+      <if test="userid != null">
+        userid,
+      </if>
+      <if test="mfiletype != null">
+        mfiletype,
+      </if>
+      <if test="mfileurl != null">
+        mfileurl,
+      </if>
+      <if test="cttime != null">
+        cttime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="mfileid != null">
+        #{mfileid,jdbcType=VARCHAR},
+      </if>
+      <if test="userid != null">
+        #{userid,jdbcType=VARCHAR},
+      </if>
+      <if test="mfiletype != null">
+        #{mfiletype,jdbcType=VARCHAR},
+      </if>
+      <if test="mfileurl != null">
+        #{mfileurl,jdbcType=VARCHAR},
+      </if>
+      <if test="cttime != null">
+        #{cttime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.mwp.dao.model.MFileExample" resultType="java.lang.Long">
+    select count(*) from mfile
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update mfile
+    <set>
+      <if test="record.mfileid != null">
+        mfileid = #{record.mfileid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userid != null">
+        userid = #{record.userid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mfiletype != null">
+        mfiletype = #{record.mfiletype,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mfileurl != null">
+        mfileurl = #{record.mfileurl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cttime != null">
+        cttime = #{record.cttime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update mfile
+    set mfileid = #{record.mfileid,jdbcType=VARCHAR},
+      userid = #{record.userid,jdbcType=VARCHAR},
+      mfiletype = #{record.mfiletype,jdbcType=VARCHAR},
+      mfileurl = #{record.mfileurl,jdbcType=VARCHAR},
+      cttime = #{record.cttime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.mwp.dao.model.MFile">
+    update mfile
+    <set>
+      <if test="userid != null">
+        userid = #{userid,jdbcType=VARCHAR},
+      </if>
+      <if test="mfiletype != null">
+        mfiletype = #{mfiletype,jdbcType=VARCHAR},
+      </if>
+      <if test="mfileurl != null">
+        mfileurl = #{mfileurl,jdbcType=VARCHAR},
+      </if>
+      <if test="cttime != null">
+        cttime = #{cttime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where mfileid = #{mfileid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.mwp.dao.model.MFile">
+    update mfile
+    set userid = #{userid,jdbcType=VARCHAR},
+      mfiletype = #{mfiletype,jdbcType=VARCHAR},
+      mfileurl = #{mfileurl,jdbcType=VARCHAR},
+      cttime = #{cttime,jdbcType=TIMESTAMP}
+    where mfileid = #{mfileid,jdbcType=VARCHAR}
+  </update>
+</mapper>

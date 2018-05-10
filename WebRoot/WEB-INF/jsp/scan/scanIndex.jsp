@@ -41,11 +41,8 @@
 		<input type="hidden" id="isSelectAll"/>
 		<label> 
 			<input type="radio" id="docMode" value="1" name="mode" onClick="setMode(this)" checked="checked">文档
-		</label>  
-	  	<label> 
-			<input type="radio" id="personMode" value="2" name="mode" onClick="setMode(this)">人像
-		</label> 
-		<label for="exposure">曝光度</label>
+		</label>
+		<label for="exposure">文档类型</label>
 		<select id="exposure" onChange="setExposure(this)">
 			<option value="100">100</option>
 			<option value="90">90</option>
@@ -215,7 +212,7 @@
 		var num = cap.GetListCount();
 		//captrue.bSavePDFStart (savePath,d);
 		for(var i = 0;i<num;i++){
-			var b =cap. GetCheck (i);
+			var b =cap.GetCheck (i);
 			if(b==1){
 				count++;
 			}
@@ -236,7 +233,7 @@
 			filelist = filelist.substring(0,filelist.length-1);
 		//alert(filelist);
 		//上传部分请自行进行二次开发
-		var str=captrue.bUpLoadImage(filelist, "127.0.0.1", 8080, "/shop/servlet/uploadServlet");			
+		var str=captrue.bUpLoadImage(filelist, "127.0.0.1", 8080, "/scan/upload");			
 		}
 	}
 	

@@ -1,7 +1,5 @@
 package com.mwp.control;
 
-import java.io.File;
-import java.util.Iterator;
 import java.util.List;
 
 import javax.servlet.http.*;
@@ -12,21 +10,17 @@ import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Description;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.ModelAndView;
 
-import com.mwp.common.util.MD5Util;
-import com.mwp.common.util.PropertiesFileUtil;
-import com.mwp.dao.model.Menu;
 import com.mwp.dao.model.User;
-import com.mwp.service.MenuService;
+import com.mwp.service.ScanService;
 import com.mwp.service.UserService;
-import com.mwp.base.BaseResult;
 import com.mwp.base.BaseController;
 
 import io.swagger.annotations.Api;
@@ -48,19 +42,29 @@ public class ScanController extends BaseController{
 	UserService userService;
 	
 	@Autowired
-	MenuService menuService;
-
+	ScanService scanService;
+/*	
+	@Description(value="扫描主页")
 	@RequestMapping(value="/index",method=RequestMethod.GET)
-	public String loginIndex(){
+	public String scanIndex(){
+		
+		return "/scan/scanIndex.jsp";
+	}
+*/
+	@Description(value="扫描主页")
+	@RequestMapping(value="/index/{userid}",method=RequestMethod.GET)
+	public String scanIndex(@PathVariable("userid") String userid, ModelMap modelMap){
+		User user = userService.getUserById(userid);
+		modelMap.put("user", user);
+		_log.info("selected user is :"+user.getRealname());
 		return "/scan/scanIndex.jsp";
 	}
 	
-	
+	@Description(value="图片文档上传服务器")
 	@RequestMapping(value="/upload",method = RequestMethod.POST)
 	@ResponseBody
-	public String upload(HttpServletRequest request,ModelMap mp){
+	public String upload(HttpServletRequest request,User user){
 		try {
-			request.setCharacterEncoding("GBK");
 	        DiskFileItemFactory fac = new DiskFileItemFactory();
 	        //设置缓存文件大小
 	        fac.setSizeThreshold(1024*1024);
@@ -69,28 +73,14 @@ public class ScanController extends BaseController{
 	        ServletFileUpload upload = new ServletFileUpload(fac);
 	        //设置最大允许上传的文件大小，这里是5MB
 	        upload.setFileSizeMax(1024*1024*5);
-	        List fileList = upload.parseRequest(request);
-        
-	        Iterator iter = fileList.iterator();
-	        while(iter.hasNext()){
-	            FileItem fileItem = (FileItem)iter.next();
-	            if(!fileItem.isFormField()){
-	                String name = fileItem.getName();
-	                String fileSize = new Long(fileItem.getSize()).toString();
-	                if(name == null || name.equals("") || fileSize.equals("0"))
-	                    continue;
-	                //截取出纯文件名
-	                name = name.substring(name.lastIndexOf("\\")+1);
-	                //存储文件
-	                File saveFile = new File("d:\\upload\\"+name);
-	                try {
-	                    fileItem.write(saveFile);
-	                } catch (Exception ex1) {
-	                    ex1.printStackTrace();
-	                    return "";
-	                }
-	            }
+	        
+	        List<FileItem> fileList = upload.parseRequest(request);
+	        boolean uploadFlag = scanService.upload(fileList,user);;
+	        
+	        if(uploadFlag == true){
+	        	return "上传成功!";
 	        }
+	        
         } catch (Exception ex) {
             ex.printStackTrace();
             return "所选文件出错";

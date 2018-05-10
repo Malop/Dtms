@@ -42,7 +42,13 @@ public class UserServiceImpl implements UserService{
 		User user = userCustomizeMapper.selectUserByName(name);
 		return user;
 	}
-	
+
+	@Transactional
+	@Description(value="根据userid查用户")
+	public User getUserById(String userid) {
+		User user = userMapper.selectByPrimaryKey(userid);
+		return user;
+	}
 	@Transactional
 	@Description(value="删除用户")
 	public int deleteUser(List<String> userList){
@@ -108,4 +114,5 @@ public class UserServiceImpl implements UserService{
 		List<User> userList = userCustomizeMapper.selectUserForOffsetPage(map);
 		return userList;
 	}
+
 }

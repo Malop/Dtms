@@ -37,9 +37,10 @@ insert into user_menu(userid,menuid) values('1',1);
 insert into user_menu(userid,menuid) values('1',2);
 
 --图片表
-create table picture(pictureid not null COMMENT '图片id',
-				uderid not null COMMENT '所属人员号',
-				pictureurl COMMENT '存储地址',
-				cttime COMMENT '创建时间',
-				PRIMARY KEY (pictureid)
+create table mfile(mfileid varchar(20) not null COMMENT '图片id',
+				userid varchar(10) DEFAULT NULL COMMENT '所属人员号',
+				mfiletype varchar(4) DEFAULT NULL comment '图片类型',
+				mfileurl varchar(40) DEFAULT NULL COMMENT '存储路径',
+				cttime DATETIME DEFAULT NULL COMMENT '创建时间',
+				PRIMARY KEY (mfileid)
 				)charset=utf8;

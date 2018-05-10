@@ -14,7 +14,7 @@
 	</div>
 </div>
 <script>
-initUpload("excelFile", "${basePath}/manage/upload");
+initUpload("excelFile", "${basePath}/manage/impoerExcel");
 function initUpload(ctrlName, uploadUrl) {
     var control = $('#' + ctrlName);
     control.fileinput({

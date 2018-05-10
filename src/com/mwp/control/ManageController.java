@@ -65,6 +65,13 @@ public class ManageController extends BaseController {
 		return "/manage/manageCreate.jsp";
 	}
 	
+	@Description(value="新增用户信息")
+	@RequestMapping(value="/create", method = RequestMethod.POST)
+	public String create(User user){
+		
+		return "/manage/manageCreate.jsp";
+	}
+	
 	@Description(value="人员列表")
 	@RequestMapping(value="/list",method=RequestMethod.GET)
 	@ResponseBody
@@ -98,7 +105,7 @@ public class ManageController extends BaseController {
 	}
 	
 	@Description(value="excel文件导入")
-	@RequestMapping(value = "/upload", method = RequestMethod.POST)
+	@RequestMapping(value = "/impoerExcel", method = RequestMethod.POST)
 	@ResponseBody
 	public BaseResult importExcel(@RequestParam(value = "excelFile", required = false) MultipartFile excelFile,HttpServletRequest request) {
 		try {
