@@ -1,5 +1,7 @@
+--mysql –uroot –proot -dtms<1.sql
 create database  dtms;
 --用户表
+--drop table user;
 create table user(userid varchar(10) not null,
 				username varchar(20) DEFAULT NULL,
 				password varchar(32) DEFAULT NULL,
@@ -11,32 +13,35 @@ create table user(userid varchar(10) not null,
 				PRIMARY KEY (userid)
 				)charset=utf8;
 
---新增用户信息
 insert into user(userid,username,password,realname,sex,phone,email,cttime) values('1','admin','21232F297A57A5A743894A0E4A801FC3','adminName','01','137XXXXXXXX','XXX@email.com','2018-04-17 00:00:00');
 			
 --菜单表
+--drop table menu;
 create table menu(menuid int not NULL,
 				parentid int,
 				menuname varchar(20) DEFAULT NULL,
 				type varchar(10) DEFAULT NULL COMMENT '1目录 2菜单 3按钮',
-				uri varchar(200) DEFAULT NULL COMMENT '访问地址',
+				uri varchar(200) DEFAULT NULL 4,
 				icon varchar(100) DEFAULT NULL,
 				cttime DATETIME DEFAULT NULL,
 				PRIMARY KEY (menuid)
 				)charset=utf8;
 
---新增菜单信息
 insert into menu(menuid,parentid,menuname,type,uri,icon,cttime) values(1,0,'人员管理','1','','','2018-04-20');
 insert into menu(menuid,parentid,menuname,type,uri,icon,cttime) values(2,1,'人员列表','2','/manage/index','','2018-04-20');
+insert into menu(menuid,parentid,menuname,type,uri,icon,cttime) values(3,1,'党员信息列表','2','/partymember/index','','2018-05-14');
 
 --人员菜单关系表
+--drop table user_menu;
 create table user_menu(userid varchar(10),menuid int,primary key(userid,menuid))charset=utf8;
 
---新增人员菜单信息
 insert into user_menu(userid,menuid) values('1',1);
 insert into user_menu(userid,menuid) values('1',2);
+insert into user_menu(userid,menuid) values('1',3);
+
 
 --图片表
+--drop table mfile;
 create table mfile(mfileid varchar(20) not null COMMENT '图片id',
 				userid varchar(10) DEFAULT NULL COMMENT '所属人员号',
 				mfiletype varchar(4) DEFAULT NULL comment '图片类型',
@@ -44,3 +49,40 @@ create table mfile(mfileid varchar(20) not null COMMENT '图片id',
 				cttime DATETIME DEFAULT NULL COMMENT '创建时间',
 				PRIMARY KEY (mfileid)
 				)charset=utf8;
+
+--党员信息表
+--drop table partymember;
+create table partymember(certid varchar(32) not null,
+					partyName varchar(32) DEFAULT NULL,
+					sex varchar(10) DEFAULT NULL COMMENT 'male男 female女',
+					nation varchar(20) DEFAULT NULL COMMENT '民族',
+					nativeplace varchar(20) DEFAULT NULL COMMENT '籍贯',
+					isTaiwan varchar(4) DEFAULT NULL COMMENT '01是 02否',
+					brithday varchar(10) DEFAULT NULL COMMENT '生日',
+					age varchar(10) DEFAULT NULL COMMENT '年龄',
+					education varchar(20) DEFAULT NULL COMMENT '学历',
+					category varchar(20) DEFAULT NULL COMMENT '人员类别',
+					partygroup varchar(32) DEFAULT NULL COMMENT '党组织',
+					partytime varchar(32) DEFAULT NULL COMMENT '入党时间',
+					fullpartytime varchar(32) DEFAULT NULL COMMENT '转正时间',
+					job varchar(32) DEFAULT NULL COMMENT '工作岗位',
+					timetowork varchar(32) DEFAULT NULL COMMENT '参加工作时间',
+					address varchar(100) DEFAULT NULL COMMENT '地址',
+					mobilephone varchar(32) DEFAULT NULL COMMENT '手机号码',
+					telephone varchar(32) DEFAULT NULL COMMENT '固定电话',
+					marriage varchar(10) DEFAULT NULL COMMENT '婚姻状况',
+					archiveplace varchar(100) DEFAULT NULL COMMENT '档案所在地',
+					technicaltitle varchar(32) DEFAULT NULL COMMENT '技术职称',
+					sociallevel varchar(32) DEFAULT NULL COMMENT '社会阶层类型',
+					situation varchar(32) DEFAULT NULL COMMENT '一线情况',
+					training varchar(32) DEFAULT NULL COMMENT '培训情况',
+					isworker varchar(4) DEFAULT NULL COMMENT '是否农民工',
+					isoffline varchar(4) DEFAULT NULL COMMENT '是否失联党员',
+					offdate varchar(32) DEFAULT NULL COMMENT '失联时间',
+					isfloat varchar(4) DEFAULT NULL COMMENT '是否流动党员',
+					floatdirection varchar(32) DEFAULT NULL COMMENT '外出流向',
+					infoprecent varchar(10) DEFAULT NULL COMMENT '信息完整度',
+					cttime DATETIME DEFAULT NULL COMMENT '创建时间',
+					PRIMARY KEY (certid)
+					)charset=utf8;
+

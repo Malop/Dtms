@@ -14,12 +14,12 @@
 		<span>块2</span>
 		</a>
 	</div>
-	<div class="col-md-6" style="width:400px;height:200px;background-color:yellow">
+	<div class="col-md-6" style="width:400px;height:200px;background:url(${basePath}/resources/images/1.jpg)">
 		<a href="#" target="_blank">
 		<span>块3</span>
 		</a>
 	</div>
-	<div class="col-md-6" style="width:400px;height:200px;background-color:yellow">
+	<div class="col-md-6" style="width:400px;height:200px;background-color:red">
 			<a href="#" target="_blank">
 			<span>块4</span>
 			</a>

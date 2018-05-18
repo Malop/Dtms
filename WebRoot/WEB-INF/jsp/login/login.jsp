@@ -84,7 +84,7 @@
 					rememberMe : $('#rememberMe').is(':checked')
 				},
 				success:function(result){
-					if(result.code==1){
+					if(result.code==0000){
 						console.log(result.msg);
 						location.href='${basePath}'+result.msg;
 					}else{

@@ -25,8 +25,7 @@
   	
   	<!-- 根据条件分页查找用户 -->
   	<select id="countForOffsetPage" parameterType="java.util.Map" resultType="java.lang.Integer">
-		select 
-	<include refid="Base_Column_List" />
+		select count(1)
 		from user 
 		where 1=1
 	<if test="username != null and username != ''">

@@ -25,6 +25,7 @@
 <link href="${basePath}/resources/bootstrap/css/bootstrap-datetimepicker.min.css" rel="stylesheet" />
 <!-- jquery confirm -->
 <link href="${basePath}/resources/ie/jquery-confirm.css" rel="stylesheet"/>
+<link href="${basePath}/resources/jquery/jquery.nouislider.css" rel="stylesheet"/>
 <link href="${basePath}/resources/common/base.css" rel="stylesheet"/>
 <!-- ztree -->
 <link href="${basePath}/resources/ztree/css/ztree_bootstrap.css" rel="stylesheet"/>
@@ -204,6 +205,7 @@
 <script src="${basePath}/resources/jquery/jquery.min.js"></script>
 <script src="${basePath}/resources/jquery/jquery.cookie.js"></script>
 <script src="${basePath}/resources/jquery-confirm/jquery-confirm.js"></script>
+<script src="${basePath}/resources/jquery/jquery.nouislider.min.js"></script>
 <script src="${basePath}/resources/jquery-validate/jquery.validate.min.js"></script>
 <script src="${basePath}/resources/jquery-validate/messages_zh.js"></script>
 <!-- Bootstrap 3.3.7 -->
@@ -243,6 +245,7 @@ $(function(){
 	$(".menu_home a[data-url]").click(function(){
 		loadPage("${basePath}/"+$(this).data("url"));
 	});
+	$(".menu_home a[data-url='/index/redirectHome']").click();
 	//初始化
     HD_CONTENT.fullHeight = $(".content-wrapper").height();
 	HD_CONTENT.title = 41;

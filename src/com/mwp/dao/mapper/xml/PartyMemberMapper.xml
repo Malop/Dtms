@@ -1,0 +1,622 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mwp.dao.mapper.PartyMemberMapper">
+  <resultMap id="BaseResultMap" type="com.mwp.dao.model.PartyMember">
+    <id column="certid" jdbcType="VARCHAR" property="certid" />
+    <result column="partyName" jdbcType="VARCHAR" property="partyname" />
+    <result column="sex" jdbcType="VARCHAR" property="sex" />
+    <result column="nation" jdbcType="VARCHAR" property="nation" />
+    <result column="nativeplace" jdbcType="VARCHAR" property="nativeplace" />
+    <result column="isTaiwan" jdbcType="VARCHAR" property="istaiwan" />
+    <result column="brithday" jdbcType="VARCHAR" property="brithday" />
+    <result column="age" jdbcType="VARCHAR" property="age" />
+    <result column="education" jdbcType="VARCHAR" property="education" />
+    <result column="category" jdbcType="VARCHAR" property="category" />
+    <result column="partygroup" jdbcType="VARCHAR" property="partygroup" />
+    <result column="partytime" jdbcType="VARCHAR" property="partytime" />
+    <result column="fullpartytime" jdbcType="VARCHAR" property="fullpartytime" />
+    <result column="job" jdbcType="VARCHAR" property="job" />
+    <result column="timetowork" jdbcType="VARCHAR" property="timetowork" />
+    <result column="address" jdbcType="VARCHAR" property="address" />
+    <result column="mobilephone" jdbcType="VARCHAR" property="mobilephone" />
+    <result column="telephone" jdbcType="VARCHAR" property="telephone" />
+    <result column="marriage" jdbcType="VARCHAR" property="marriage" />
+    <result column="archiveplace" jdbcType="VARCHAR" property="archiveplace" />
+    <result column="technicaltitle" jdbcType="VARCHAR" property="technicaltitle" />
+    <result column="sociallevel" jdbcType="VARCHAR" property="sociallevel" />
+    <result column="situation" jdbcType="VARCHAR" property="situation" />
+    <result column="training" jdbcType="VARCHAR" property="training" />
+    <result column="isworker" jdbcType="VARCHAR" property="isworker" />
+    <result column="isoffline" jdbcType="VARCHAR" property="isoffline" />
+    <result column="offdate" jdbcType="VARCHAR" property="offdate" />
+    <result column="isfloat" jdbcType="VARCHAR" property="isfloat" />
+    <result column="floatdirection" jdbcType="VARCHAR" property="floatdirection" />
+    <result column="infoprecent" jdbcType="VARCHAR" property="infoprecent" />
+    <result column="cttime" jdbcType="TIMESTAMP" property="cttime" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    certid, partyName, sex, nation, nativeplace, isTaiwan, brithday, age, education, 
+    category, partygroup, partytime, fullpartytime, job, timetowork, address, mobilephone, 
+    telephone, marriage, archiveplace, technicaltitle, sociallevel, situation, training, 
+    isworker, isoffline, offdate, isfloat, floatdirection, infoprecent, cttime
+  </sql>
+  <select id="selectByExample" parameterType="com.mwp.dao.model.PartyMemberExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from partymember
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from partymember
+    where certid = #{certid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from partymember
+    where certid = #{certid,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.mwp.dao.model.PartyMemberExample">
+    delete from partymember
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.mwp.dao.model.PartyMember">
+    insert into partymember (certid, partyName, sex, 
+      nation, nativeplace, isTaiwan, 
+      brithday, age, education, 
+      category, partygroup, partytime, 
+      fullpartytime, job, timetowork, 
+      address, mobilephone, telephone, 
+      marriage, archiveplace, technicaltitle, 
+      sociallevel, situation, training, 
+      isworker, isoffline, offdate, 
+      isfloat, floatdirection, infoprecent, 
+      cttime)
+    values (#{certid,jdbcType=VARCHAR}, #{partyname,jdbcType=VARCHAR}, #{sex,jdbcType=VARCHAR}, 
+      #{nation,jdbcType=VARCHAR}, #{nativeplace,jdbcType=VARCHAR}, #{istaiwan,jdbcType=VARCHAR}, 
+      #{brithday,jdbcType=VARCHAR}, #{age,jdbcType=VARCHAR}, #{education,jdbcType=VARCHAR}, 
+      #{category,jdbcType=VARCHAR}, #{partygroup,jdbcType=VARCHAR}, #{partytime,jdbcType=VARCHAR}, 
+      #{fullpartytime,jdbcType=VARCHAR}, #{job,jdbcType=VARCHAR}, #{timetowork,jdbcType=VARCHAR}, 
+      #{address,jdbcType=VARCHAR}, #{mobilephone,jdbcType=VARCHAR}, #{telephone,jdbcType=VARCHAR}, 
+      #{marriage,jdbcType=VARCHAR}, #{archiveplace,jdbcType=VARCHAR}, #{technicaltitle,jdbcType=VARCHAR}, 
+      #{sociallevel,jdbcType=VARCHAR}, #{situation,jdbcType=VARCHAR}, #{training,jdbcType=VARCHAR}, 
+      #{isworker,jdbcType=VARCHAR}, #{isoffline,jdbcType=VARCHAR}, #{offdate,jdbcType=VARCHAR}, 
+      #{isfloat,jdbcType=VARCHAR}, #{floatdirection,jdbcType=VARCHAR}, #{infoprecent,jdbcType=VARCHAR}, 
+      #{cttime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.mwp.dao.model.PartyMember">
+    insert into partymember
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="certid != null">
+        certid,
+      </if>
+      <if test="partyname != null">
+        partyName,
+      </if>
+      <if test="sex != null">
+        sex,
+      </if>
+      <if test="nation != null">
+        nation,
+      </if>
+      <if test="nativeplace != null">
+        nativeplace,
+      </if>
+      <if test="istaiwan != null">
+        isTaiwan,
+      </if>
+      <if test="brithday != null">
+        brithday,
+      </if>
+      <if test="age != null">
+        age,
+      </if>
+      <if test="education != null">
+        education,
+      </if>
+      <if test="category != null">
+        category,
+      </if>
+      <if test="partygroup != null">
+        partygroup,
+      </if>
+      <if test="partytime != null">
+        partytime,
+      </if>
+      <if test="fullpartytime != null">
+        fullpartytime,
+      </if>
+      <if test="job != null">
+        job,
+      </if>
+      <if test="timetowork != null">
+        timetowork,
+      </if>
+      <if test="address != null">
+        address,
+      </if>
+      <if test="mobilephone != null">
+        mobilephone,
+      </if>
+      <if test="telephone != null">
+        telephone,
+      </if>
+      <if test="marriage != null">
+        marriage,
+      </if>
+      <if test="archiveplace != null">
+        archiveplace,
+      </if>
+      <if test="technicaltitle != null">
+        technicaltitle,
+      </if>
+      <if test="sociallevel != null">
+        sociallevel,
+      </if>
+      <if test="situation != null">
+        situation,
+      </if>
+      <if test="training != null">
+        training,
+      </if>
+      <if test="isworker != null">
+        isworker,
+      </if>
+      <if test="isoffline != null">
+        isoffline,
+      </if>
+      <if test="offdate != null">
+        offdate,
+      </if>
+      <if test="isfloat != null">
+        isfloat,
+      </if>
+      <if test="floatdirection != null">
+        floatdirection,
+      </if>
+      <if test="infoprecent != null">
+        infoprecent,
+      </if>
+      <if test="cttime != null">
+        cttime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="certid != null">
+        #{certid,jdbcType=VARCHAR},
+      </if>
+      <if test="partyname != null">
+        #{partyname,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null">
+        #{sex,jdbcType=VARCHAR},
+      </if>
+      <if test="nation != null">
+        #{nation,jdbcType=VARCHAR},
+      </if>
+      <if test="nativeplace != null">
+        #{nativeplace,jdbcType=VARCHAR},
+      </if>
+      <if test="istaiwan != null">
+        #{istaiwan,jdbcType=VARCHAR},
+      </if>
+      <if test="brithday != null">
+        #{brithday,jdbcType=VARCHAR},
+      </if>
+      <if test="age != null">
+        #{age,jdbcType=VARCHAR},
+      </if>
+      <if test="education != null">
+        #{education,jdbcType=VARCHAR},
+      </if>
+      <if test="category != null">
+        #{category,jdbcType=VARCHAR},
+      </if>
+      <if test="partygroup != null">
+        #{partygroup,jdbcType=VARCHAR},
+      </if>
+      <if test="partytime != null">
+        #{partytime,jdbcType=VARCHAR},
+      </if>
+      <if test="fullpartytime != null">
+        #{fullpartytime,jdbcType=VARCHAR},
+      </if>
+      <if test="job != null">
+        #{job,jdbcType=VARCHAR},
+      </if>
+      <if test="timetowork != null">
+        #{timetowork,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null">
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="mobilephone != null">
+        #{mobilephone,jdbcType=VARCHAR},
+      </if>
+      <if test="telephone != null">
+        #{telephone,jdbcType=VARCHAR},
+      </if>
+      <if test="marriage != null">
+        #{marriage,jdbcType=VARCHAR},
+      </if>
+      <if test="archiveplace != null">
+        #{archiveplace,jdbcType=VARCHAR},
+      </if>
+      <if test="technicaltitle != null">
+        #{technicaltitle,jdbcType=VARCHAR},
+      </if>
+      <if test="sociallevel != null">
+        #{sociallevel,jdbcType=VARCHAR},
+      </if>
+      <if test="situation != null">
+        #{situation,jdbcType=VARCHAR},
+      </if>
+      <if test="training != null">
+        #{training,jdbcType=VARCHAR},
+      </if>
+      <if test="isworker != null">
+        #{isworker,jdbcType=VARCHAR},
+      </if>
+      <if test="isoffline != null">
+        #{isoffline,jdbcType=VARCHAR},
+      </if>
+      <if test="offdate != null">
+        #{offdate,jdbcType=VARCHAR},
+      </if>
+      <if test="isfloat != null">
+        #{isfloat,jdbcType=VARCHAR},
+      </if>
+      <if test="floatdirection != null">
+        #{floatdirection,jdbcType=VARCHAR},
+      </if>
+      <if test="infoprecent != null">
+        #{infoprecent,jdbcType=VARCHAR},
+      </if>
+      <if test="cttime != null">
+        #{cttime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.mwp.dao.model.PartyMemberExample" resultType="java.lang.Long">
+    select count(*) from partymember
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update partymember
+    <set>
+      <if test="record.certid != null">
+        certid = #{record.certid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.partyname != null">
+        partyName = #{record.partyname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sex != null">
+        sex = #{record.sex,jdbcType=VARCHAR},
+      </if>
+      <if test="record.nation != null">
+        nation = #{record.nation,jdbcType=VARCHAR},
+      </if>
+      <if test="record.nativeplace != null">
+        nativeplace = #{record.nativeplace,jdbcType=VARCHAR},
+      </if>
+      <if test="record.istaiwan != null">
+        isTaiwan = #{record.istaiwan,jdbcType=VARCHAR},
+      </if>
+      <if test="record.brithday != null">
+        brithday = #{record.brithday,jdbcType=VARCHAR},
+      </if>
+      <if test="record.age != null">
+        age = #{record.age,jdbcType=VARCHAR},
+      </if>
+      <if test="record.education != null">
+        education = #{record.education,jdbcType=VARCHAR},
+      </if>
+      <if test="record.category != null">
+        category = #{record.category,jdbcType=VARCHAR},
+      </if>
+      <if test="record.partygroup != null">
+        partygroup = #{record.partygroup,jdbcType=VARCHAR},
+      </if>
+      <if test="record.partytime != null">
+        partytime = #{record.partytime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fullpartytime != null">
+        fullpartytime = #{record.fullpartytime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.job != null">
+        job = #{record.job,jdbcType=VARCHAR},
+      </if>
+      <if test="record.timetowork != null">
+        timetowork = #{record.timetowork,jdbcType=VARCHAR},
+      </if>
+      <if test="record.address != null">
+        address = #{record.address,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mobilephone != null">
+        mobilephone = #{record.mobilephone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.telephone != null">
+        telephone = #{record.telephone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.marriage != null">
+        marriage = #{record.marriage,jdbcType=VARCHAR},
+      </if>
+      <if test="record.archiveplace != null">
+        archiveplace = #{record.archiveplace,jdbcType=VARCHAR},
+      </if>
+      <if test="record.technicaltitle != null">
+        technicaltitle = #{record.technicaltitle,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sociallevel != null">
+        sociallevel = #{record.sociallevel,jdbcType=VARCHAR},
+      </if>
+      <if test="record.situation != null">
+        situation = #{record.situation,jdbcType=VARCHAR},
+      </if>
+      <if test="record.training != null">
+        training = #{record.training,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isworker != null">
+        isworker = #{record.isworker,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isoffline != null">
+        isoffline = #{record.isoffline,jdbcType=VARCHAR},
+      </if>
+      <if test="record.offdate != null">
+        offdate = #{record.offdate,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isfloat != null">
+        isfloat = #{record.isfloat,jdbcType=VARCHAR},
+      </if>
+      <if test="record.floatdirection != null">
+        floatdirection = #{record.floatdirection,jdbcType=VARCHAR},
+      </if>
+      <if test="record.infoprecent != null">
+        infoprecent = #{record.infoprecent,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cttime != null">
+        cttime = #{record.cttime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update partymember
+    set certid = #{record.certid,jdbcType=VARCHAR},
+      partyName = #{record.partyname,jdbcType=VARCHAR},
+      sex = #{record.sex,jdbcType=VARCHAR},
+      nation = #{record.nation,jdbcType=VARCHAR},
+      nativeplace = #{record.nativeplace,jdbcType=VARCHAR},
+      isTaiwan = #{record.istaiwan,jdbcType=VARCHAR},
+      brithday = #{record.brithday,jdbcType=VARCHAR},
+      age = #{record.age,jdbcType=VARCHAR},
+      education = #{record.education,jdbcType=VARCHAR},
+      category = #{record.category,jdbcType=VARCHAR},
+      partygroup = #{record.partygroup,jdbcType=VARCHAR},
+      partytime = #{record.partytime,jdbcType=VARCHAR},
+      fullpartytime = #{record.fullpartytime,jdbcType=VARCHAR},
+      job = #{record.job,jdbcType=VARCHAR},
+      timetowork = #{record.timetowork,jdbcType=VARCHAR},
+      address = #{record.address,jdbcType=VARCHAR},
+      mobilephone = #{record.mobilephone,jdbcType=VARCHAR},
+      telephone = #{record.telephone,jdbcType=VARCHAR},
+      marriage = #{record.marriage,jdbcType=VARCHAR},
+      archiveplace = #{record.archiveplace,jdbcType=VARCHAR},
+      technicaltitle = #{record.technicaltitle,jdbcType=VARCHAR},
+      sociallevel = #{record.sociallevel,jdbcType=VARCHAR},
+      situation = #{record.situation,jdbcType=VARCHAR},
+      training = #{record.training,jdbcType=VARCHAR},
+      isworker = #{record.isworker,jdbcType=VARCHAR},
+      isoffline = #{record.isoffline,jdbcType=VARCHAR},
+      offdate = #{record.offdate,jdbcType=VARCHAR},
+      isfloat = #{record.isfloat,jdbcType=VARCHAR},
+      floatdirection = #{record.floatdirection,jdbcType=VARCHAR},
+      infoprecent = #{record.infoprecent,jdbcType=VARCHAR},
+      cttime = #{record.cttime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.mwp.dao.model.PartyMember">
+    update partymember
+    <set>
+      <if test="partyname != null">
+        partyName = #{partyname,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null">
+        sex = #{sex,jdbcType=VARCHAR},
+      </if>
+      <if test="nation != null">
+        nation = #{nation,jdbcType=VARCHAR},
+      </if>
+      <if test="nativeplace != null">
+        nativeplace = #{nativeplace,jdbcType=VARCHAR},
+      </if>
+      <if test="istaiwan != null">
+        isTaiwan = #{istaiwan,jdbcType=VARCHAR},
+      </if>
+      <if test="brithday != null">
+        brithday = #{brithday,jdbcType=VARCHAR},
+      </if>
+      <if test="age != null">
+        age = #{age,jdbcType=VARCHAR},
+      </if>
+      <if test="education != null">
+        education = #{education,jdbcType=VARCHAR},
+      </if>
+      <if test="category != null">
+        category = #{category,jdbcType=VARCHAR},
+      </if>
+      <if test="partygroup != null">
+        partygroup = #{partygroup,jdbcType=VARCHAR},
+      </if>
+      <if test="partytime != null">
+        partytime = #{partytime,jdbcType=VARCHAR},
+      </if>
+      <if test="fullpartytime != null">
+        fullpartytime = #{fullpartytime,jdbcType=VARCHAR},
+      </if>
+      <if test="job != null">
+        job = #{job,jdbcType=VARCHAR},
+      </if>
+      <if test="timetowork != null">
+        timetowork = #{timetowork,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null">
+        address = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="mobilephone != null">
+        mobilephone = #{mobilephone,jdbcType=VARCHAR},
+      </if>
+      <if test="telephone != null">
+        telephone = #{telephone,jdbcType=VARCHAR},
+      </if>
+      <if test="marriage != null">
+        marriage = #{marriage,jdbcType=VARCHAR},
+      </if>
+      <if test="archiveplace != null">
+        archiveplace = #{archiveplace,jdbcType=VARCHAR},
+      </if>
+      <if test="technicaltitle != null">
+        technicaltitle = #{technicaltitle,jdbcType=VARCHAR},
+      </if>
+      <if test="sociallevel != null">
+        sociallevel = #{sociallevel,jdbcType=VARCHAR},
+      </if>
+      <if test="situation != null">
+        situation = #{situation,jdbcType=VARCHAR},
+      </if>
+      <if test="training != null">
+        training = #{training,jdbcType=VARCHAR},
+      </if>
+      <if test="isworker != null">
+        isworker = #{isworker,jdbcType=VARCHAR},
+      </if>
+      <if test="isoffline != null">
+        isoffline = #{isoffline,jdbcType=VARCHAR},
+      </if>
+      <if test="offdate != null">
+        offdate = #{offdate,jdbcType=VARCHAR},
+      </if>
+      <if test="isfloat != null">
+        isfloat = #{isfloat,jdbcType=VARCHAR},
+      </if>
+      <if test="floatdirection != null">
+        floatdirection = #{floatdirection,jdbcType=VARCHAR},
+      </if>
+      <if test="infoprecent != null">
+        infoprecent = #{infoprecent,jdbcType=VARCHAR},
+      </if>
+      <if test="cttime != null">
+        cttime = #{cttime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where certid = #{certid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.mwp.dao.model.PartyMember">
+    update partymember
+    set partyName = #{partyname,jdbcType=VARCHAR},
+      sex = #{sex,jdbcType=VARCHAR},
+      nation = #{nation,jdbcType=VARCHAR},
+      nativeplace = #{nativeplace,jdbcType=VARCHAR},
+      isTaiwan = #{istaiwan,jdbcType=VARCHAR},
+      brithday = #{brithday,jdbcType=VARCHAR},
+      age = #{age,jdbcType=VARCHAR},
+      education = #{education,jdbcType=VARCHAR},
+      category = #{category,jdbcType=VARCHAR},
+      partygroup = #{partygroup,jdbcType=VARCHAR},
+      partytime = #{partytime,jdbcType=VARCHAR},
+      fullpartytime = #{fullpartytime,jdbcType=VARCHAR},
+      job = #{job,jdbcType=VARCHAR},
+      timetowork = #{timetowork,jdbcType=VARCHAR},
+      address = #{address,jdbcType=VARCHAR},
+      mobilephone = #{mobilephone,jdbcType=VARCHAR},
+      telephone = #{telephone,jdbcType=VARCHAR},
+      marriage = #{marriage,jdbcType=VARCHAR},
+      archiveplace = #{archiveplace,jdbcType=VARCHAR},
+      technicaltitle = #{technicaltitle,jdbcType=VARCHAR},
+      sociallevel = #{sociallevel,jdbcType=VARCHAR},
+      situation = #{situation,jdbcType=VARCHAR},
+      training = #{training,jdbcType=VARCHAR},
+      isworker = #{isworker,jdbcType=VARCHAR},
+      isoffline = #{isoffline,jdbcType=VARCHAR},
+      offdate = #{offdate,jdbcType=VARCHAR},
+      isfloat = #{isfloat,jdbcType=VARCHAR},
+      floatdirection = #{floatdirection,jdbcType=VARCHAR},
+      infoprecent = #{infoprecent,jdbcType=VARCHAR},
+      cttime = #{cttime,jdbcType=TIMESTAMP}
+    where certid = #{certid,jdbcType=VARCHAR}
+  </update>
+</mapper>

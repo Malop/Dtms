@@ -68,7 +68,7 @@ public class LoginController extends BaseController{
 		//密码相同，登入成功，将登入用户存到session中
 		//mp.addAttribute("user", userByName);
 		request.getSession().setAttribute("user", userByName);
-		return new BaseResult(1, "/index/"+userName,null);
+		return new BaseResult(0000, "/index/"+userName,null);
 	}
 	
 	@RequestMapping(value="/{userName}",method=RequestMethod.GET)
