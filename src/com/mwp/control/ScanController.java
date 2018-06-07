@@ -18,7 +18,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.mwp.dao.model.PartyMember;
 import com.mwp.dao.model.User;
+import com.mwp.service.PartyMemberService;
 import com.mwp.service.ScanService;
 import com.mwp.service.UserService;
 import com.mwp.base.BaseController;
@@ -39,7 +41,7 @@ public class ScanController extends BaseController{
 	private static Logger _log = LoggerFactory.getLogger(ScanController.class);
 	
 	@Autowired
-	UserService userService;
+	PartyMemberService partyMemberService;
 	
 	@Autowired
 	ScanService scanService;
@@ -52,11 +54,11 @@ public class ScanController extends BaseController{
 	}
 */
 	@Description(value="扫描主页")
-	@RequestMapping(value="/index/{userid}",method=RequestMethod.GET)
-	public String scanIndex(@PathVariable("userid") String userid, ModelMap modelMap){
-		User user = userService.getUserById(userid);
-		modelMap.put("user", user);
-		_log.info("selected user is :"+user.getRealname());
+	@RequestMapping(value="/index/{certid}",method=RequestMethod.GET)
+	public String scanIndex(@PathVariable("certid") String certid, ModelMap modelMap){
+		PartyMember partyMember = partyMemberService.getPartyMemberByCertId(certid);
+		modelMap.put("partyMember", partyMember);
+		_log.info("selected user is :"+partyMember.getPartyname());
 		return "/scan/scanIndex.jsp";
 	}
 	

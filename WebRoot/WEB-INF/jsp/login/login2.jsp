@@ -30,27 +30,32 @@
 <body class="hold-transition login-page">
 <div class="container">
         <form action="" method="" id="signInForm" class="form row">
-            <div class="form-horizontal" id="login_form">
-            <div class="form-group">
-                <div class="col-md-5">
-	                <i class="fa fa-user fa-lg"></i>
-	                <input class="form-control required" type="text" placeholder="请输入用户名" id="username" autofocus="autofocus" maxlength="20"/>
-	            </div>
-                <div class="col-md-1"></div>
-                <div class="col-md-5">
-                	<i class="fa fa-lock fa-lg"></i>
-                	<input class="form-control required" type="password" placeholder="请输入密码" id="password"  maxlength="8"/>
+            <div class="form-horizontal col-md-offset-3" id="login_form">
+                <h3 class="form-title" >LOGIN</h3>
+                <div class="col-md-9">
+                    <div class="form-group">
+                        <i class="fa fa-user fa-lg"></i>
+                        <input class="form-control required" type="text" placeholder="请输入用户名" id="username" autofocus="autofocus" maxlength="20"/>
+                    </div>
+                    <div class="form-group">
+                        <i class="fa fa-lock fa-lg"></i>
+                        <input class="form-control required" type="password" placeholder="请输入密码" id="password"  maxlength="8"/>
+                    </div>
+                    <div class="form-group">
+                    	<div class="col-xs-6">
+	                        <label class="checkbox">
+	                            <input type="checkbox" name="rememberMe" />记住我
+	                        </label>
+                        </div>
+                        <div class="col-xs-6">
+                        	<a href="#" id="forgetPassword">忘记密码</a>
+                        	<!-- <a href="#" id="register" class="text-center">注册</a> -->
+                        </div>
+                    </div>
+                    <div class="form-group col-md-offset-9">
+                        <button type="button" class="btn btn-success btn-block btn-flat" id="signIn">登录</button>
+                    </div>
                 </div>
-             </div>
-             <div class="form-group">
-             	<div class="col-md-6"></div>
-              	<div class="col-md-2">
-                	<button type="button" class="btn btn-success btn-block" id="signIn">登录</button>
-              	</div>
-              	<div class="col-md-2">
-                	<button type="button" class="btn btn-success btn-block" id="signIn">重置</button>
-              	</div>
-             </div>
             </div>
         </form>
     </div>

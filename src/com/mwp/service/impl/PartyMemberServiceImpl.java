@@ -39,6 +39,7 @@ public class PartyMemberServiceImpl implements PartyMemberService{
 	@Description(value="根据证件号查询信息")
 	public PartyMember getPartyMemberByCertId(String certId) {
 		PartyMember partyMember = partyMemberMapper.selectByPrimaryKey(certId);
+		if(null == partyMember) return null;
 		return partyMember;
 	}
 

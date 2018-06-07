@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Description;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -57,7 +58,7 @@ public class PartyMemberController extends BaseController {
 	@Description(value="excel文件导入")
 	@RequestMapping(value="/fileInput",method=RequestMethod.GET)
 	public String fileInput(){
-		return "/manage/fileInput.jsp";
+		return "/partymember/fileInput.jsp";
 	} 
 
 	@Description(value="新增党员信息")
@@ -65,11 +66,7 @@ public class PartyMemberController extends BaseController {
 	public String create(){
 		return "/partymember/partyMemberCreate.jsp";
 	}
-	@Description(value="党员信息详情")
-	@RequestMapping(value="/info", method = RequestMethod.GET)
-	public String info(){
-		return "/partymember/partyMemberInfo.jsp";
-	}
+	
 	
 	@Description(value="党员信息保存")
 	@RequestMapping(value="/create", method = RequestMethod.POST)
@@ -83,6 +80,16 @@ public class PartyMemberController extends BaseController {
 		}
 		_log.info("新增党员信息成功certid={},partyname={}", partyMember.getCertid(),partyMember.getPartyname());
 		return new BaseResult(1,"操作成功",null);
+	}
+	
+	@Description(value="党员信息详情修改")
+	@RequestMapping(value="/info/{certid}", method = RequestMethod.GET)
+	public String info(@PathVariable(required=true,value="certid") String certid,ModelMap mp){
+		_log.info("修改党员信息:"+certid);
+		
+		PartyMember partyMember = partyMemberService.getPartyMemberByCertId(certid);
+		mp.put("partyMember", partyMember);
+		return "/partymember/partyMemberInfo.jsp";
 	}
 	
 	@Description(value="删除记录信息")

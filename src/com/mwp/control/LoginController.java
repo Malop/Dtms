@@ -51,6 +51,10 @@ public class LoginController extends BaseController{
 		return "/login/login.jsp";
 	}
 	
+	@RequestMapping(value="/redirect",method=RequestMethod.GET)
+	public String redirect(){
+		return "/index/redirect_index.jsp";
+	}
 	
 	@RequestMapping(value="/login",method = RequestMethod.POST)
 	@ResponseBody
@@ -68,11 +72,11 @@ public class LoginController extends BaseController{
 		//密码相同，登入成功，将登入用户存到session中
 		//mp.addAttribute("user", userByName);
 		request.getSession().setAttribute("user", userByName);
-		return new BaseResult(0000, "/index/"+userName,null);
+		return new BaseResult(0000, "/index/redirect",null);
 	}
 	
-	@RequestMapping(value="/{userName}",method=RequestMethod.GET)
-	public String index(@PathVariable("userName") String userName,HttpServletRequest request,ModelMap mp){
+	@RequestMapping(value="/indexhome",method=RequestMethod.GET)
+	public String index(HttpServletRequest request,ModelMap mp){
 		//获取登入的用户
 		User user = (User) request.getSession().getAttribute("user");
 		_log.info("user is ========"+user.getUsername());

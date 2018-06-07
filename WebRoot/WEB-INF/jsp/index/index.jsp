@@ -242,10 +242,12 @@ $(function(){
     });
 	
 	//首页4块豆腐干导航
+	/*
 	$(".menu_home a[data-url]").click(function(){
 		loadPage("${basePath}/"+$(this).data("url"));
 	});
 	$(".menu_home a[data-url='/index/redirectHome']").click();
+	*/
 	//初始化
     HD_CONTENT.fullHeight = $(".content-wrapper").height();
 	HD_CONTENT.title = 41;

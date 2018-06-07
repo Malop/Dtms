@@ -42,27 +42,27 @@
 		</div>
 	</div>
 		
-		<div id="toolbar" class="btn-toolbar pull-right" style="margin-bottom:3px">
-			<button id="btn_scan" type="button" class="btn btn-success btn-sm">
-	            <span class="glyphicon glyphicon-inbox" aria-hidden="true"></span>扫描档案
-	        </button>
-			<button id="btn_create" type="button" class="btn btn-success btn-sm">
-	            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>新增
-	        </button>
-			<button id="btn_info" type="button" class="btn btn-success btn-sm">
-	            <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>详情
-	        </button>
-	        <button id="btn_update" type="button" class="btn btn-success btn-sm">
-	            <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>修改
-	        </button>
-	        <button id="btn_delete" type="button" class="btn btn-success btn-sm">
-	            <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>删除
-	        </button>
-	        <button id="btn_import" type="button" class="btn btn-success btn-sm">
-	            <span class="glyphicon glyphicon-import" aria-hidden="true"></span>导入excel
-	        </button>
-		</div>
-		<table id="tb_departments"></table>
+	<div id="toolbar" class="btn-toolbar pull-right" style="margin-bottom:3px">
+		<button id="btn_scan" type="button" class="btn btn-success btn-sm">
+            <span class="glyphicon glyphicon-inbox" aria-hidden="true"></span>扫描档案
+        </button>
+		<button id="btn_create" type="button" class="btn btn-success btn-sm">
+            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>新增
+        </button>
+		<button id="btn_info" type="button" class="btn btn-success btn-sm">
+            <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>详情
+        </button>
+        <button id="btn_update" type="button" class="btn btn-success btn-sm">
+            <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>详情测试按钮
+        </button> 
+        <button id="btn_delete" type="button" class="btn btn-success btn-sm">
+            <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>删除
+        </button>
+        <button id="btn_import" type="button" class="btn btn-success btn-sm">
+            <span class="glyphicon glyphicon-import" aria-hidden="true"></span>导入excel
+        </button>
+	</div>
+	<table id="tb_departments"></table>
 	</div>
 </div>
 
@@ -138,19 +138,28 @@ $(function () {
 	//扫描档案文件
 	$("#btn_scan").click(function(){
 		var rows = $('#tb_departments').bootstrapTable('getSelections');
-		$.hdDialog({
-			title:'OCX文档扫描',
-			columnClass:'col-md-offset-2 col-md-8',//配合col-md-offset-x居中
-			containerFluid:true,//最大化
-			content: 'url:${basePath}/scan/index/' + rows[0].certid,
-			//content: 'url:${basePath}/scan/index',
-			onClose: function(){
-			    if(HdDialog.getValue()){
-			    	$('#tb_departments').bootstrapTable('refresh');
-			    }
-			}
-		});
+		if (rows.length != 1) {
+			$.hdConfirm({
+				content: '请选择一条记录！',
+				autoClose: 'cancel|3000',
+				buttons: {cancel: {text: '取消'}}
+			});
+		} else {
+			$.hdDialog({
+				title:'OCX文档扫描',
+				columnClass:'col-md-offset-2 col-md-8',//配合col-md-offset-x居中
+				containerFluid:true,//最大化
+				content: 'url:${basePath}/scan/index/' + rows[0].certid,
+				//content: 'url:${basePath}/scan/index',
+				onClose: function(){
+				    if(HdDialog.getValue()){
+				    	$('#tb_departments').bootstrapTable('refresh');
+				    }
+				}
+			});
+		}
 	});
+	
 	//导入excel
     $("#toolbar #btn_import").click(function(){
     	$.hdDialog({
@@ -181,22 +190,15 @@ $(function () {
 		});
     });
 	
-	//详情按钮
-	$("#toolbar #btn_info").click(function(){
-		$.hdDialog({
-			title: '用户详情',
-			columnClass:'col-md-offset-2 col-md-8',//配合col-md-offset-x居中
-			//containerFluid:true,//最大化
-			content: 'url:${basePath}/partymember/info' + rows[0].certid,
-			onClose: function(){
-			    if(HdDialog.getValue()){
-			    	$('#tb_departments').bootstrapTable('refresh');
-			    }
-			}
-		});
+	//详情与修改合并
+	//详情测试按钮
+ 	$("#toolbar #btn_update").click(function(){
+ 		var rows = $('#tb_departments').bootstrapTable('getSelections');
+ 		loadPage("${basePath}/partymember/info/" + rows[0].certid);
+ 		//window.location.href="${basePath}/partymember/info/" + rows[0].certid;
 	});
-	//修改更新按钮
-	$("#toolbar #btn_update").click(function(){
+	//详情更新按钮
+	$("#toolbar #btn_info").click(function(){
 	    var rows = $('#tb_departments').bootstrapTable('getSelections');
 		if (rows.length != 1) {
 			$.hdConfirm({
@@ -210,10 +212,10 @@ $(function () {
 			});
 		} else {
 		    $.hdDialog({
-				title: '系统信息修改',
+				title: '党员信息修改',
 				columnClass:'col-md-offset-2 col-md-8',//配合col-md-offset-x居中
 				//containerFluid:true,//最大化
-				content: 'url:${basePath}/partymember/update/' + rows[0].certid,
+				content: 'url:${basePath}/partymember/info/' + rows[0].certid,
 				onClose: function(){
 				    if(HdDialog.getValue()){
 				    	$('#tb_departments').bootstrapTable('refresh');
