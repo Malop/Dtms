@@ -3,6 +3,7 @@ package com.mwp.service;
 import java.util.List;
 import java.util.Map;
 
+import com.mwp.dao.model.MFile;
 import com.mwp.dao.model.PartyMember;
 
 /**

@@ -25,7 +25,11 @@ import com.mwp.base.BaseController;
 import com.mwp.base.BasePageResult;
 import com.mwp.base.BaseResult;
 import com.mwp.common.util.ExcelUtil;
+import com.mwp.dao.model.MFile;
+import com.mwp.dao.model.MFileExample;
+import com.mwp.dao.model.MFileExample.Criteria;
 import com.mwp.dao.model.PartyMember;
+import com.mwp.service.MFileService;
 import com.mwp.service.PartyMemberService;
 import com.mwp.service.UserService;
 
@@ -47,6 +51,9 @@ public class PartyMemberController extends BaseController {
 	PartyMemberService partyMemberService;
 	
 	@Autowired
+	MFileService mFileService;
+	
+	@Autowired
 	UserService userService;
 
 	@RequestMapping(value="/index",method=RequestMethod.GET)
@@ -61,6 +68,36 @@ public class PartyMemberController extends BaseController {
 		return "/partymember/fileInput.jsp";
 	} 
 
+	@Description(value="党员档案信息浏览")
+	@RequestMapping(value="/fileList/{certid}",method=RequestMethod.GET)
+	public String fileList(@PathVariable(required=true,value="certid") String certid,ModelMap map){
+		_log.info("接受参数:"+certid);
+		map.addAttribute("partyMemberCertid", certid);
+		return "/partymember/fileList.jsp";
+	}
+	
+	@Description(value="党员档案信息浏览")
+	@RequestMapping(value="/fileList/{partyMemberCertid}",method=RequestMethod.POST)
+	@ResponseBody
+	public BasePageResult<MFile> fileList(@PathVariable(required=true,value="partyMemberCertid") String partyMemberCertid,
+			@RequestParam(required=false,value="mFileType") String mfiletype){
+		_log.info("post接受参数:"+partyMemberCertid+"---"+mfiletype);
+		//设置条件
+		MFileExample mfe = new MFileExample();
+		Criteria creteria= mfe.createCriteria();
+		creteria.andUseridEqualTo(partyMemberCertid);
+		
+		if(!StringUtils.isBlank(mfiletype)){
+			creteria.andMfiletypeEqualTo(mfiletype);
+		}
+		
+		
+		int total = mFileService.countMFileByExample(mfe);
+		
+		List<MFile> mFileList = mFileService.selectMFileByExample(mfe);
+		_log.info("===="+new BasePageResult<MFile>(total, mFileList).toString());
+		return new BasePageResult<MFile>(total, mFileList);
+	}
 	@Description(value="新增党员信息")
 	@RequestMapping(value="/create", method = RequestMethod.GET)
 	public String create(){

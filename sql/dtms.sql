@@ -44,12 +44,14 @@ insert into user_menu(userid,menuid) values('1',3);
 --drop table mfile;
 create table mfile(mfileid varchar(20) not null COMMENT '图片id',
 				mfilename varchar(50) DEFAULT NULL COMMENT '图片名称',
-				userid varchar(10) DEFAULT NULL COMMENT '所属人员号',
+				userid varchar(20) DEFAULT NULL COMMENT '所属人员号',
 				mfiletype varchar(4) DEFAULT NULL comment '图片类型',
 				mfileurl varchar(40) DEFAULT NULL COMMENT '存储路径',
 				cttime DATETIME DEFAULT NULL COMMENT '创建时间',
 				PRIMARY KEY (mfileid)
 				)charset=utf8;
+				
+insert into mfile(mfileid,mfilename,userid,mfiletype,mfileurl,cttime) values('1','测试文件','330106195705270012','01','/uploadfiles','2018-06-24 00:00:00');
 
 --党员信息表
 --drop table partymember;

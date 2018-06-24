@@ -43,8 +43,11 @@
 	</div>
 		
 	<div id="toolbar" class="btn-toolbar pull-right" style="margin-bottom:3px">
-		<button id="btn_scan" type="button" class="btn btn-success btn-sm">
+		<!-- <button id="btn_scan" type="button" class="btn btn-success btn-sm">
             <span class="glyphicon glyphicon-inbox" aria-hidden="true"></span>扫描档案
+        </button> -->
+		<button id="btn_filelist" type="button" class="btn btn-success btn-sm">
+            <span class="glyphicon glyphicon-inbox" aria-hidden="true"></span>档案查看
         </button>
 		<button id="btn_create" type="button" class="btn btn-success btn-sm">
             <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>新增
@@ -134,6 +137,35 @@ $(function () {
 	$("#btn_reset").click(function(){
 		$(".form-control").val("");
 	});
+	
+	//档案文件列表
+	$("#btn_filelist").click(function(){
+		var rows = $('#tb_departments').bootstrapTable('getSelections');
+		if (rows.length != 1) {
+			$.hdConfirm({
+				content: '请选择一条记录！',
+				autoClose: 'cancel|3000',
+				buttons: {
+					cancel: {
+						text: '取消'
+					}
+				}
+			});
+		} else {
+		    $.hdDialog({
+				title: '档案文件信息查看',
+				columnClass:'col-md-offset-2 col-md-8',//配合col-md-offset-x居中
+				//containerFluid:true,//最大化
+				content: 'url:${basePath}/partymember/fileList/' + rows[0].certid,
+				onClose: function(){
+				    if(HdDialog.getValue()){
+				    	$('#tb_departments').bootstrapTable('refresh');
+				    }
+				}
+			});
+		}
+	});
+	
 	
 	//扫描档案文件
 	$("#btn_scan").click(function(){

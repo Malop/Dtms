@@ -14,8 +14,6 @@ import com.mwp.dao.mapper.PartyMemberCustomizeMapper;
 import com.mwp.dao.mapper.PartyMemberMapper;
 import com.mwp.dao.model.PartyMember;
 import com.mwp.dao.model.PartyMemberExample;
-import com.mwp.dao.model.User;
-import com.mwp.dao.model.UserExample;
 import com.mwp.service.PartyMemberService;
 
 @Service
