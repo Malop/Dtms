@@ -3,6 +3,7 @@
 <mapper namespace="com.mwp.dao.mapper.MFileMapper">
   <resultMap id="BaseResultMap" type="com.mwp.dao.model.MFile">
     <id column="mfileid" jdbcType="VARCHAR" property="mfileid" />
+    <result column="mfilename" jdbcType="VARCHAR" property="mfilename" />
     <result column="userid" jdbcType="VARCHAR" property="userid" />
     <result column="mfiletype" jdbcType="VARCHAR" property="mfiletype" />
     <result column="mfileurl" jdbcType="VARCHAR" property="mfileurl" />
@@ -67,7 +68,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    mfileid, userid, mfiletype, mfileurl, cttime
+    mfileid, mfilename, userid, mfiletype, mfileurl, cttime
   </sql>
   <select id="selectByExample" parameterType="com.mwp.dao.model.MFileExample" resultMap="BaseResultMap">
     select
@@ -100,16 +101,21 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.mwp.dao.model.MFile">
-    insert into mfile (mfileid, userid, mfiletype, 
-      mfileurl, cttime)
-    values (#{mfileid,jdbcType=VARCHAR}, #{userid,jdbcType=VARCHAR}, #{mfiletype,jdbcType=VARCHAR}, 
-      #{mfileurl,jdbcType=VARCHAR}, #{cttime,jdbcType=TIMESTAMP})
+    insert into mfile (mfileid, mfilename, userid, 
+      mfiletype, mfileurl, cttime
+      )
+    values (#{mfileid,jdbcType=VARCHAR}, #{mfilename,jdbcType=VARCHAR}, #{userid,jdbcType=VARCHAR}, 
+      #{mfiletype,jdbcType=VARCHAR}, #{mfileurl,jdbcType=VARCHAR}, #{cttime,jdbcType=TIMESTAMP}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.mwp.dao.model.MFile">
     insert into mfile
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="mfileid != null">
         mfileid,
+      </if>
+      <if test="mfilename != null">
+        mfilename,
       </if>
       <if test="userid != null">
         userid,
@@ -127,6 +133,9 @@
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="mfileid != null">
         #{mfileid,jdbcType=VARCHAR},
+      </if>
+      <if test="mfilename != null">
+        #{mfilename,jdbcType=VARCHAR},
       </if>
       <if test="userid != null">
         #{userid,jdbcType=VARCHAR},
@@ -154,6 +163,9 @@
       <if test="record.mfileid != null">
         mfileid = #{record.mfileid,jdbcType=VARCHAR},
       </if>
+      <if test="record.mfilename != null">
+        mfilename = #{record.mfilename,jdbcType=VARCHAR},
+      </if>
       <if test="record.userid != null">
         userid = #{record.userid,jdbcType=VARCHAR},
       </if>
@@ -174,6 +186,7 @@
   <update id="updateByExample" parameterType="map">
     update mfile
     set mfileid = #{record.mfileid,jdbcType=VARCHAR},
+      mfilename = #{record.mfilename,jdbcType=VARCHAR},
       userid = #{record.userid,jdbcType=VARCHAR},
       mfiletype = #{record.mfiletype,jdbcType=VARCHAR},
       mfileurl = #{record.mfileurl,jdbcType=VARCHAR},
@@ -185,6 +198,9 @@
   <update id="updateByPrimaryKeySelective" parameterType="com.mwp.dao.model.MFile">
     update mfile
     <set>
+      <if test="mfilename != null">
+        mfilename = #{mfilename,jdbcType=VARCHAR},
+      </if>
       <if test="userid != null">
         userid = #{userid,jdbcType=VARCHAR},
       </if>
@@ -202,7 +218,8 @@
   </update>
   <update id="updateByPrimaryKey" parameterType="com.mwp.dao.model.MFile">
     update mfile
-    set userid = #{userid,jdbcType=VARCHAR},
+    set mfilename = #{mfilename,jdbcType=VARCHAR},
+      userid = #{userid,jdbcType=VARCHAR},
       mfiletype = #{mfiletype,jdbcType=VARCHAR},
       mfileurl = #{mfileurl,jdbcType=VARCHAR},
       cttime = #{cttime,jdbcType=TIMESTAMP}

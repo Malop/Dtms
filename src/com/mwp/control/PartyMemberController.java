@@ -138,7 +138,7 @@ public class PartyMemberController extends BaseController {
 	}
 	
 	@Description(value="excel文件导入")
-	@RequestMapping(value = "/impoerExcel", method = RequestMethod.POST)
+	@RequestMapping(value = "/importExcel", method = RequestMethod.POST)
 	@ResponseBody
 	public BaseResult importExcel(@RequestParam(value = "excelFile", required = false) MultipartFile excelFile,HttpServletRequest request) {
 		try {
@@ -157,7 +157,7 @@ public class PartyMemberController extends BaseController {
 	             //读到的数据都在datas里面
 	             if(datas!=null && datas.size()>0){
 	            	 for(int i=0;i<datas.size();i++){
-	            		 userService.importUser(datas.get(i));
+	            		 partyMemberService.importPartyMember(datas.get(i));
 	            	 }
 	                 return new BaseResult(1,"导入成功","");
 	             }

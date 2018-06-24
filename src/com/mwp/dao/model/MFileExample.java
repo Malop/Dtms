@@ -178,6 +178,76 @@ public class MFileExample implements Serializable {
             return (Criteria) this;
         }
 
+        public Criteria andMfilenameIsNull() {
+            addCriterion("mfilename is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andMfilenameIsNotNull() {
+            addCriterion("mfilename is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andMfilenameEqualTo(String value) {
+            addCriterion("mfilename =", value, "mfilename");
+            return (Criteria) this;
+        }
+
+        public Criteria andMfilenameNotEqualTo(String value) {
+            addCriterion("mfilename <>", value, "mfilename");
+            return (Criteria) this;
+        }
+
+        public Criteria andMfilenameGreaterThan(String value) {
+            addCriterion("mfilename >", value, "mfilename");
+            return (Criteria) this;
+        }
+
+        public Criteria andMfilenameGreaterThanOrEqualTo(String value) {
+            addCriterion("mfilename >=", value, "mfilename");
+            return (Criteria) this;
+        }
+
+        public Criteria andMfilenameLessThan(String value) {
+            addCriterion("mfilename <", value, "mfilename");
+            return (Criteria) this;
+        }
+
+        public Criteria andMfilenameLessThanOrEqualTo(String value) {
+            addCriterion("mfilename <=", value, "mfilename");
+            return (Criteria) this;
+        }
+
+        public Criteria andMfilenameLike(String value) {
+            addCriterion("mfilename like", value, "mfilename");
+            return (Criteria) this;
+        }
+
+        public Criteria andMfilenameNotLike(String value) {
+            addCriterion("mfilename not like", value, "mfilename");
+            return (Criteria) this;
+        }
+
+        public Criteria andMfilenameIn(List<String> values) {
+            addCriterion("mfilename in", values, "mfilename");
+            return (Criteria) this;
+        }
+
+        public Criteria andMfilenameNotIn(List<String> values) {
+            addCriterion("mfilename not in", values, "mfilename");
+            return (Criteria) this;
+        }
+
+        public Criteria andMfilenameBetween(String value1, String value2) {
+            addCriterion("mfilename between", value1, value2, "mfilename");
+            return (Criteria) this;
+        }
+
+        public Criteria andMfilenameNotBetween(String value1, String value2) {
+            addCriterion("mfilename not between", value1, value2, "mfilename");
+            return (Criteria) this;
+        }
+
         public Criteria andUseridIsNull() {
             addCriterion("userid is null");
             return (Criteria) this;

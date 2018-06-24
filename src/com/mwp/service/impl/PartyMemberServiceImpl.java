@@ -14,6 +14,8 @@ import com.mwp.dao.mapper.PartyMemberCustomizeMapper;
 import com.mwp.dao.mapper.PartyMemberMapper;
 import com.mwp.dao.model.PartyMember;
 import com.mwp.dao.model.PartyMemberExample;
+import com.mwp.dao.model.User;
+import com.mwp.dao.model.UserExample;
 import com.mwp.service.PartyMemberService;
 
 @Service
@@ -86,8 +88,17 @@ public class PartyMemberServiceImpl implements PartyMemberService{
 
 	@Transactional
 	public int importPartyMember(List<String> partyMemberList) {
-		// TODO Auto-generated method stub
-		return 0;
+		PartyMember partyMemberFromExcel  = new PartyMember(partyMemberList);
+		
+		PartyMemberExample pme = new PartyMemberExample();
+		pme.createCriteria().andCertidEqualTo(partyMemberFromExcel.getCertid());
+		PartyMember partyMemberExists = partyMemberMapper.selectByPrimaryKey(partyMemberFromExcel.getCertid());
+		if(partyMemberExists != null){
+			_log.info("PartyMember: "+partyMemberExists.getCertid()+" is exist!");
+			return 0;
+		}
+		partyMemberMapper.insert(partyMemberFromExcel);
+		return 1;
 	}
 
 }

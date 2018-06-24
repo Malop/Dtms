@@ -89,7 +89,7 @@
 		
 		<table tableName="upms_user_role" domainObjectName="UpmsUserRole"/>
 		-->
-        <table tableName="partymember" domainObjectName="PartyMember">
+        <table tableName="mfile" domainObjectName="MFile">
         </table>
 	</context>
 </generatorConfiguration>

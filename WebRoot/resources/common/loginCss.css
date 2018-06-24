@@ -23,12 +23,12 @@ body{
 	background: rgba(255,255,255,0.2);
 	width:600px;
 	position: absolute;   
-    top: 50%;   
+    top: 55%;   
     left: 50%; 
 }
 
 /*阴影*/
-.fa{display: inline-block;top: 27px;left: 6px;position: relative;color: #ccc;}
+.fa{display: inline-block;top: 25px;left: 6px;position: relative;color: #ccc;}
 .form-horizontal{border-radius: 15px;}
 input[type="text"],input[type="password"]{padding-left:26px;}
 //.checkbox{padding-left:21px;}

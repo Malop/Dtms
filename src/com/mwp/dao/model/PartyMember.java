@@ -2,6 +2,7 @@ package com.mwp.dao.model;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 public class PartyMember implements Serializable {
     private String certid;
@@ -211,7 +212,40 @@ public class PartyMember implements Serializable {
      */
     private Date cttime;
 
-    private static final long serialVersionUID = 1L;
+    public PartyMember(){}
+    public PartyMember(List<String> list){
+		this.partyname = list.get(0);
+		this.certid = list.get(1);
+		this.sex = list.get(2);
+		this.nation = list.get(3);
+		this.nativeplace = list.get(4);
+		this.istaiwan = list.get(5);
+		this.brithday = list.get(6);
+		this.education = list.get(7);
+		this.category = list.get(8);
+		this.partygroup = list.get(9);
+		this.partytime = list.get(10);
+		this.fullpartytime = list.get(11);
+		this.job = list.get(12);
+		this.timetowork =list.get(13);
+		this.address = list.get(14);
+		this.mobilephone = list.get(15);
+		this.telephone = list.get(16);
+		this.marriage = list.get(17);
+		this.archiveplace = list.get(18);
+		this.technicaltitle = list.get(19);
+		this.sociallevel = list.get(20);
+		this.situation = list.get(21);
+		this.training = list.get(22);
+		this.isworker = list.get(23);
+		this.isoffline = list.get(24);
+		this.offdate = list.get(25);
+		this.isfloat = list.get(26);
+		this.floatdirection = list.get(27);
+		this.infoprecent = list.get(28);
+	}
+    
+	private static final long serialVersionUID = 1L;
 
     public String getCertid() {
         return certid;

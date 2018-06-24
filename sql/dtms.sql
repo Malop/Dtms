@@ -43,6 +43,7 @@ insert into user_menu(userid,menuid) values('1',3);
 --图片表
 --drop table mfile;
 create table mfile(mfileid varchar(20) not null COMMENT '图片id',
+				mfilename varchar(50) DEFAULT NULL COMMENT '图片名称',
 				userid varchar(10) DEFAULT NULL COMMENT '所属人员号',
 				mfiletype varchar(4) DEFAULT NULL comment '图片类型',
 				mfileurl varchar(40) DEFAULT NULL COMMENT '存储路径',

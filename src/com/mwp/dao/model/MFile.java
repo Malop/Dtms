@@ -12,6 +12,13 @@ public class MFile implements Serializable {
     private String mfileid;
 
     /**
+     * 图片名称
+     *
+     * @mbg.generated
+     */
+    private String mfilename;
+
+    /**
      * 所属人员号
      *
      * @mbg.generated
@@ -47,6 +54,14 @@ public class MFile implements Serializable {
 
     public void setMfileid(String mfileid) {
         this.mfileid = mfileid;
+    }
+
+    public String getMfilename() {
+        return mfilename;
+    }
+
+    public void setMfilename(String mfilename) {
+        this.mfilename = mfilename;
     }
 
     public String getUserid() {
@@ -88,6 +103,7 @@ public class MFile implements Serializable {
         sb.append(" [");
         sb.append("Hash = ").append(hashCode());
         sb.append(", mfileid=").append(mfileid);
+        sb.append(", mfilename=").append(mfilename);
         sb.append(", userid=").append(userid);
         sb.append(", mfiletype=").append(mfiletype);
         sb.append(", mfileurl=").append(mfileurl);
@@ -109,6 +125,7 @@ public class MFile implements Serializable {
         }
         MFile other = (MFile) that;
         return (this.getMfileid() == null ? other.getMfileid() == null : this.getMfileid().equals(other.getMfileid()))
+            && (this.getMfilename() == null ? other.getMfilename() == null : this.getMfilename().equals(other.getMfilename()))
             && (this.getUserid() == null ? other.getUserid() == null : this.getUserid().equals(other.getUserid()))
             && (this.getMfiletype() == null ? other.getMfiletype() == null : this.getMfiletype().equals(other.getMfiletype()))
             && (this.getMfileurl() == null ? other.getMfileurl() == null : this.getMfileurl().equals(other.getMfileurl()))
@@ -120,6 +137,7 @@ public class MFile implements Serializable {
         final int prime = 31;
         int result = 1;
         result = prime * result + ((getMfileid() == null) ? 0 : getMfileid().hashCode());
+        result = prime * result + ((getMfilename() == null) ? 0 : getMfilename().hashCode());
         result = prime * result + ((getUserid() == null) ? 0 : getUserid().hashCode());
         result = prime * result + ((getMfiletype() == null) ? 0 : getMfiletype().hashCode());
         result = prime * result + ((getMfileurl() == null) ? 0 : getMfileurl().hashCode());

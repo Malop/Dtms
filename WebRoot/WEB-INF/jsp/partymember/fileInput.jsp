@@ -7,14 +7,14 @@
 	<div class="modal-body">
 	    <form id="importFile" name="importFile" class="form-horizontal" method="post">
 	        <div class="box-body">
-	            <label class="control-label">请选择要导入的Excel文件：</label>
+	            <label class="control-label">1111请选择要导入的Excel文件：</label>
 	            <input id="excelFile" name="excelFile" class="file-loading" type="file" multiple accept=".xls,.xlsx">
 	        </div>
 	    </form>
 	</div>
 </div>
 <script>
-initUpload("excelFile", "${basePath}/manage/impoerExcel");
+initUpload("excelFile", "${basePath}/partymember/importExcel");
 function initUpload(ctrlName, uploadUrl) {
     var control = $('#' + ctrlName);
     control.fileinput({
@@ -53,7 +53,6 @@ function initUpload(ctrlName, uploadUrl) {
 
 //文件上传成功回调方法
 $("#excelFile").on("fileuploaded", function (event, data, previewId, index) {
-	alert("12312");
     if(data.response.code == 1){
         alert(data.files[index].name + ":"+data.response.msg);
     	//关闭

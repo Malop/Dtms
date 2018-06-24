@@ -274,10 +274,10 @@ $(function () {
 	
 	$(".slider-minmax").noUiSlider({
         range: [0, 100],
-        start: [10],
+        start: 23,
         handles: 1,
         connect: 'upper',
-        step:5,
+        step:1,
         slide: function() {
             var val = Math.floor($(this).val());
             $(this).find(".noUi-handle").text(val+"%");
