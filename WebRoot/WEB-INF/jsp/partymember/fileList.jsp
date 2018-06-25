@@ -54,7 +54,7 @@ $(function () {
 		contentType:'application/json',
 		success:function(data){
 			$(data.rows).each(function(i,n){
-				var item = '<tr class="mfiletr"><td>'+n.mfileid+'</td><td>'+n.mfiletype+'</td><td>'+n.mfilename+'</td><td><a href="'+n.mfileurl+'">查看</a></td></tr>';
+				var item = '<tr class="mfiletr"><td>'+n.mfileid+'</td><td>'+n.mfiletype+'</td><td>'+n.mfilename+'</td><td><a href="#" onClick="window.open(\''+n.mfileurl+'\',\'\',\'height=530, width=700, top=180,left=350\')">查看</a>&nbsp;&nbsp;<a href="'+n.mfileurl+'" download="'+n.mfilename+'.tif">下载</a></td></tr>';
 				$(item).appendTo('table.filelist');
 			})
 		}
@@ -71,7 +71,7 @@ $(function () {
     		success:function(data){
     			$('.mfiletr').remove();
     			$(data.rows).each(function(i,n){
-    				var item = '<tr class="mfiletr"><td>'+n.mfileid+'</td><td>'+n.mfiletype+'</td><td>'+n.mfilename+'</td><td><a href="'+n.mfileurl+'">查看</a></td></tr>';
+    				var item = '<tr class="mfiletr"><td>'+n.mfileid+'</td><td>'+n.mfiletype+'</td><td>'+n.mfilename+'</td><td><a href="#" onClick="window.open(\''+n.mfileurl+'\',\'\',\'height=530, width=700, top=180,left=350\')">查看</a>&nbsp;&nbsp;<a href="'+n.mfileurl+'" download="'+n.mfilename+'.tif">下载</a></td></tr>';
     				$(item).appendTo('table.filelist');
     			})
     		}
