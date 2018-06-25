@@ -46,11 +46,17 @@
 		select count(1)
 		from partymember 
 		where 1=1
-	<if test="partyname != null and partyname != ''">
-		and partyname like concat('%',#{partyname,jdbcType=VARCHAR},'%')
+	<if test="partyName != null and partyName != ''">
+		and partyname like concat('%',#{partyName,jdbcType=VARCHAR},'%')
 	</if>
-	<if test="certid != null and certid !=''">
-		and certid = #{certid,jdbcType=VARCHAR}
+	<if test="certId != null and certId !=''">
+		and certid = #{certId,jdbcType=VARCHAR}
+	</if>
+	<if test="birthDay != null and birthDay !=''">
+		and birthDay = #{birthDay,jdbcType=VARCHAR}
+	</if>
+	<if test="partyTime != null and partyTime !=''">
+		and partyTime = #{partyTime,jdbcType=VARCHAR}
 	</if>
 	</select>
 	
@@ -61,13 +67,19 @@
 	<include refid="Base_Column_List" />
 		from partymember 
 		where 1=1
-	<if test="partyname != null and partyname != ''">
-		and partyname like concat('%',#{partyname,jdbcType=VARCHAR},'%')
+	<if test="partyName != null and partyName != ''">
+		and partyname like concat('%',#{partyName,jdbcType=VARCHAR},'%')
 	</if>
-	<if test="certid != null and certid !=''">
-		and certid = #{certid,jdbcType=VARCHAR}
+	<if test="certId != null and certId !=''">
+		and certid = #{certId,jdbcType=VARCHAR}
 	</if>
-		order by #{order,jdbcType=VARCHAR} limit #{offset,jdbcType=INTEGER},#{limit,jdbcType=INTEGER}
+	<if test="birthDay != null and birthDay !=''">
+		and birthDay = #{birthDay,jdbcType=VARCHAR}
+	</if>
+	<if test="partyTime != null and partyTime !=''">
+		and partyTime = #{partyTime,jdbcType=VARCHAR}
+	</if>
+		order by #{sort,jdbcType=VARCHAR} #{order,jdbcType=VARCHAR}  limit #{offset,jdbcType=INTEGER},#{limit,jdbcType=INTEGER}
 	</select>
 	
 	<!-- 按cretid删除党员信息 -->

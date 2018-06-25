@@ -23,13 +23,13 @@
 				<div class="col-md-2">
 					<input type="text" class="form-control" id="partyName">
 				</div>
-				<label class="control-label col-md-1" for="query_cretId">其他</label>
+				<label class="control-label col-md-1" for="query_brithday">生日</label>
 				<div class="col-md-2">
-					<input type="text" class="form-control" id="query_cretId" readonly>
+					<input type="text" class="form-control" id="brithday">
 				</div>
-				<label class="control-label col-md-1" for="query_cretId">其他</label>
+				<label class="control-label col-md-1" for=query_partytime>入党时间</label>
 				<div class="col-md-2">
-					<input type="text" class="form-control" id="query_cretId" readonly>
+					<input type="text" class="form-control" id="partyTime">
 				</div>
 			</div>
 			<button id="btn_query" type="button" class="btn btn-success btn-sm">
@@ -43,9 +43,9 @@
 	</div>
 		
 	<div id="toolbar" class="btn-toolbar pull-right" style="margin-bottom:3px">
-		<!-- <button id="btn_scan" type="button" class="btn btn-success btn-sm">
+		<button id="btn_scan" type="button" class="btn btn-success btn-sm" style="display:none">
             <span class="glyphicon glyphicon-inbox" aria-hidden="true"></span>扫描档案
-        </button> -->
+        </button>
 		<button id="btn_filelist" type="button" class="btn btn-success btn-sm">
             <span class="glyphicon glyphicon-inbox" aria-hidden="true"></span>档案查看
         </button>
@@ -55,7 +55,7 @@
 		<button id="btn_info" type="button" class="btn btn-success btn-sm">
             <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>详情
         </button>
-        <button id="btn_update" type="button" class="btn btn-success btn-sm">
+        <button id="btn_update" type="button" class="btn btn-success btn-sm" style="display:none">
             <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>详情测试按钮
         </button> 
         <button id="btn_delete" type="button" class="btn btn-success btn-sm">
@@ -75,13 +75,15 @@ $(function () {
 	
 	$('#tb_departments').bootstrapTable({
         url: '${basePath}/partymember/list',     //请求后台的URL（*）
-        method: 'get',                      //请求方式（*）
+        method: 'post',                      //请求方式（*）
         toolbar: '#toolbar',                //工具按钮用哪个容器
         toolbarAlign:"right",
+        contentType:"application/x-www-form-urlencoded",
         striped: true,                      //是否显示行间隔色
         cache: false,                       //是否使用缓存，默认为true，所以一般情况下需要设置一下这个属性（*）
         pagination: true,                   //是否显示分页（*）
         sortable: false,                    //是否启用排序
+        sortName : 'certid',				//初始化的时候排序的字段
         sortOrder: "asc",                   //排序方式
         sidePagination: "server",           //分页方式：client客户端分页，server服务端分页（*）
         pageNumber:1,                       //初始化加载第一页，默认第一页
@@ -108,7 +110,12 @@ $(function () {
             return {
                 limit: params.limit,   //页面大小
                 offset: params.offset,  //页码
-                certId: $("#certid").val()
+                order:this.sortOrder,//排序命令
+                sort:this.sortName,//排序字段
+                certId: $("#certId").val(),
+                partyName:$("#partyName").val(),
+                brithday:$("#brithday").val(),
+                partyTime:$("#partyTime").val()
             };
         },
         columns: [

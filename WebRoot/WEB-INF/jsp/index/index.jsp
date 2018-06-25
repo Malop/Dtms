@@ -33,7 +33,7 @@
 <link href="${basePath}/resources/icon-picker/css/icon-picker.min.css" rel="stylesheet"/>
 
 </head>
-<body class="hold-transition sidebar-mini skin-green-light"><!--整体皮肤类skin-green-light -->
+<body class="hold-transition sidebar-mini skin-red-light"><!--整体皮肤类skin-green-light -->
 	<div class="wrapper">
 		<header class="main-header">
 			<a href="#" class="logo">

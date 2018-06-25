@@ -43,8 +43,8 @@ img:hover {
 <div class="container">
 	<div class="col-md-3"><a href="${basePath}/index/indexhome"><img class="img3" src="${basePath}/resources/images/lgicr3.png" alt="" /></a></div>
 	<div class="col-md-3"><a href="#"><img class="img1" src="${basePath}/resources/images/lgicr1.png" alt="" /></a></div>
-	<div class="col-md-3"><a href="#"><img class="img4" src="${basePath}/resources/images/lgicr4.png" alt="" /></a></div>
-	<div class="col-md-3"><a href="#"><img class="img2" src="${basePath}/resources/images/lgicr2.png" alt="" /></a></div>
+	<%-- <div class="col-md-3"><a href="#"><img class="img4" src="${basePath}/resources/images/lgicr4.png" alt="" /></a></div>
+	<div class="col-md-3"><a href="#"><img class="img2" src="${basePath}/resources/images/lgicr2.png" alt="" /></a></div> --%>
 </div>
 <script src="${basePath}/resources/jquery/jquery.min.js"></script>
 <script src="${basePath}/resources/bootstrap/js/bootstrap.min.js"></script>

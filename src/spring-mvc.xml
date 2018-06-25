@@ -48,5 +48,6 @@
     <!-- 配置静态资源访问，不被DispatcherServlet处理，增加缓存时间10秒 -->
     <mvc:resources mapping="/favicon.ico" location="/favicon.ico"/>
     <mvc:resources mapping="/resources/**" location="/resources/" cache-period="10"/>
+    <mvc:resources mapping="/uploadfiles/**" location="/uploadfiles/" cache-period="10"/>
     
 </beans>

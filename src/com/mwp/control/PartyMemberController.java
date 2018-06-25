@@ -95,7 +95,6 @@ public class PartyMemberController extends BaseController {
 		int total = mFileService.countMFileByExample(mfe);
 		
 		List<MFile> mFileList = mFileService.selectMFileByExample(mfe);
-		_log.info("===="+new BasePageResult<MFile>(total, mFileList).toString());
 		return new BasePageResult<MFile>(total, mFileList);
 	}
 	@Description(value="新增党员信息")
@@ -147,25 +146,42 @@ public class PartyMemberController extends BaseController {
 	}
 	
 	@Description(value="人员列表")
-	@RequestMapping(value="/list",method=RequestMethod.GET)
+	@RequestMapping(value="/list",method=RequestMethod.POST)
 	@ResponseBody
 	public BasePageResult<PartyMember> list(
 			@RequestParam(required=false,defaultValue="0",value="offset") int offset,
 			@RequestParam(required=false,defaultValue="10",value="limit") int limit,
-			@RequestParam(required=false,value="partyname") String userName,
-			@RequestParam(required=false,value="certid") String certid,
+			@RequestParam(required=false,value="certId") String certId,
+			@RequestParam(required=false,value="partyName") String partyName,
+			@RequestParam(required=false,value="brithday") String brithday,
+			@RequestParam(required=false,value="partyTime") String partyTime,
+			@RequestParam(required=false,value="sort") String sort,
 			@RequestParam(required=false,value="order") String order){
 		Map<String, Comparable> parameMap = new HashMap<String,Comparable>();
 		
-		if(!StringUtils.isBlank(certid)){
-			parameMap.put("certid", certid);
+		if(!StringUtils.isBlank(certId)){
+			parameMap.put("certId", certId);
+		}
+		
+		if(!StringUtils.isBlank(partyName)){
+			parameMap.put("partyName", partyName);
+		}
+		if(!StringUtils.isBlank(brithday)){
+			parameMap.put("birthDay", brithday);
+		}
+		if(!StringUtils.isBlank(partyTime)){
+			parameMap.put("partyTime", partyTime);
 		}
 
 		int total = partyMemberService.countForOffsetPage(parameMap);
 		if(!StringUtils.isBlank(order)){
 			parameMap.put("order", order);
 		}
-
+		
+		if(!StringUtils.isBlank(order)){
+			parameMap.put("sort", sort);
+		}
+		_log.info("------获取查询参数:"+parameMap.toString());
 		parameMap.put("offset", offset);
 		parameMap.put("limit", limit);
 		
