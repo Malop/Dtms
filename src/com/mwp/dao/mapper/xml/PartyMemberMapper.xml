@@ -33,6 +33,7 @@
     <result column="floatdirection" jdbcType="VARCHAR" property="floatdirection" />
     <result column="infoprecent" jdbcType="VARCHAR" property="infoprecent" />
     <result column="cttime" jdbcType="TIMESTAMP" property="cttime" />
+    <result column="maininfoprecent" jdbcType="VARCHAR" property="maininfoprecent" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -96,7 +97,7 @@
     certid, partyName, sex, nation, nativeplace, isTaiwan, brithday, age, education, 
     category, partygroup, partytime, fullpartytime, job, timetowork, address, mobilephone, 
     telephone, marriage, archiveplace, technicaltitle, sociallevel, situation, training, 
-    isworker, isoffline, offdate, isfloat, floatdirection, infoprecent, cttime
+    isworker, isoffline, offdate, isfloat, floatdirection, infoprecent, cttime, maininfoprecent
   </sql>
   <select id="selectByExample" parameterType="com.mwp.dao.model.PartyMemberExample" resultMap="BaseResultMap">
     select
@@ -139,7 +140,7 @@
       sociallevel, situation, training, 
       isworker, isoffline, offdate, 
       isfloat, floatdirection, infoprecent, 
-      cttime)
+      cttime, maininfoprecent)
     values (#{certid,jdbcType=VARCHAR}, #{partyname,jdbcType=VARCHAR}, #{sex,jdbcType=VARCHAR}, 
       #{nation,jdbcType=VARCHAR}, #{nativeplace,jdbcType=VARCHAR}, #{istaiwan,jdbcType=VARCHAR}, 
       #{brithday,jdbcType=VARCHAR}, #{age,jdbcType=VARCHAR}, #{education,jdbcType=VARCHAR}, 
@@ -150,7 +151,7 @@
       #{sociallevel,jdbcType=VARCHAR}, #{situation,jdbcType=VARCHAR}, #{training,jdbcType=VARCHAR}, 
       #{isworker,jdbcType=VARCHAR}, #{isoffline,jdbcType=VARCHAR}, #{offdate,jdbcType=VARCHAR}, 
       #{isfloat,jdbcType=VARCHAR}, #{floatdirection,jdbcType=VARCHAR}, #{infoprecent,jdbcType=VARCHAR}, 
-      #{cttime,jdbcType=TIMESTAMP})
+      #{cttime,jdbcType=TIMESTAMP}, #{maininfoprecent,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.mwp.dao.model.PartyMember">
     insert into partymember
@@ -248,6 +249,9 @@
       <if test="cttime != null">
         cttime,
       </if>
+      <if test="maininfoprecent != null">
+        maininfoprecent,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="certid != null">
@@ -342,6 +346,9 @@
       </if>
       <if test="cttime != null">
         #{cttime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="maininfoprecent != null">
+        #{maininfoprecent,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -447,6 +454,9 @@
       <if test="record.cttime != null">
         cttime = #{record.cttime,jdbcType=TIMESTAMP},
       </if>
+      <if test="record.maininfoprecent != null">
+        maininfoprecent = #{record.maininfoprecent,jdbcType=VARCHAR},
+      </if>
     </set>
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -484,7 +494,8 @@
       isfloat = #{record.isfloat,jdbcType=VARCHAR},
       floatdirection = #{record.floatdirection,jdbcType=VARCHAR},
       infoprecent = #{record.infoprecent,jdbcType=VARCHAR},
-      cttime = #{record.cttime,jdbcType=TIMESTAMP}
+      cttime = #{record.cttime,jdbcType=TIMESTAMP},
+      maininfoprecent = #{record.maininfoprecent,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -582,6 +593,9 @@
       <if test="cttime != null">
         cttime = #{cttime,jdbcType=TIMESTAMP},
       </if>
+      <if test="maininfoprecent != null">
+        maininfoprecent = #{maininfoprecent,jdbcType=VARCHAR},
+      </if>
     </set>
     where certid = #{certid,jdbcType=VARCHAR}
   </update>
@@ -616,7 +630,8 @@
       isfloat = #{isfloat,jdbcType=VARCHAR},
       floatdirection = #{floatdirection,jdbcType=VARCHAR},
       infoprecent = #{infoprecent,jdbcType=VARCHAR},
-      cttime = #{cttime,jdbcType=TIMESTAMP}
+      cttime = #{cttime,jdbcType=TIMESTAMP},
+      maininfoprecent = #{maininfoprecent,jdbcType=VARCHAR}
     where certid = #{certid,jdbcType=VARCHAR}
   </update>
 </mapper>

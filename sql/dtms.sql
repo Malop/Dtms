@@ -51,7 +51,11 @@ create table mfile(mfileid varchar(20) not null COMMENT '图片id',
 				PRIMARY KEY (mfileid)
 				)charset=utf8;
 				
-insert into mfile(mfileid,mfilename,userid,mfiletype,mfileurl,cttime) values('1','测试文件','330106195705270012','01','/uploadfiles','2018-06-24 00:00:00');
+insert into mfile(mfileid,mfilename,userid,mfiletype,mfileurl,cttime) values('1','中国共产党党员基本情况登记表','330106195705270012','01','/Dtms/uploadfiles/中国共产党党员基本情况登记表.tif','2018-06-24 00:00:00');
+insert into mfile(mfileid,mfilename,userid,mfiletype,mfileurl,cttime) values('2','发展党员工作全程纪实表','330106195705270012','01','/Dtms/uploadfiles/发展党员工作全程纪实表.tif','2018-06-24 00:00:00');
+insert into mfile(mfileid,mfilename,userid,mfiletype,mfileurl,cttime) values('3','入党申请书','330106195705270012','01','/Dtms/uploadfiles/入党申请书.tif','2018-06-24 00:00:00');
+insert into mfile(mfileid,mfilename,userid,mfiletype,mfileurl,cttime) values('4','党内表彰奖励情况','330106195705270012','01','/Dtms/uploadfiles/党内表彰奖励情况.tif','2018-06-24 00:00:00');
+insert into mfile(mfileid,mfilename,userid,mfiletype,mfileurl,cttime) values('5','党纪处分情况','330106195705270012','01','/Dtms/uploadfiles/党纪处分情况.tif','2018-06-24 00:00:00');
 
 --党员信息表
 --drop table partymember;
@@ -84,8 +88,10 @@ create table partymember(certid varchar(32) not null,
 					offdate varchar(32) DEFAULT NULL COMMENT '失联时间',
 					isfloat varchar(4) DEFAULT NULL COMMENT '是否流动党员',
 					floatdirection varchar(32) DEFAULT NULL COMMENT '外出流向',
-					infoprecent varchar(10) DEFAULT NULL COMMENT '信息完整度',
+					infoprecent varchar(10) DEFAULT NULL COMMENT '档案资料完整度',
+					maininfoprecent varchar(10) DEFAULT NULL COMMENT '关键档案资料完整度',
 					cttime DATETIME DEFAULT NULL COMMENT '创建时间',
 					PRIMARY KEY (certid)
 					)charset=utf8;
 
+--alter table partymember add maininfoprecent varchar(10) DEFAULT NULL COMMENT '关键档案资料完整度';

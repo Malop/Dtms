@@ -2267,6 +2267,76 @@ public class PartyMemberExample implements Serializable {
             addCriterion("cttime not between", value1, value2, "cttime");
             return (Criteria) this;
         }
+
+        public Criteria andMaininfoprecentIsNull() {
+            addCriterion("maininfoprecent is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andMaininfoprecentIsNotNull() {
+            addCriterion("maininfoprecent is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andMaininfoprecentEqualTo(String value) {
+            addCriterion("maininfoprecent =", value, "maininfoprecent");
+            return (Criteria) this;
+        }
+
+        public Criteria andMaininfoprecentNotEqualTo(String value) {
+            addCriterion("maininfoprecent <>", value, "maininfoprecent");
+            return (Criteria) this;
+        }
+
+        public Criteria andMaininfoprecentGreaterThan(String value) {
+            addCriterion("maininfoprecent >", value, "maininfoprecent");
+            return (Criteria) this;
+        }
+
+        public Criteria andMaininfoprecentGreaterThanOrEqualTo(String value) {
+            addCriterion("maininfoprecent >=", value, "maininfoprecent");
+            return (Criteria) this;
+        }
+
+        public Criteria andMaininfoprecentLessThan(String value) {
+            addCriterion("maininfoprecent <", value, "maininfoprecent");
+            return (Criteria) this;
+        }
+
+        public Criteria andMaininfoprecentLessThanOrEqualTo(String value) {
+            addCriterion("maininfoprecent <=", value, "maininfoprecent");
+            return (Criteria) this;
+        }
+
+        public Criteria andMaininfoprecentLike(String value) {
+            addCriterion("maininfoprecent like", value, "maininfoprecent");
+            return (Criteria) this;
+        }
+
+        public Criteria andMaininfoprecentNotLike(String value) {
+            addCriterion("maininfoprecent not like", value, "maininfoprecent");
+            return (Criteria) this;
+        }
+
+        public Criteria andMaininfoprecentIn(List<String> values) {
+            addCriterion("maininfoprecent in", values, "maininfoprecent");
+            return (Criteria) this;
+        }
+
+        public Criteria andMaininfoprecentNotIn(List<String> values) {
+            addCriterion("maininfoprecent not in", values, "maininfoprecent");
+            return (Criteria) this;
+        }
+
+        public Criteria andMaininfoprecentBetween(String value1, String value2) {
+            addCriterion("maininfoprecent between", value1, value2, "maininfoprecent");
+            return (Criteria) this;
+        }
+
+        public Criteria andMaininfoprecentNotBetween(String value1, String value2) {
+            addCriterion("maininfoprecent not between", value1, value2, "maininfoprecent");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria implements Serializable {

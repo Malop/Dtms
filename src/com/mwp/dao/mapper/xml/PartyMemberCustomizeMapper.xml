@@ -2,43 +2,44 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.mwp.dao.mapper.PartyMemberCustomizeMapper">
 	<resultMap id="BaseResultMap" type="com.mwp.dao.model.PartyMember">
-	    <id column="certid" jdbcType="VARCHAR" property="certid" />
-	    <result column="partyName" jdbcType="VARCHAR" property="partyname" />
-	    <result column="sex" jdbcType="VARCHAR" property="sex" />
-	    <result column="nation" jdbcType="VARCHAR" property="nation" />
-	    <result column="nativeplace" jdbcType="VARCHAR" property="nativeplace" />
-	    <result column="isTaiwan" jdbcType="VARCHAR" property="istaiwan" />
-	    <result column="brithday" jdbcType="VARCHAR" property="brithday" />
-	    <result column="age" jdbcType="VARCHAR" property="age" />
-	    <result column="education" jdbcType="VARCHAR" property="education" />
-	    <result column="category" jdbcType="VARCHAR" property="category" />
-	    <result column="partygroup" jdbcType="VARCHAR" property="partygroup" />
-	    <result column="partytime" jdbcType="VARCHAR" property="partytime" />
-	    <result column="fullpartytime" jdbcType="VARCHAR" property="fullpartytime" />
-	    <result column="job" jdbcType="VARCHAR" property="job" />
-	    <result column="timetowork" jdbcType="VARCHAR" property="timetowork" />
-	    <result column="address" jdbcType="VARCHAR" property="address" />
-	    <result column="mobilephone" jdbcType="VARCHAR" property="mobilephone" />
-	    <result column="telephone" jdbcType="VARCHAR" property="telephone" />
-	    <result column="marriage" jdbcType="VARCHAR" property="marriage" />
-	    <result column="archiveplace" jdbcType="VARCHAR" property="archiveplace" />
-	    <result column="technicaltitle" jdbcType="VARCHAR" property="technicaltitle" />
-	    <result column="sociallevel" jdbcType="VARCHAR" property="sociallevel" />
-	    <result column="situation" jdbcType="VARCHAR" property="situation" />
-	    <result column="training" jdbcType="VARCHAR" property="training" />
-	    <result column="isworker" jdbcType="VARCHAR" property="isworker" />
-	    <result column="isoffline" jdbcType="VARCHAR" property="isoffline" />
-	    <result column="offdate" jdbcType="VARCHAR" property="offdate" />
-	    <result column="isfloat" jdbcType="VARCHAR" property="isfloat" />
-	    <result column="floatdirection" jdbcType="VARCHAR" property="floatdirection" />
-	    <result column="infoprecent" jdbcType="VARCHAR" property="infoprecent" />
-	    <result column="cttime" jdbcType="TIMESTAMP" property="cttime" />
-	</resultMap>
+		<id column="certid" jdbcType="VARCHAR" property="certid" />
+		<result column="partyName" jdbcType="VARCHAR" property="partyname" />
+		<result column="sex" jdbcType="VARCHAR" property="sex" />
+		<result column="nation" jdbcType="VARCHAR" property="nation" />
+		<result column="nativeplace" jdbcType="VARCHAR" property="nativeplace" />
+		<result column="isTaiwan" jdbcType="VARCHAR" property="istaiwan" />
+		<result column="brithday" jdbcType="VARCHAR" property="brithday" />
+		<result column="age" jdbcType="VARCHAR" property="age" />
+		<result column="education" jdbcType="VARCHAR" property="education" />
+		<result column="category" jdbcType="VARCHAR" property="category" />
+		<result column="partygroup" jdbcType="VARCHAR" property="partygroup" />
+		<result column="partytime" jdbcType="VARCHAR" property="partytime" />
+		<result column="fullpartytime" jdbcType="VARCHAR" property="fullpartytime" />
+		<result column="job" jdbcType="VARCHAR" property="job" />
+		<result column="timetowork" jdbcType="VARCHAR" property="timetowork" />
+		<result column="address" jdbcType="VARCHAR" property="address" />
+		<result column="mobilephone" jdbcType="VARCHAR" property="mobilephone" />
+		<result column="telephone" jdbcType="VARCHAR" property="telephone" />
+		<result column="marriage" jdbcType="VARCHAR" property="marriage" />
+		<result column="archiveplace" jdbcType="VARCHAR" property="archiveplace" />
+		<result column="technicaltitle" jdbcType="VARCHAR" property="technicaltitle" />
+		<result column="sociallevel" jdbcType="VARCHAR" property="sociallevel" />
+		<result column="situation" jdbcType="VARCHAR" property="situation" />
+		<result column="training" jdbcType="VARCHAR" property="training" />
+		<result column="isworker" jdbcType="VARCHAR" property="isworker" />
+		<result column="isoffline" jdbcType="VARCHAR" property="isoffline" />
+		<result column="offdate" jdbcType="VARCHAR" property="offdate" />
+		<result column="isfloat" jdbcType="VARCHAR" property="isfloat" />
+		<result column="floatdirection" jdbcType="VARCHAR" property="floatdirection" />
+		<result column="infoprecent" jdbcType="VARCHAR" property="infoprecent" />
+		<result column="cttime" jdbcType="TIMESTAMP" property="cttime" />
+		<result column="maininfoprecent" jdbcType="VARCHAR" property="maininfoprecent" />
+  </resultMap>
 	<sql id="Base_Column_List">
 	    certid, partyName, sex, nation, nativeplace, isTaiwan, brithday, age, education, 
 	    category, partygroup, partytime, fullpartytime, job, timetowork, address, mobilephone, 
 	    telephone, marriage, archiveplace, technicaltitle, sociallevel, situation, training, 
-	    isworker, isoffline, offdate, isfloat, floatdirection, infoprecent, cttime
+	    isworker, isoffline, offdate, isfloat, floatdirection, infoprecent, cttime, maininfoprecent
 	</sql>
   	
   	<!-- 根据条件分页查找 -->
@@ -46,17 +47,20 @@
 		select count(1)
 		from partymember 
 		where 1=1
-	<if test="partyName != null and partyName != ''">
-		and partyname like concat('%',#{partyName,jdbcType=VARCHAR},'%')
+	<if test="queryParm != null and queryParm != '' and queryVal != null and queryVal !=''">
+		and ${queryParm} like '${queryVal}%'
 	</if>
-	<if test="certId != null and certId !=''">
-		and certid = #{certId,jdbcType=VARCHAR}
+	<if test="brithDayBegin != null and brithDayBegin !=''">
+		and brithDay &gt;= #{brithDayBegin,jdbcType=VARCHAR}
 	</if>
-	<if test="birthDay != null and birthDay !=''">
-		and birthDay = #{birthDay,jdbcType=VARCHAR}
+	<if test="brithDayEnd != null and brithDayEnd !=''">
+		and brithDay &lt;= #{brithDayEnd,jdbcType=VARCHAR}
 	</if>
-	<if test="partyTime != null and partyTime !=''">
-		and partyTime = #{partyTime,jdbcType=VARCHAR}
+	<if test="partyTimeBegin != null and partyTimeBegin !=''">
+		and partyTime &gt;= #{partyTimeBegin,jdbcType=VARCHAR}
+	</if>
+	<if test="partyTimeEnd != null and partyTimeEnd !=''">
+		and partyTime &lt;= #{partyTimeEnd,jdbcType=VARCHAR}
 	</if>
 	</select>
 	
@@ -67,17 +71,20 @@
 	<include refid="Base_Column_List" />
 		from partymember 
 		where 1=1
-	<if test="partyName != null and partyName != ''">
-		and partyname like concat('%',#{partyName,jdbcType=VARCHAR},'%')
+	<if test="queryParm != null and queryParm != '' and queryVal != null and queryVal !=''">
+		and ${queryParm} like '${queryVal}%'
 	</if>
-	<if test="certId != null and certId !=''">
-		and certid = #{certId,jdbcType=VARCHAR}
+	<if test="brithDayBegin != null and brithDayBegin !=''">
+		and brithDay &gt;= #{brithDayBegin,jdbcType=VARCHAR}
 	</if>
-	<if test="birthDay != null and birthDay !=''">
-		and birthDay = #{birthDay,jdbcType=VARCHAR}
+	<if test="brithDayEnd != null and brithDayEnd !=''">
+		and brithDay &lt;= #{brithDayEnd,jdbcType=VARCHAR}
 	</if>
-	<if test="partyTime != null and partyTime !=''">
-		and partyTime = #{partyTime,jdbcType=VARCHAR}
+	<if test="partyTimeBegin != null and partyTimeBegin !=''">
+		and partyTime &gt;= #{partyTimeBegin,jdbcType=VARCHAR}
+	</if>
+	<if test="partyTimeEnd != null and partyTimeEnd !=''">
+		and partyTime &lt;= #{partyTimeEnd,jdbcType=VARCHAR}
 	</if>
 		order by #{sort,jdbcType=VARCHAR} #{order,jdbcType=VARCHAR}  limit #{offset,jdbcType=INTEGER},#{limit,jdbcType=INTEGER}
 	</select>

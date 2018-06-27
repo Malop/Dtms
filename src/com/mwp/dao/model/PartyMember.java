@@ -212,6 +212,13 @@ public class PartyMember implements Serializable {
      */
     private Date cttime;
 
+    /**
+     * 关键档案资料完整度
+     *
+     * @mbg.generated
+     */
+    private String maininfoprecent;
+
     public PartyMember(){}
     public PartyMember(List<String> list){
 		this.partyname = list.get(0);
@@ -242,10 +249,9 @@ public class PartyMember implements Serializable {
 		this.offdate = list.get(25);
 		this.isfloat = list.get(26);
 		this.floatdirection = list.get(27);
-		this.infoprecent = list.get(28);
 	}
     
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
     public String getCertid() {
         return certid;
@@ -495,6 +501,14 @@ public class PartyMember implements Serializable {
         this.cttime = cttime;
     }
 
+    public String getMaininfoprecent() {
+        return maininfoprecent;
+    }
+
+    public void setMaininfoprecent(String maininfoprecent) {
+        this.maininfoprecent = maininfoprecent;
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
@@ -532,6 +546,7 @@ public class PartyMember implements Serializable {
         sb.append(", floatdirection=").append(floatdirection);
         sb.append(", infoprecent=").append(infoprecent);
         sb.append(", cttime=").append(cttime);
+        sb.append(", maininfoprecent=").append(maininfoprecent);
         sb.append("]");
         return sb.toString();
     }
@@ -578,7 +593,8 @@ public class PartyMember implements Serializable {
             && (this.getIsfloat() == null ? other.getIsfloat() == null : this.getIsfloat().equals(other.getIsfloat()))
             && (this.getFloatdirection() == null ? other.getFloatdirection() == null : this.getFloatdirection().equals(other.getFloatdirection()))
             && (this.getInfoprecent() == null ? other.getInfoprecent() == null : this.getInfoprecent().equals(other.getInfoprecent()))
-            && (this.getCttime() == null ? other.getCttime() == null : this.getCttime().equals(other.getCttime()));
+            && (this.getCttime() == null ? other.getCttime() == null : this.getCttime().equals(other.getCttime()))
+            && (this.getMaininfoprecent() == null ? other.getMaininfoprecent() == null : this.getMaininfoprecent().equals(other.getMaininfoprecent()));
     }
 
     @Override
@@ -616,6 +632,7 @@ public class PartyMember implements Serializable {
         result = prime * result + ((getFloatdirection() == null) ? 0 : getFloatdirection().hashCode());
         result = prime * result + ((getInfoprecent() == null) ? 0 : getInfoprecent().hashCode());
         result = prime * result + ((getCttime() == null) ? 0 : getCttime().hashCode());
+        result = prime * result + ((getMaininfoprecent() == null) ? 0 : getMaininfoprecent().hashCode());
         return result;
     }
 }

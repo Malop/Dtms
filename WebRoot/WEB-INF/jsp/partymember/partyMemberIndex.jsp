@@ -15,21 +15,31 @@
 		<div id="collapseOne" class="accordion-body collapse" style="height: 0px; ">
 			<form id="query_form" class="form-horizontal">
 			<div class="form-group form-group-sm">
-				<label class="control-label col-md-1" for="certId">证件号</label>
+				<label class="control-label col-md-1" for="queryParm">组合条件:</label>
 				<div class="col-md-2">
-					<input type="text" class="form-control" id="certId">
+					<select id="queryParm" class="form-control" name="queryParm" required>
+						<option value="certid">证件号</option>
+						<option value="partyName">党员名称</option>
+						<option value="education">学历</option>
+						<option value="address">地址</option>
+					</select>
+					<input type="text" class="form-control" id="queryVal">
 				</div>
-				<label class="control-label col-md-1" for="partyName">党员名称</label>
+				<!-- <label class="control-label col-md-1" for="partyName">党员名称</label>
 				<div class="col-md-2">
 					<input type="text" class="form-control" id="partyName">
-				</div>
+				</div> -->
 				<label class="control-label col-md-1" for="query_brithday">生日</label>
 				<div class="col-md-2">
-					<input type="text" class="form-control" id="brithday">
+					<input type="text" class="form-control" id="brithDayBegin">
+					至
+					<input type="text" class="form-control" id="brithDayEnd">
 				</div>
 				<label class="control-label col-md-1" for=query_partytime>入党时间</label>
 				<div class="col-md-2">
-					<input type="text" class="form-control" id="partyTime">
+					<input type="text" class="form-control" id="partyTimeBegin">
+					至
+					<input type="text" class="form-control" id="partyTimeEnd">
 				</div>
 			</div>
 			<button id="btn_query" type="button" class="btn btn-success btn-sm">
@@ -112,24 +122,27 @@ $(function () {
                 offset: params.offset,  //页码
                 order:this.sortOrder,//排序命令
                 sort:this.sortName,//排序字段
-                certId: $("#certId").val(),
-                partyName:$("#partyName").val(),
-                brithday:$("#brithday").val(),
-                partyTime:$("#partyTime").val()
+                queryParm: $("#queryParm").val(),
+                queryVal:$("#queryVal").val(),
+                brithDayBegin:$("#brithDayBegin").val(),
+                brithDayEnd:$("#brithDayEnd").val(),
+                partyTimeBegin:$("#partyTimeBegin").val(),
+                partyTimeEnd:$("#partyTimeEnd").val()
             };
         },
         columns: [
 			{field: 'ck', checkbox: true},
 			{field: 'certid', title: '证件号', sortable: true, align: 'center'},
 			{field: 'partyname', title: '党员名称', sortable: true, align: 'center'},
-			{field: 'brithday', title: '生日', sortable: true, align: 'center'},
-			{field: 'address', title: '地址', sortable: true, align: 'center'},
-			{field: 'marriage', title: '婚姻状况', sortable: true, align: 'center'},
+			{field: 'sex', title: '性别', sortable: true, align: 'center'},
 			{field: 'education', title: '学历', sortable: true, align: 'center'},
+			{field: 'telphone', title: '联系方式', sortable: true, align: 'center'},
+			{field: 'address', title: '地址', sortable: true, align: 'center'},
+			{field: 'job', title: '工作单位及职务', sortable: true, align: 'center'},
 			{field: 'partygroup', title: '党组织', sortable: true, align: 'center'},
-	    	{field: 'archiveplace', title: '档案所在地', sortable: true, align: 'center'},
 			{field: 'partytime', title: '入党时间', sortable: true, align: 'center'},
-			{field: 'infoprecent', title: '信息完整度', sortable: true, align: 'center'}
+			//{field: 'maininfoprecent', title: '关键资料完整度', sortable: true, align: 'center'},
+			{field: 'infoprecent', title: '档案完整度', sortable: true, align: 'center'}
 		],
 		onLoadError : function(status, result){$.hdErrorConfirm(result.responseText);}
     });

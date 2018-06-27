@@ -151,27 +151,36 @@ public class PartyMemberController extends BaseController {
 	public BasePageResult<PartyMember> list(
 			@RequestParam(required=false,defaultValue="0",value="offset") int offset,
 			@RequestParam(required=false,defaultValue="10",value="limit") int limit,
-			@RequestParam(required=false,value="certId") String certId,
-			@RequestParam(required=false,value="partyName") String partyName,
-			@RequestParam(required=false,value="brithday") String brithday,
-			@RequestParam(required=false,value="partyTime") String partyTime,
+			@RequestParam(required=false,value="queryParm") String queryParm,
+			@RequestParam(required=false,value="queryVal") String queryVal,
+			@RequestParam(required=false,value="brithdayBegin") String brithDayBegin,
+			@RequestParam(required=false,value="brithdayEnd") String brithDayEnd,
+			@RequestParam(required=false,value="partyTimeBegin") String partyTimeBegin,
+			@RequestParam(required=false,value="partyTimeEnd") String partyTimeEnd,
 			@RequestParam(required=false,value="sort") String sort,
 			@RequestParam(required=false,value="order") String order){
 		Map<String, Comparable> parameMap = new HashMap<String,Comparable>();
 		
-		if(!StringUtils.isBlank(certId)){
-			parameMap.put("certId", certId);
+		if(!StringUtils.isBlank(queryParm)){
+			parameMap.put("queryParm", queryParm);
 		}
 		
-		if(!StringUtils.isBlank(partyName)){
-			parameMap.put("partyName", partyName);
+		if(!StringUtils.isBlank(queryVal)){
+			parameMap.put("queryVal", queryVal);
 		}
-		if(!StringUtils.isBlank(brithday)){
-			parameMap.put("birthDay", brithday);
+		if(!StringUtils.isBlank(brithDayBegin)){
+			parameMap.put("brithDayBegin", brithDayBegin);
 		}
-		if(!StringUtils.isBlank(partyTime)){
-			parameMap.put("partyTime", partyTime);
+		if(!StringUtils.isBlank(brithDayEnd)){
+			parameMap.put("brithDayEnd", brithDayEnd);
 		}
+		if(!StringUtils.isBlank(partyTimeBegin)){
+			parameMap.put("partyTimeBegin", partyTimeBegin);
+		}
+		if(!StringUtils.isBlank(partyTimeEnd)){
+			parameMap.put("partyTimeEnd", partyTimeEnd);
+		}
+		_log.info("------获取查询参数:"+parameMap.toString());
 
 		int total = partyMemberService.countForOffsetPage(parameMap);
 		if(!StringUtils.isBlank(order)){
@@ -181,11 +190,11 @@ public class PartyMemberController extends BaseController {
 		if(!StringUtils.isBlank(order)){
 			parameMap.put("sort", sort);
 		}
-		_log.info("------获取查询参数:"+parameMap.toString());
 		parameMap.put("offset", offset);
 		parameMap.put("limit", limit);
 		
 		List<PartyMember> partyMemberList = partyMemberService.selectPartyMemberForOffsetPage(parameMap);
+		_log.info("------"+partyMemberList);
 		return new BasePageResult<PartyMember>(total, partyMemberList);
 		
 	}
