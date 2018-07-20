@@ -32,14 +32,17 @@
 		<result column="isfloat" jdbcType="VARCHAR" property="isfloat" />
 		<result column="floatdirection" jdbcType="VARCHAR" property="floatdirection" />
 		<result column="infoprecent" jdbcType="VARCHAR" property="infoprecent" />
-		<result column="cttime" jdbcType="TIMESTAMP" property="cttime" />
-		<result column="maininfoprecent" jdbcType="VARCHAR" property="maininfoprecent" />
+	    <result column="cttime" jdbcType="TIMESTAMP" property="cttime" />
+	    <result column="isout" jdbcType="VARCHAR" property="isout" />
+	    <result column="outtime" jdbcType="VARCHAR" property="outtime" />
+	    <result column="fileprecent" jdbcType="VARCHAR" property="fileprecent" />
+	    <result column="mainfileprecent" jdbcType="VARCHAR" property="mainfileprecent" />
   </resultMap>
 	<sql id="Base_Column_List">
 	    certid, partyName, sex, nation, nativeplace, isTaiwan, brithday, age, education, 
 	    category, partygroup, partytime, fullpartytime, job, timetowork, address, mobilephone, 
 	    telephone, marriage, archiveplace, technicaltitle, sociallevel, situation, training, 
-	    isworker, isoffline, offdate, isfloat, floatdirection, infoprecent, cttime, maininfoprecent
+	    isworker, isoffline, offdate, isfloat, floatdirection, infoprecent, cttime, fileprecent,mainfileprecent
 	</sql>
   	
   	<!-- 根据条件分页查找 -->
@@ -49,6 +52,9 @@
 		where 1=1
 	<if test="queryParm != null and queryParm != '' and queryVal != null and queryVal !=''">
 		and ${queryParm} like '${queryVal}%'
+	</if>
+	<if test="queryParm1 != null and queryParm1 != '' and queryVal1 != null and queryVal1 !=''">
+		and ${queryParm1} like '${queryVal1}%'
 	</if>
 	<if test="brithDayBegin != null and brithDayBegin !=''">
 		and brithDay &gt;= #{brithDayBegin,jdbcType=VARCHAR}
@@ -61,6 +67,9 @@
 	</if>
 	<if test="partyTimeEnd != null and partyTimeEnd !=''">
 		and partyTime &lt;= #{partyTimeEnd,jdbcType=VARCHAR}
+	</if>
+	<if test="isOut != null and isOut !=''">
+		and isOut = #{isOut,jdbcType=VARCHAR}
 	</if>
 	</select>
 	
@@ -74,6 +83,9 @@
 	<if test="queryParm != null and queryParm != '' and queryVal != null and queryVal !=''">
 		and ${queryParm} like '${queryVal}%'
 	</if>
+	<if test="queryParm1 != null and queryParm1 != '' and queryVal1 != null and queryVal1 !=''">
+		and ${queryParm1} like '${queryVal1}%'
+	</if>
 	<if test="brithDayBegin != null and brithDayBegin !=''">
 		and brithDay &gt;= #{brithDayBegin,jdbcType=VARCHAR}
 	</if>
@@ -85,6 +97,9 @@
 	</if>
 	<if test="partyTimeEnd != null and partyTimeEnd !=''">
 		and partyTime &lt;= #{partyTimeEnd,jdbcType=VARCHAR}
+	</if>
+	<if test="isOut != null and isOut !=''">
+		and isOut = #{isOut,jdbcType=VARCHAR}
 	</if>
 		order by #{sort,jdbcType=VARCHAR} #{order,jdbcType=VARCHAR}  limit #{offset,jdbcType=INTEGER},#{limit,jdbcType=INTEGER}
 	</select>
@@ -98,4 +113,5 @@
 			#{certid}  
 		</foreach> 
 	</delete>
+	
 </mapper>

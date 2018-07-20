@@ -56,10 +56,16 @@ public class PartyMemberController extends BaseController {
 	@Autowired
 	UserService userService;
 
-	@RequestMapping(value="/index",method=RequestMethod.GET)
-	public String index(HttpServletRequest request,ModelMap mp){
-		
-		return "/partymember/partyMemberIndex.jsp";
+	@Description(value="党员信息主页")
+	@RequestMapping(value="/index/{isOut}",method=RequestMethod.GET)
+	public String index(@PathVariable(required=true,value="isOut") String isOut,ModelMap mp){
+		return "/partymember/partyMemberIndex.jsp?isOut='"+isOut+"'";
+	}
+	
+	@Description(value="转出党员信息主页")
+	@RequestMapping(value="/indexOut",method=RequestMethod.GET)
+	public String indexOut(HttpServletRequest request,ModelMap mp){
+		return "/partymember/partyMemberOutIndex.jsp";
 	}
 	
 	@Description(value="excel文件导入")
@@ -76,35 +82,29 @@ public class PartyMemberController extends BaseController {
 		return "/partymember/fileList.jsp";
 	}
 	
-	@Description(value="党员档案信息浏览")
-	@RequestMapping(value="/fileList/{partyMemberCertid}",method=RequestMethod.POST)
-	@ResponseBody
-	public BasePageResult<MFile> fileList(@PathVariable(required=true,value="partyMemberCertid") String partyMemberCertid,
-			@RequestParam(required=false,value="mFileType") String mfiletype){
-		_log.info("post接受参数:"+partyMemberCertid+"---"+mfiletype);
-		//设置条件
-		MFileExample mfe = new MFileExample();
-		Criteria creteria= mfe.createCriteria();
-		creteria.andUseridEqualTo(partyMemberCertid);
-		
-		if(!StringUtils.isBlank(mfiletype)){
-			creteria.andMfiletypeEqualTo(mfiletype);
-		}
-		
-		
-		int total = mFileService.countMFileByExample(mfe);
-		
-		List<MFile> mFileList = mFileService.selectMFileByExample(mfe);
-		return new BasePageResult<MFile>(total, mFileList);
+	
+	@Description(value="党员转出页面")
+	@RequestMapping(value="/out/{certid}", method = RequestMethod.GET)
+	public String out(@PathVariable(required=true,value="certid") String certid,ModelMap mp){
+		PartyMember partyMember = partyMemberService.getPartyMemberByCertId(certid);
+		mp.put("partyMember", partyMember);
+		return "/partymember/partyMemberOut.jsp";
 	}
+	@Description(value="党员转出页面")
+	@RequestMapping(value="/out", method = RequestMethod.POST)
+	@ResponseBody
+	public BaseResult out(PartyMember partyMember){
+		partyMemberService.updatePartyMember(partyMember);
+		return new BaseResult(1,"操作成功",null);
+	}
+	
+	
 	@Description(value="新增党员信息")
 	@RequestMapping(value="/create", method = RequestMethod.GET)
 	public String create(){
 		return "/partymember/partyMemberCreate.jsp";
 	}
-	
-	
-	@Description(value="党员信息保存")
+	@Description(value="新增党员信息")
 	@RequestMapping(value="/create", method = RequestMethod.POST)
 	@ResponseBody
 	public BaseResult create(PartyMember partyMember){
@@ -151,8 +151,11 @@ public class PartyMemberController extends BaseController {
 	public BasePageResult<PartyMember> list(
 			@RequestParam(required=false,defaultValue="0",value="offset") int offset,
 			@RequestParam(required=false,defaultValue="10",value="limit") int limit,
+			@RequestParam(required=false,value="isOut") String isOut,
 			@RequestParam(required=false,value="queryParm") String queryParm,
 			@RequestParam(required=false,value="queryVal") String queryVal,
+			@RequestParam(required=false,value="queryParm1") String queryParm1,
+			@RequestParam(required=false,value="queryVal1") String queryVal1,
 			@RequestParam(required=false,value="brithdayBegin") String brithDayBegin,
 			@RequestParam(required=false,value="brithdayEnd") String brithDayEnd,
 			@RequestParam(required=false,value="partyTimeBegin") String partyTimeBegin,
@@ -160,13 +163,20 @@ public class PartyMemberController extends BaseController {
 			@RequestParam(required=false,value="sort") String sort,
 			@RequestParam(required=false,value="order") String order){
 		Map<String, Comparable> parameMap = new HashMap<String,Comparable>();
-		
+		parameMap.put("isOut", isOut);//转出标志，默认0未转出
 		if(!StringUtils.isBlank(queryParm)){
 			parameMap.put("queryParm", queryParm);
 		}
 		
 		if(!StringUtils.isBlank(queryVal)){
 			parameMap.put("queryVal", queryVal);
+		}
+		if(!StringUtils.isBlank(queryParm1)){
+			parameMap.put("queryParm1", queryParm1);
+		}
+		
+		if(!StringUtils.isBlank(queryVal1)){
+			parameMap.put("queryVal1", queryVal1);
 		}
 		if(!StringUtils.isBlank(brithDayBegin)){
 			parameMap.put("brithDayBegin", brithDayBegin);
@@ -187,7 +197,7 @@ public class PartyMemberController extends BaseController {
 			parameMap.put("order", order);
 		}
 		
-		if(!StringUtils.isBlank(order)){
+		if(!StringUtils.isBlank(sort)){
 			parameMap.put("sort", sort);
 		}
 		parameMap.put("offset", offset);
@@ -197,6 +207,27 @@ public class PartyMemberController extends BaseController {
 		_log.info("------"+partyMemberList);
 		return new BasePageResult<PartyMember>(total, partyMemberList);
 		
+	}
+
+	@Description(value="党员档案信息浏览")
+	@RequestMapping(value="/fileList/{partyMemberCertid}",method=RequestMethod.POST)
+	@ResponseBody
+	public BasePageResult<MFile> fileList(@PathVariable(required=true,value="partyMemberCertid") String partyMemberCertid,
+			@RequestParam(required=false,value="mFileType") String mfiletype){
+		_log.info("post接受参数:"+partyMemberCertid+"---"+mfiletype);
+		//设置条件
+		MFileExample mfe = new MFileExample();
+		Criteria creteria= mfe.createCriteria();
+		creteria.andUseridEqualTo(partyMemberCertid);
+		
+		if(!StringUtils.isBlank(mfiletype)){
+			creteria.andMfiletypeEqualTo(mfiletype);
+		}
+		
+		int total = mFileService.countMFileByExample(mfe);
+		
+		List<MFile> mFileList = mFileService.selectMFileByExample(mfe);
+		return new BasePageResult<MFile>(total, mFileList);
 	}
 	
 	@Description(value="excel文件导入")

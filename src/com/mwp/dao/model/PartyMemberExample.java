@@ -2268,73 +2268,283 @@ public class PartyMemberExample implements Serializable {
             return (Criteria) this;
         }
 
-        public Criteria andMaininfoprecentIsNull() {
-            addCriterion("maininfoprecent is null");
+        public Criteria andIsoutIsNull() {
+            addCriterion("isout is null");
             return (Criteria) this;
         }
 
-        public Criteria andMaininfoprecentIsNotNull() {
-            addCriterion("maininfoprecent is not null");
+        public Criteria andIsoutIsNotNull() {
+            addCriterion("isout is not null");
             return (Criteria) this;
         }
 
-        public Criteria andMaininfoprecentEqualTo(String value) {
-            addCriterion("maininfoprecent =", value, "maininfoprecent");
+        public Criteria andIsoutEqualTo(String value) {
+            addCriterion("isout =", value, "isout");
             return (Criteria) this;
         }
 
-        public Criteria andMaininfoprecentNotEqualTo(String value) {
-            addCriterion("maininfoprecent <>", value, "maininfoprecent");
+        public Criteria andIsoutNotEqualTo(String value) {
+            addCriterion("isout <>", value, "isout");
             return (Criteria) this;
         }
 
-        public Criteria andMaininfoprecentGreaterThan(String value) {
-            addCriterion("maininfoprecent >", value, "maininfoprecent");
+        public Criteria andIsoutGreaterThan(String value) {
+            addCriterion("isout >", value, "isout");
             return (Criteria) this;
         }
 
-        public Criteria andMaininfoprecentGreaterThanOrEqualTo(String value) {
-            addCriterion("maininfoprecent >=", value, "maininfoprecent");
+        public Criteria andIsoutGreaterThanOrEqualTo(String value) {
+            addCriterion("isout >=", value, "isout");
             return (Criteria) this;
         }
 
-        public Criteria andMaininfoprecentLessThan(String value) {
-            addCriterion("maininfoprecent <", value, "maininfoprecent");
+        public Criteria andIsoutLessThan(String value) {
+            addCriterion("isout <", value, "isout");
             return (Criteria) this;
         }
 
-        public Criteria andMaininfoprecentLessThanOrEqualTo(String value) {
-            addCriterion("maininfoprecent <=", value, "maininfoprecent");
+        public Criteria andIsoutLessThanOrEqualTo(String value) {
+            addCriterion("isout <=", value, "isout");
             return (Criteria) this;
         }
 
-        public Criteria andMaininfoprecentLike(String value) {
-            addCriterion("maininfoprecent like", value, "maininfoprecent");
+        public Criteria andIsoutLike(String value) {
+            addCriterion("isout like", value, "isout");
             return (Criteria) this;
         }
 
-        public Criteria andMaininfoprecentNotLike(String value) {
-            addCriterion("maininfoprecent not like", value, "maininfoprecent");
+        public Criteria andIsoutNotLike(String value) {
+            addCriterion("isout not like", value, "isout");
             return (Criteria) this;
         }
 
-        public Criteria andMaininfoprecentIn(List<String> values) {
-            addCriterion("maininfoprecent in", values, "maininfoprecent");
+        public Criteria andIsoutIn(List<String> values) {
+            addCriterion("isout in", values, "isout");
             return (Criteria) this;
         }
 
-        public Criteria andMaininfoprecentNotIn(List<String> values) {
-            addCriterion("maininfoprecent not in", values, "maininfoprecent");
+        public Criteria andIsoutNotIn(List<String> values) {
+            addCriterion("isout not in", values, "isout");
             return (Criteria) this;
         }
 
-        public Criteria andMaininfoprecentBetween(String value1, String value2) {
-            addCriterion("maininfoprecent between", value1, value2, "maininfoprecent");
+        public Criteria andIsoutBetween(String value1, String value2) {
+            addCriterion("isout between", value1, value2, "isout");
             return (Criteria) this;
         }
 
-        public Criteria andMaininfoprecentNotBetween(String value1, String value2) {
-            addCriterion("maininfoprecent not between", value1, value2, "maininfoprecent");
+        public Criteria andIsoutNotBetween(String value1, String value2) {
+            addCriterion("isout not between", value1, value2, "isout");
+            return (Criteria) this;
+        }
+
+        public Criteria andOuttimeIsNull() {
+            addCriterion("outtime is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andOuttimeIsNotNull() {
+            addCriterion("outtime is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andOuttimeEqualTo(String value) {
+            addCriterion("outtime =", value, "outtime");
+            return (Criteria) this;
+        }
+
+        public Criteria andOuttimeNotEqualTo(String value) {
+            addCriterion("outtime <>", value, "outtime");
+            return (Criteria) this;
+        }
+
+        public Criteria andOuttimeGreaterThan(String value) {
+            addCriterion("outtime >", value, "outtime");
+            return (Criteria) this;
+        }
+
+        public Criteria andOuttimeGreaterThanOrEqualTo(String value) {
+            addCriterion("outtime >=", value, "outtime");
+            return (Criteria) this;
+        }
+
+        public Criteria andOuttimeLessThan(String value) {
+            addCriterion("outtime <", value, "outtime");
+            return (Criteria) this;
+        }
+
+        public Criteria andOuttimeLessThanOrEqualTo(String value) {
+            addCriterion("outtime <=", value, "outtime");
+            return (Criteria) this;
+        }
+
+        public Criteria andOuttimeLike(String value) {
+            addCriterion("outtime like", value, "outtime");
+            return (Criteria) this;
+        }
+
+        public Criteria andOuttimeNotLike(String value) {
+            addCriterion("outtime not like", value, "outtime");
+            return (Criteria) this;
+        }
+
+        public Criteria andOuttimeIn(List<String> values) {
+            addCriterion("outtime in", values, "outtime");
+            return (Criteria) this;
+        }
+
+        public Criteria andOuttimeNotIn(List<String> values) {
+            addCriterion("outtime not in", values, "outtime");
+            return (Criteria) this;
+        }
+
+        public Criteria andOuttimeBetween(String value1, String value2) {
+            addCriterion("outtime between", value1, value2, "outtime");
+            return (Criteria) this;
+        }
+
+        public Criteria andOuttimeNotBetween(String value1, String value2) {
+            addCriterion("outtime not between", value1, value2, "outtime");
+            return (Criteria) this;
+        }
+
+        public Criteria andFileprecentIsNull() {
+            addCriterion("fileprecent is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andFileprecentIsNotNull() {
+            addCriterion("fileprecent is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andFileprecentEqualTo(String value) {
+            addCriterion("fileprecent =", value, "fileprecent");
+            return (Criteria) this;
+        }
+
+        public Criteria andFileprecentNotEqualTo(String value) {
+            addCriterion("fileprecent <>", value, "fileprecent");
+            return (Criteria) this;
+        }
+
+        public Criteria andFileprecentGreaterThan(String value) {
+            addCriterion("fileprecent >", value, "fileprecent");
+            return (Criteria) this;
+        }
+
+        public Criteria andFileprecentGreaterThanOrEqualTo(String value) {
+            addCriterion("fileprecent >=", value, "fileprecent");
+            return (Criteria) this;
+        }
+
+        public Criteria andFileprecentLessThan(String value) {
+            addCriterion("fileprecent <", value, "fileprecent");
+            return (Criteria) this;
+        }
+
+        public Criteria andFileprecentLessThanOrEqualTo(String value) {
+            addCriterion("fileprecent <=", value, "fileprecent");
+            return (Criteria) this;
+        }
+
+        public Criteria andFileprecentLike(String value) {
+            addCriterion("fileprecent like", value, "fileprecent");
+            return (Criteria) this;
+        }
+
+        public Criteria andFileprecentNotLike(String value) {
+            addCriterion("fileprecent not like", value, "fileprecent");
+            return (Criteria) this;
+        }
+
+        public Criteria andFileprecentIn(List<String> values) {
+            addCriterion("fileprecent in", values, "fileprecent");
+            return (Criteria) this;
+        }
+
+        public Criteria andFileprecentNotIn(List<String> values) {
+            addCriterion("fileprecent not in", values, "fileprecent");
+            return (Criteria) this;
+        }
+
+        public Criteria andFileprecentBetween(String value1, String value2) {
+            addCriterion("fileprecent between", value1, value2, "fileprecent");
+            return (Criteria) this;
+        }
+
+        public Criteria andFileprecentNotBetween(String value1, String value2) {
+            addCriterion("fileprecent not between", value1, value2, "fileprecent");
+            return (Criteria) this;
+        }
+
+        public Criteria andMainfileprecentIsNull() {
+            addCriterion("mainfileprecent is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andMainfileprecentIsNotNull() {
+            addCriterion("mainfileprecent is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andMainfileprecentEqualTo(String value) {
+            addCriterion("mainfileprecent =", value, "mainfileprecent");
+            return (Criteria) this;
+        }
+
+        public Criteria andMainfileprecentNotEqualTo(String value) {
+            addCriterion("mainfileprecent <>", value, "mainfileprecent");
+            return (Criteria) this;
+        }
+
+        public Criteria andMainfileprecentGreaterThan(String value) {
+            addCriterion("mainfileprecent >", value, "mainfileprecent");
+            return (Criteria) this;
+        }
+
+        public Criteria andMainfileprecentGreaterThanOrEqualTo(String value) {
+            addCriterion("mainfileprecent >=", value, "mainfileprecent");
+            return (Criteria) this;
+        }
+
+        public Criteria andMainfileprecentLessThan(String value) {
+            addCriterion("mainfileprecent <", value, "mainfileprecent");
+            return (Criteria) this;
+        }
+
+        public Criteria andMainfileprecentLessThanOrEqualTo(String value) {
+            addCriterion("mainfileprecent <=", value, "mainfileprecent");
+            return (Criteria) this;
+        }
+
+        public Criteria andMainfileprecentLike(String value) {
+            addCriterion("mainfileprecent like", value, "mainfileprecent");
+            return (Criteria) this;
+        }
+
+        public Criteria andMainfileprecentNotLike(String value) {
+            addCriterion("mainfileprecent not like", value, "mainfileprecent");
+            return (Criteria) this;
+        }
+
+        public Criteria andMainfileprecentIn(List<String> values) {
+            addCriterion("mainfileprecent in", values, "mainfileprecent");
+            return (Criteria) this;
+        }
+
+        public Criteria andMainfileprecentNotIn(List<String> values) {
+            addCriterion("mainfileprecent not in", values, "mainfileprecent");
+            return (Criteria) this;
+        }
+
+        public Criteria andMainfileprecentBetween(String value1, String value2) {
+            addCriterion("mainfileprecent between", value1, value2, "mainfileprecent");
+            return (Criteria) this;
+        }
+
+        public Criteria andMainfileprecentNotBetween(String value1, String value2) {
+            addCriterion("mainfileprecent not between", value1, value2, "mainfileprecent");
             return (Criteria) this;
         }
     }

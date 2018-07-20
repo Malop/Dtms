@@ -88,6 +88,8 @@ create table partymember(certid varchar(32) not null,
 					offdate varchar(32) DEFAULT NULL COMMENT '失联时间',
 					isfloat varchar(4) DEFAULT NULL COMMENT '是否流动党员',
 					floatdirection varchar(32) DEFAULT NULL COMMENT '外出流向',
+					isout varchar(4) DEFAULT NULL COMMENT '是否转出',
+					outtime varchar(32) DEFAULT NULL COMMENT '转出时间',
 					infoprecent varchar(10) DEFAULT NULL COMMENT '档案资料完整度',
 					maininfoprecent varchar(10) DEFAULT NULL COMMENT '关键档案资料完整度',
 					cttime DATETIME DEFAULT NULL COMMENT '创建时间',
@@ -95,3 +97,4 @@ create table partymember(certid varchar(32) not null,
 					)charset=utf8;
 
 --alter table partymember add maininfoprecent varchar(10) DEFAULT NULL COMMENT '关键档案资料完整度';
+--alter table partymember drop column maininfoprecent;

@@ -45,10 +45,10 @@
              <div class="form-group">
              	<div class="col-md-6"></div>
               	<div class="col-md-2">
-                	<button type="button" class="btn btn-success btn-block" id="signIn">登录</button>
+                	<button type="button" class="btn btn-danger btn-block" id="signIn">登录</button>
               	</div>
               	<div class="col-md-2">
-                	<button type="button" class="btn btn-success btn-block" id="signIn">重置</button>
+                	<button type="button" class="btn btn-danger btn-block" id="signIn">重置</button>
               	</div>
              </div>
             </div>

@@ -255,7 +255,7 @@ $(function(){
 	HD_CONTENT.height = HD_CONTENT.fullHeight - HD_CONTENT.title - HD_CONTENT.padding -4;
 	HD_CONTENT.treeHeight = HD_CONTENT.height -10;
 	$("#logout").click(function(){
-		location.href = '${basePath}/login/logout?username=${user.username}';
+		location.href = '${basePath}/index/logout/${user.username}';
 	});
 	$("#self-info").click(function(){
 		$.hdDialog({

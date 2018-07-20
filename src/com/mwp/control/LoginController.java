@@ -48,7 +48,7 @@ public class LoginController extends BaseController{
 
 	@RequestMapping(value="/login",method=RequestMethod.GET)
 	public String loginIndex(){
-		return "/login/login.jsp";
+		return LOGIN_URL;
 	}
 	
 	@RequestMapping(value="/redirect",method=RequestMethod.GET)
@@ -91,5 +91,14 @@ public class LoginController extends BaseController{
 	public String redirectHome(){
 		
 		return "/index/redirect_index.jsp";
+	}
+	
+	@RequestMapping(value="/logout/{username}",method=RequestMethod.GET)
+	public String logout(@PathVariable(required=true,value="username") String username,HttpServletRequest request){
+		if(username.equals(request.getAttribute("user"))){
+			request.getSession().setAttribute("user", null);
+		}
+		
+		return LOGIN_URL;
 	}
 }

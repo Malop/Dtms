@@ -29,22 +29,34 @@ li{
     left: 50%; 
     transform: translate(-50%,30%);
 }
-img{
-	width:130px;
+.img3{
+	width:170px;
 	height:80px;
 }
-img:hover {
-	width: 160px;
+.img3:hover {
+	width: 200px;
+	height: 100px;
+}
+.img1{
+	width:100px;
+	height:80px;
+}
+.img1:hover {
+	width: 120px;
 	height: 100px;
 }
 </style>
 </head>
 <body class="hold-transition">
 <div class="container">
+	<div class="col-md-3"></div>
 	<div class="col-md-3"><a href="${basePath}/index/indexhome"><img class="img3" src="${basePath}/resources/images/lgicr3.png" alt="" /></a></div>
 	<div class="col-md-3"><a href="#"><img class="img1" src="${basePath}/resources/images/lgicr1.png" alt="" /></a></div>
-	<%-- <div class="col-md-3"><a href="#"><img class="img4" src="${basePath}/resources/images/lgicr4.png" alt="" /></a></div>
-	<div class="col-md-3"><a href="#"><img class="img2" src="${basePath}/resources/images/lgicr2.png" alt="" /></a></div> --%>
+	<div class="col-md-3"></div>
+	<%-- 
+	<div class="col-md-3"><a href="#"><img class="img4" src="${basePath}/resources/images/lgicr4.png" alt="" /></a></div>
+	<div class="col-md-3"><a href="#"><img class="img2" src="${basePath}/resources/images/lgicr2.png" alt="" /></a></div> 
+	--%>
 </div>
 <script src="${basePath}/resources/jquery/jquery.min.js"></script>
 <script src="${basePath}/resources/bootstrap/js/bootstrap.min.js"></script>

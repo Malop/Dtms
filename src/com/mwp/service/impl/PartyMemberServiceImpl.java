@@ -68,9 +68,12 @@ public class PartyMemberServiceImpl implements PartyMemberService{
 	}
 
 	@Transactional
-	public String updatePartyMember(PartyMember partyMember) {
+	public int updatePartyMember(PartyMember partyMember) {
 		// TODO Auto-generated method stub
-		return null;
+		PartyMemberExample pme = new PartyMemberExample();
+		pme.createCriteria().andCertidEqualTo(partyMember.getCertid());
+		
+		return partyMemberMapper.updateByPrimaryKeySelective(partyMember);
 	}
 
 	@Transactional

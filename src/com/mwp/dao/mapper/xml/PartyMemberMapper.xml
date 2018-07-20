@@ -33,7 +33,10 @@
     <result column="floatdirection" jdbcType="VARCHAR" property="floatdirection" />
     <result column="infoprecent" jdbcType="VARCHAR" property="infoprecent" />
     <result column="cttime" jdbcType="TIMESTAMP" property="cttime" />
-    <result column="maininfoprecent" jdbcType="VARCHAR" property="maininfoprecent" />
+    <result column="isout" jdbcType="VARCHAR" property="isout" />
+    <result column="outtime" jdbcType="VARCHAR" property="outtime" />
+    <result column="fileprecent" jdbcType="VARCHAR" property="fileprecent" />
+    <result column="mainfileprecent" jdbcType="VARCHAR" property="mainfileprecent" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -97,7 +100,8 @@
     certid, partyName, sex, nation, nativeplace, isTaiwan, brithday, age, education, 
     category, partygroup, partytime, fullpartytime, job, timetowork, address, mobilephone, 
     telephone, marriage, archiveplace, technicaltitle, sociallevel, situation, training, 
-    isworker, isoffline, offdate, isfloat, floatdirection, infoprecent, cttime, maininfoprecent
+    isworker, isoffline, offdate, isfloat, floatdirection, infoprecent, cttime, isout, 
+    outtime, fileprecent, mainfileprecent
   </sql>
   <select id="selectByExample" parameterType="com.mwp.dao.model.PartyMemberExample" resultMap="BaseResultMap">
     select
@@ -140,7 +144,8 @@
       sociallevel, situation, training, 
       isworker, isoffline, offdate, 
       isfloat, floatdirection, infoprecent, 
-      cttime, maininfoprecent)
+      cttime, isout, outtime, 
+      fileprecent, mainfileprecent)
     values (#{certid,jdbcType=VARCHAR}, #{partyname,jdbcType=VARCHAR}, #{sex,jdbcType=VARCHAR}, 
       #{nation,jdbcType=VARCHAR}, #{nativeplace,jdbcType=VARCHAR}, #{istaiwan,jdbcType=VARCHAR}, 
       #{brithday,jdbcType=VARCHAR}, #{age,jdbcType=VARCHAR}, #{education,jdbcType=VARCHAR}, 
@@ -151,7 +156,8 @@
       #{sociallevel,jdbcType=VARCHAR}, #{situation,jdbcType=VARCHAR}, #{training,jdbcType=VARCHAR}, 
       #{isworker,jdbcType=VARCHAR}, #{isoffline,jdbcType=VARCHAR}, #{offdate,jdbcType=VARCHAR}, 
       #{isfloat,jdbcType=VARCHAR}, #{floatdirection,jdbcType=VARCHAR}, #{infoprecent,jdbcType=VARCHAR}, 
-      #{cttime,jdbcType=TIMESTAMP}, #{maininfoprecent,jdbcType=VARCHAR})
+      #{cttime,jdbcType=TIMESTAMP}, #{isout,jdbcType=VARCHAR}, #{outtime,jdbcType=VARCHAR}, 
+      #{fileprecent,jdbcType=VARCHAR}, #{mainfileprecent,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.mwp.dao.model.PartyMember">
     insert into partymember
@@ -249,8 +255,17 @@
       <if test="cttime != null">
         cttime,
       </if>
-      <if test="maininfoprecent != null">
-        maininfoprecent,
+      <if test="isout != null">
+        isout,
+      </if>
+      <if test="outtime != null">
+        outtime,
+      </if>
+      <if test="fileprecent != null">
+        fileprecent,
+      </if>
+      <if test="mainfileprecent != null">
+        mainfileprecent,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
@@ -347,8 +362,17 @@
       <if test="cttime != null">
         #{cttime,jdbcType=TIMESTAMP},
       </if>
-      <if test="maininfoprecent != null">
-        #{maininfoprecent,jdbcType=VARCHAR},
+      <if test="isout != null">
+        #{isout,jdbcType=VARCHAR},
+      </if>
+      <if test="outtime != null">
+        #{outtime,jdbcType=VARCHAR},
+      </if>
+      <if test="fileprecent != null">
+        #{fileprecent,jdbcType=VARCHAR},
+      </if>
+      <if test="mainfileprecent != null">
+        #{mainfileprecent,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -454,8 +478,17 @@
       <if test="record.cttime != null">
         cttime = #{record.cttime,jdbcType=TIMESTAMP},
       </if>
-      <if test="record.maininfoprecent != null">
-        maininfoprecent = #{record.maininfoprecent,jdbcType=VARCHAR},
+      <if test="record.isout != null">
+        isout = #{record.isout,jdbcType=VARCHAR},
+      </if>
+      <if test="record.outtime != null">
+        outtime = #{record.outtime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fileprecent != null">
+        fileprecent = #{record.fileprecent,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mainfileprecent != null">
+        mainfileprecent = #{record.mainfileprecent,jdbcType=VARCHAR},
       </if>
     </set>
     <if test="_parameter != null">
@@ -495,7 +528,10 @@
       floatdirection = #{record.floatdirection,jdbcType=VARCHAR},
       infoprecent = #{record.infoprecent,jdbcType=VARCHAR},
       cttime = #{record.cttime,jdbcType=TIMESTAMP},
-      maininfoprecent = #{record.maininfoprecent,jdbcType=VARCHAR}
+      isout = #{record.isout,jdbcType=VARCHAR},
+      outtime = #{record.outtime,jdbcType=VARCHAR},
+      fileprecent = #{record.fileprecent,jdbcType=VARCHAR},
+      mainfileprecent = #{record.mainfileprecent,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -593,8 +629,17 @@
       <if test="cttime != null">
         cttime = #{cttime,jdbcType=TIMESTAMP},
       </if>
-      <if test="maininfoprecent != null">
-        maininfoprecent = #{maininfoprecent,jdbcType=VARCHAR},
+      <if test="isout != null">
+        isout = #{isout,jdbcType=VARCHAR},
+      </if>
+      <if test="outtime != null">
+        outtime = #{outtime,jdbcType=VARCHAR},
+      </if>
+      <if test="fileprecent != null">
+        fileprecent = #{fileprecent,jdbcType=VARCHAR},
+      </if>
+      <if test="mainfileprecent != null">
+        mainfileprecent = #{mainfileprecent,jdbcType=VARCHAR},
       </if>
     </set>
     where certid = #{certid,jdbcType=VARCHAR}
@@ -631,7 +676,10 @@
       floatdirection = #{floatdirection,jdbcType=VARCHAR},
       infoprecent = #{infoprecent,jdbcType=VARCHAR},
       cttime = #{cttime,jdbcType=TIMESTAMP},
-      maininfoprecent = #{maininfoprecent,jdbcType=VARCHAR}
+      isout = #{isout,jdbcType=VARCHAR},
+      outtime = #{outtime,jdbcType=VARCHAR},
+      fileprecent = #{fileprecent,jdbcType=VARCHAR},
+      mainfileprecent = #{mainfileprecent,jdbcType=VARCHAR}
     where certid = #{certid,jdbcType=VARCHAR}
   </update>
 </mapper>

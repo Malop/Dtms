@@ -1,3 +1,5 @@
+window.history.forward();
+window.onbeforeunload=function (){}
 //验证框架
 $.validator.setDefaults({
     showErrors: function(errorMap, errorList) {

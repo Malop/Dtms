@@ -27,7 +27,7 @@
 		</div>
 		<div class="form-group">
 			<label for="nation" class="col-md-3 control-label">民族</label>
-			<div class="col-md-7">
+			<div class="col-md-9">
 				<input id="nation" type="text" class="form-control" name="nation" maxlength="20" required value="${partyMember.nation}">
 			</div>
 		</div>
@@ -205,17 +205,6 @@
 			</div>
 		</div>
 		
-		<div class="form-group">
-			<label for="status" class="col-md-3 control-label">状态</label>
-			<div class="col-md-9">
-				<label class="radio-inline">
-					<input type="radio" name="status" id="status_1" value="NORMAL" checked>正常
-				</label>
-				<label class="radio-inline">
-					<input type="radio" name="status" id="status_2" value="ABNORMAL">锁定
-				</label>
-			</div>
-		</div>
 		<div class="form-group">
 			<div class="col-md-1 col-md-offset-5">
 				<button id="btn_save" type="button" class="btn btn-primary">保存</button>

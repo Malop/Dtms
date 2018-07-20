@@ -54,6 +54,9 @@ public class singleConsumerTest {
 		}
 	}
 	
+	/**
+	 * 多线程更新数据
+	 */
 	@Test
 	public void testThread(){
 		try{
@@ -94,6 +97,9 @@ public class singleConsumerTest {
 		}
 	}
 	
+	/**
+	 * 多线程增加乐观锁更新
+	 */
 	public void testThreadVersion(){
 		//主线程的try-catch
 		try{

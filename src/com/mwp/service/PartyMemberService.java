@@ -23,7 +23,7 @@ public interface PartyMemberService {
 	
 	public PartyMember addPartyMember(PartyMember partyMember);
 	
-	public String updatePartyMember(PartyMember partyMember);
+	public int updatePartyMember(PartyMember partyMember);
 	
 	//按条件查询总数
 	public int countForOffsetPage(Map<String,Comparable> map);

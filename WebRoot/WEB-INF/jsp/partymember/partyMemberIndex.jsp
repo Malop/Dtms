@@ -1,6 +1,7 @@
-<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page contentType="text/html; charset=utf-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jstl/core_rt" prefix="c" %>
 <c:set var="basePath" value="${pageContext.request.contextPath }" />
+<c:set var="isOut" value= "${isOut}" scope="request"/>
 
 <!-- 单一页面不用写html,head,body标签 -->
 <div class="panel panel-default">
@@ -13,67 +14,96 @@
 			</a>
 		</div>
 		<div id="collapseOne" class="accordion-body collapse" style="height: 0px; ">
-			<form id="query_form" class="form-horizontal">
-			<div class="form-group form-group-sm">
-				<label class="control-label col-md-1" for="queryParm">组合条件:</label>
-				<div class="col-md-2">
-					<select id="queryParm" class="form-control" name="queryParm" required>
-						<option value="certid">证件号</option>
-						<option value="partyName">党员名称</option>
-						<option value="education">学历</option>
-						<option value="address">地址</option>
-					</select>
-					<input type="text" class="form-control" id="queryVal">
-				</div>
-				<!-- <label class="control-label col-md-1" for="partyName">党员名称</label>
-				<div class="col-md-2">
-					<input type="text" class="form-control" id="partyName">
-				</div> -->
-				<label class="control-label col-md-1" for="query_brithday">生日</label>
-				<div class="col-md-2">
-					<input type="text" class="form-control" id="brithDayBegin">
-					至
-					<input type="text" class="form-control" id="brithDayEnd">
-				</div>
-				<label class="control-label col-md-1" for=query_partytime>入党时间</label>
-				<div class="col-md-2">
-					<input type="text" class="form-control" id="partyTimeBegin">
-					至
-					<input type="text" class="form-control" id="partyTimeEnd">
-				</div>
+			<form id="query_form" class="" role="form">
+			<div class="container">
+				<div class="form-group">
+                    <div class="col-lg-2">
+                        <select id="queryParm" class="form-control " name="queryParm" required>
+							<option value="">请选择条件</option>
+							<option value="certid">证件号</option>
+							<option value="partyName">党员名称</option>
+							<option value="education">学历</option>
+							<option value="address">地址</option>
+							<option value="nation">民族</option>
+							<option value="partygroup">党组织</option>
+						</select>
+                    </div>
+                    <div class=" col-lg-3">
+                    	<input type="text" class="form-control" id="queryVal">
+                    </div>
+                    
+                    <div class="col-lg-2">
+                        <select id="queryParm1" class="form-control " name="queryParm1" required>
+							<option value="">请选择条件</option>
+							<option value="certid">证件号</option>
+							<option value="partyName">党员名称</option>
+							<option value="education">学历</option>
+							<option value="address">地址</option>
+							<option value="nation">民族</option>
+							<option value="partygroup">党组织</option>
+						</select>
+                    </div>
+                    <div class=" col-lg-3">
+                    	<input type="text" class="form-control" id="queryVal1">
+                    </div>
+                    <button id="btn_query" type="button" class="btn btn-danger btn-sm">
+						<span class="glyphicon glyphicon-search" aria-hidden="true"></span>查询
+					</button>
+               	</div>
+               	<div class="form-group">
+	               	<div class="form-group col-lg-5">
+	                    <div class="input-group">
+	                        <span class="input-group-addon">生日</span>
+	                        <input class="form-control" type="text" id="brithDayBegin">
+	                        <span class="input-group-addon">至</span>
+	                        <input class="form-control" type="text" id="brithDayEnd">
+	                    </div>
+	               	</div>
+	               	<div class="form-group col-lg-5">
+	                    <div class="input-group">
+	                        <span class="input-group-addon">入党时间</span>
+	                        <input class="form-control" type="text" id="partyTimeBegin">
+	                        <span class="input-group-addon">至</span>
+	                        <input class="form-control" type="text" id="partyTimeEnd">
+	                    </div>
+	               	</div>
+					<button id="btn_reset" type="button" class="btn btn-danger btn-sm">
+						<span class="glyphicon glyphicon-search" aria-hidden="true"></span>重置
+					</button>
+               	</div>
 			</div>
-			<button id="btn_query" type="button" class="btn btn-success btn-sm">
-				<span class="glyphicon glyphicon-search" aria-hidden="true"></span>查询
-			</button>
-			<button id="btn_reset" type="button" class="btn btn-success btn-sm">
-				<span class="glyphicon glyphicon-search" aria-hidden="true"></span>重置
-			</button>
+			
 			</form>
 		</div>
 	</div>
 		
 	<div id="toolbar" class="btn-toolbar pull-right" style="margin-bottom:3px">
-		<button id="btn_scan" type="button" class="btn btn-success btn-sm" style="display:none">
+	<c:if test="${isOut == 0}">
+		<button id="btn_scan" type="button" class="btn btn-danger btn-sm" style="display:none">
             <span class="glyphicon glyphicon-inbox" aria-hidden="true"></span>扫描档案
         </button>
-		<button id="btn_filelist" type="button" class="btn btn-success btn-sm">
+		<button id="btn_filelist" type="button" class="btn btn-danger btn-sm">
             <span class="glyphicon glyphicon-inbox" aria-hidden="true"></span>档案查看
         </button>
-		<button id="btn_create" type="button" class="btn btn-success btn-sm">
+		<button id="btn_create" type="button" class="btn btn-danger btn-sm">
             <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>新增
         </button>
-		<button id="btn_info" type="button" class="btn btn-success btn-sm">
+		<button id="btn_info" type="button" class="btn btn-danger btn-sm">
             <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>详情
         </button>
-        <button id="btn_update" type="button" class="btn btn-success btn-sm" style="display:none">
+        <button id="btn_update" type="button" class="btn btn-danger btn-sm" style="display:none">
             <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>详情测试按钮
         </button> 
-        <button id="btn_delete" type="button" class="btn btn-success btn-sm">
+        <button id="btn_delete" type="button" class="btn btn-danger btn-sm">
             <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>删除
         </button>
-        <button id="btn_import" type="button" class="btn btn-success btn-sm">
+        <button id="btn_import" type="button" class="btn btn-danger btn-sm">
             <span class="glyphicon glyphicon-import" aria-hidden="true"></span>导入excel
         </button>
+        <button id="btn_out" type="button" class="btn btn-danger btn-sm">
+            <span class="glyphicon glyphicon-import" aria-hidden="true"></span>党员转出
+        </button>
+	</c:if>
 	</div>
 	<table id="tb_departments"></table>
 	</div>
@@ -118,12 +148,15 @@ $(function () {
         
         queryParams: function (params) {
             return {
-                limit: params.limit,   //页面大小
+                limit: params.limit,	//页面大小
                 offset: params.offset,  //页码
-                order:this.sortOrder,//排序命令
-                sort:this.sortName,//排序字段
+                order:this.sortOrder,	//排序命令
+                sort:this.sortName,		//排序字段
+                isOut:'${isOut}',		//是否转出标志
                 queryParm: $("#queryParm").val(),
                 queryVal:$("#queryVal").val(),
+                queryParm1: $("#queryParm1").val(),
+                queryVal1:$("#queryVal1").val(),
                 brithDayBegin:$("#brithDayBegin").val(),
                 brithDayEnd:$("#brithDayEnd").val(),
                 partyTimeBegin:$("#partyTimeBegin").val(),
@@ -136,13 +169,13 @@ $(function () {
 			{field: 'partyname', title: '党员名称', sortable: true, align: 'center'},
 			{field: 'sex', title: '性别', sortable: true, align: 'center'},
 			{field: 'education', title: '学历', sortable: true, align: 'center'},
-			{field: 'telphone', title: '联系方式', sortable: true, align: 'center'},
+			{field: 'mobilephone', title: '联系方式', sortable: true, align: 'center'},
 			{field: 'address', title: '地址', sortable: true, align: 'center'},
 			{field: 'job', title: '工作单位及职务', sortable: true, align: 'center'},
 			{field: 'partygroup', title: '党组织', sortable: true, align: 'center'},
 			{field: 'partytime', title: '入党时间', sortable: true, align: 'center'},
-			//{field: 'maininfoprecent', title: '关键资料完整度', sortable: true, align: 'center'},
-			{field: 'infoprecent', title: '档案完整度', sortable: true, align: 'center'}
+			{field: 'mainfileprecent', title: '关键资料完整度', sortable: true, align: 'center'},
+			{field: 'fileprecent', title: '档案完整度', sortable: true, align: 'center'}
 		],
 		onLoadError : function(status, result){$.hdErrorConfirm(result.responseText);}
     });
@@ -231,7 +264,7 @@ $(function () {
 	//新增按钮
 	$("#toolbar #btn_create").click(function(){
 	    $.hdDialog({
-			title: '新增系统信息',
+			title: '新增党员信息',
 			columnClass:'col-md-offset-2 col-md-8',//配合col-md-offset-x居中
 			//containerFluid:true,//最大化
 			content: 'url:${basePath}/partymember/create',
@@ -270,6 +303,33 @@ $(function () {
 				columnClass:'col-md-offset-2 col-md-8',//配合col-md-offset-x居中
 				//containerFluid:true,//最大化
 				content: 'url:${basePath}/partymember/info/' + rows[0].certid,
+				onClose: function(){
+				    if(HdDialog.getValue()){
+				    	$('#tb_departments').bootstrapTable('refresh');
+				    }
+				}
+			});
+		}
+    });
+	//转出按钮
+	$("#toolbar #btn_out").click(function(){
+	    var rows = $('#tb_departments').bootstrapTable('getSelections');
+		if (rows.length != 1) {
+			$.hdConfirm({
+				content: '请选择一条记录！',
+				autoClose: 'cancel|3000',
+				buttons: {
+					cancel: {
+						text: '取消'
+					}
+				}
+			});
+		} else {
+		    $.hdDialog({
+				title: '党员转出',
+				columnClass:'col-md-offset-2 col-md-8',//配合col-md-offset-x居中
+				//containerFluid:true,//最大化
+				content: 'url:${basePath}/partymember/out/' + rows[0].certid,
 				onClose: function(){
 				    if(HdDialog.getValue()){
 				    	$('#tb_departments').bootstrapTable('refresh');

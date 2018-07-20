@@ -213,12 +213,32 @@ public class PartyMember implements Serializable {
     private Date cttime;
 
     /**
-     * 关键档案资料完整度
+     * 是否转出
      *
      * @mbg.generated
      */
-    private String maininfoprecent;
+    private String isout;
 
+    /**
+     * 转出时间
+     *
+     * @mbg.generated
+     */
+    private String outtime;
+
+    /**
+     * 档案资料完整度
+     *
+     * @mbg.generated
+     */
+    private String fileprecent;
+
+    /**
+     * 主要档案资料完整度
+     *
+     * @mbg.generated
+     */
+    private String mainfileprecent;
     public PartyMember(){}
     public PartyMember(List<String> list){
 		this.partyname = list.get(0);
@@ -249,8 +269,10 @@ public class PartyMember implements Serializable {
 		this.offdate = list.get(25);
 		this.isfloat = list.get(26);
 		this.floatdirection = list.get(27);
+		this.infoprecent = list.get(28);
+		this.isout="0";
 	}
-    
+
     private static final long serialVersionUID = 1L;
 
     public String getCertid() {
@@ -501,12 +523,36 @@ public class PartyMember implements Serializable {
         this.cttime = cttime;
     }
 
-    public String getMaininfoprecent() {
-        return maininfoprecent;
+    public String getIsout() {
+        return isout;
     }
 
-    public void setMaininfoprecent(String maininfoprecent) {
-        this.maininfoprecent = maininfoprecent;
+    public void setIsout(String isout) {
+        this.isout = isout;
+    }
+
+    public String getOuttime() {
+        return outtime;
+    }
+
+    public void setOuttime(String outtime) {
+        this.outtime = outtime;
+    }
+
+    public String getFileprecent() {
+        return fileprecent;
+    }
+
+    public void setFileprecent(String fileprecent) {
+        this.fileprecent = fileprecent;
+    }
+
+    public String getMainfileprecent() {
+        return mainfileprecent;
+    }
+
+    public void setMainfileprecent(String mainfileprecent) {
+        this.mainfileprecent = mainfileprecent;
     }
 
     @Override
@@ -546,7 +592,10 @@ public class PartyMember implements Serializable {
         sb.append(", floatdirection=").append(floatdirection);
         sb.append(", infoprecent=").append(infoprecent);
         sb.append(", cttime=").append(cttime);
-        sb.append(", maininfoprecent=").append(maininfoprecent);
+        sb.append(", isout=").append(isout);
+        sb.append(", outtime=").append(outtime);
+        sb.append(", fileprecent=").append(fileprecent);
+        sb.append(", mainfileprecent=").append(mainfileprecent);
         sb.append("]");
         return sb.toString();
     }
@@ -594,7 +643,10 @@ public class PartyMember implements Serializable {
             && (this.getFloatdirection() == null ? other.getFloatdirection() == null : this.getFloatdirection().equals(other.getFloatdirection()))
             && (this.getInfoprecent() == null ? other.getInfoprecent() == null : this.getInfoprecent().equals(other.getInfoprecent()))
             && (this.getCttime() == null ? other.getCttime() == null : this.getCttime().equals(other.getCttime()))
-            && (this.getMaininfoprecent() == null ? other.getMaininfoprecent() == null : this.getMaininfoprecent().equals(other.getMaininfoprecent()));
+            && (this.getIsout() == null ? other.getIsout() == null : this.getIsout().equals(other.getIsout()))
+            && (this.getOuttime() == null ? other.getOuttime() == null : this.getOuttime().equals(other.getOuttime()))
+            && (this.getFileprecent() == null ? other.getFileprecent() == null : this.getFileprecent().equals(other.getFileprecent()))
+            && (this.getMainfileprecent() == null ? other.getMainfileprecent() == null : this.getMainfileprecent().equals(other.getMainfileprecent()));
     }
 
     @Override
@@ -632,7 +684,10 @@ public class PartyMember implements Serializable {
         result = prime * result + ((getFloatdirection() == null) ? 0 : getFloatdirection().hashCode());
         result = prime * result + ((getInfoprecent() == null) ? 0 : getInfoprecent().hashCode());
         result = prime * result + ((getCttime() == null) ? 0 : getCttime().hashCode());
-        result = prime * result + ((getMaininfoprecent() == null) ? 0 : getMaininfoprecent().hashCode());
+        result = prime * result + ((getIsout() == null) ? 0 : getIsout().hashCode());
+        result = prime * result + ((getOuttime() == null) ? 0 : getOuttime().hashCode());
+        result = prime * result + ((getFileprecent() == null) ? 0 : getFileprecent().hashCode());
+        result = prime * result + ((getMainfileprecent() == null) ? 0 : getMainfileprecent().hashCode());
         return result;
     }
 }
