@@ -75,7 +75,7 @@
 								<li class="footer"><a href="#">查看全部</a></li>
 							</ul>
 						</li>
-						<li class="dropdown tasks-menu">
+						<%-- <li class="dropdown tasks-menu">
 							<a href="#" class="dropdown-toggle" data-toggle="dropdown">
 								<i class="fa fa-flag-o"></i>
 								<span class="label label-danger">1</span>
@@ -117,7 +117,7 @@
 									</ul>
 								</li>
 							</ul>
-						</li>
+						</li> --%>
 						<li class="dropdown user user-menu">
 							<a href="#" class="dropdown-toggle" data-toggle="dropdown">
 								<span class="hidden-xs">${user.realname}</span>

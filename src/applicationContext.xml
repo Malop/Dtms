@@ -14,7 +14,7 @@
 	      http://www.springframework.org/schema/context/spring-context.xsd">
 	
 	<!-- 扫描含有注解的service -->
-	<context:component-scan base-package="com.mwp" />
+	<context:component-scan base-package="com.mwp.service" />
 	
 	<!--引入jdbc配置文件 -->
 	<context:property-placeholder location="classpath:jdbc.properties" />

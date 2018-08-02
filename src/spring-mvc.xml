@@ -28,6 +28,18 @@
     <!-- 扫描含有注解的control -->
 	<context:component-scan base-package="com.mwp.control" />
 	
+	<!-- 拦截器 -->
+	<mvc:interceptors>
+        <!--限流拦截器-->
+        <mvc:interceptor>
+            <mvc:mapping path="/**"/>
+            <mvc:exclude-mapping path="/resources/**"/>
+            <bean class="com.mwp.base.LimitInterceptor">
+            	<constructor-arg index="0" value="10"/>
+            </bean>
+        </mvc:interceptor>
+    </mvc:interceptors>
+    
 	<!-- 文件导入的必需包 -->
 	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver" />
 	<mvc:default-servlet-handler />
