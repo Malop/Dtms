@@ -51,10 +51,10 @@
 		from partymember 
 		where 1=1
 	<if test="queryParm != null and queryParm != '' and queryVal != null and queryVal !=''">
-		and ${queryParm} like '${queryVal}%'
+		and ${queryParm} like '%${queryVal}%'
 	</if>
 	<if test="queryParm1 != null and queryParm1 != '' and queryVal1 != null and queryVal1 !=''">
-		and ${queryParm1} like '${queryVal1}%'
+		and ${queryParm1} like '%${queryVal1}%'
 	</if>
 	<if test="brithDayBegin != null and brithDayBegin !=''">
 		and brithDay &gt;= #{brithDayBegin,jdbcType=VARCHAR}
@@ -81,10 +81,10 @@
 		from partymember 
 		where 1=1
 	<if test="queryParm != null and queryParm != '' and queryVal != null and queryVal !=''">
-		and ${queryParm} like '${queryVal}%'
+		and ${queryParm} like '%${queryVal}%'
 	</if>
 	<if test="queryParm1 != null and queryParm1 != '' and queryVal1 != null and queryVal1 !=''">
-		and ${queryParm1} like '${queryVal1}%'
+		and ${queryParm1} like '%${queryVal1}%'
 	</if>
 	<if test="brithDayBegin != null and brithDayBegin !=''">
 		and brithDay &gt;= #{brithDayBegin,jdbcType=VARCHAR}

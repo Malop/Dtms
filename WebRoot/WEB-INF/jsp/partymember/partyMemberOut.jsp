@@ -17,16 +17,18 @@
 			</div>
 		</div>
 		<div class="form-group">
-			<label for="sex" class="col-md-3 control-label">是否转出</label>
+			<label for="sex" class="col-md-3 control-label">党籍状态</label>
 			<div class="col-md-9">
 				<select id="isout" class="form-control" name="isout" required>
-					<option value="0">否</option>
-					<option value="1">是</option>
+					<option value="0">正常</option>
+					<option value="1">转出</option>
+					<option value="2">死亡</option>
+					<option value="3">出党</option>
 				</select>
 			</div>
 		</div>
 		<div class="form-group">
-			<label for="outtime" class="col-md-3 control-label">转出时间</label>
+			<label for="outtime" class="col-md-3 control-label">修改时间</label>
 			<div class="col-md-9">
 				<input id="outtime" type="text" class="form-control" name="outtime" maxlength="10" required value="${partyMember.outtime}">
 			</div>

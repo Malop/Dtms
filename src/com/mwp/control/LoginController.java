@@ -22,6 +22,7 @@ import com.mwp.dao.model.User;
 import com.mwp.service.MenuService;
 import com.mwp.service.UserService;
 import com.mwp.base.BaseResult;
+import com.mwp.annotation.ControllerLimit;
 import com.mwp.base.BaseController;
 
 import io.swagger.annotations.Api;
@@ -58,6 +59,7 @@ public class LoginController extends BaseController{
 	
 	@RequestMapping(value="/login",method = RequestMethod.POST)
 	@ResponseBody
+	@ControllerLimit(10)
 	public BaseResult login(HttpServletRequest request,ModelMap mp){
 		String userName = request.getParameter("username");
 		String passWord = request.getParameter("password");
