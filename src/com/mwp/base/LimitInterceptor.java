@@ -39,7 +39,7 @@ public class LimitInterceptor implements HandlerInterceptor {
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object object) throws Exception {
 		
 		long now  = System.currentTimeMillis();//当前时间
-		
+		 _log.info(request.getRequestURI()+"开始拦截"+count.intValue());
 		if(now - timestamp < 1000){
 			//访问次数未超过阈值
 			if(count.intValue() < limitCount){

@@ -101,7 +101,7 @@
             <span class="glyphicon glyphicon-import" aria-hidden="true"></span>导入excel
         </button>
         <button id="btn_out" type="button" class="btn btn-danger btn-sm">
-            <span class="glyphicon glyphicon-import" aria-hidden="true"></span>党员转出
+            <span class="glyphicon glyphicon-export" aria-hidden="true"></span>党籍状态
         </button>
 	</c:if>
 	</div>

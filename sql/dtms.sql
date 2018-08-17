@@ -28,8 +28,10 @@ create table menu(menuid int not NULL,
 				)charset=utf8;
 
 insert into menu(menuid,parentid,menuname,type,uri,icon,cttime) values(1,0,'人员管理','1','','','2018-04-20');
-insert into menu(menuid,parentid,menuname,type,uri,icon,cttime) values(2,1,'人员列表','2','/manage/index','','2018-04-20');
-insert into menu(menuid,parentid,menuname,type,uri,icon,cttime) values(3,1,'党员信息列表','2','/partymember/index','','2018-05-14');
+insert into menu(menuid,parentid,menuname,type,uri,icon,cttime) values(2,1,'党员信息列表','2','/partymember/index/0','','2018-05-14');
+insert into menu(menuid,parentid,menuname,type,uri,icon,cttime) values(3,1,'转出党员列表','2','/partymember/index/1','','2018-05-14');
+insert into menu(menuid,parentid,menuname,type,uri,icon,cttime) values(4,1,'死亡党员列表','2','/partymember/index/2','','2018-05-14');
+insert into menu(menuid,parentid,menuname,type,uri,icon,cttime) values(5,1,'出党党员列表','2','/partymember/index/3','','2018-05-14');
 
 --人员菜单关系表
 --drop table user_menu;
@@ -38,6 +40,8 @@ create table user_menu(userid varchar(10),menuid int,primary key(userid,menuid))
 insert into user_menu(userid,menuid) values('1',1);
 insert into user_menu(userid,menuid) values('1',2);
 insert into user_menu(userid,menuid) values('1',3);
+insert into user_menu(userid,menuid) values('1',4);
+insert into user_menu(userid,menuid) values('1',5);
 
 
 --图片表

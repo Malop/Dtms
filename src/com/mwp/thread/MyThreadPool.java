@@ -15,8 +15,8 @@ import org.springframework.stereotype.Component;
 @Component
 public class MyThreadPool {
 
-	private static int corePoolSize=10;//核心线程数
-	private static int maximumPoolSize=13;//最大线程数
+	private static int corePoolSize=20;//核心线程数
+	private static int maximumPoolSize=23;//最大线程数
 	private static long keepAliveTIme = 6000;//最大空闲时间
 	private static TimeUnit unit = TimeUnit.SECONDS;//单位
 	private static BlockingQueue<Runnable> workQueueArray = new ArrayBlockingQueue<Runnable>(30);//队列
