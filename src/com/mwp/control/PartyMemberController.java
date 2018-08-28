@@ -1,5 +1,6 @@
 package com.mwp.control;
 
+import java.io.File;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -74,6 +75,50 @@ public class PartyMemberController extends BaseController {
 		return "/partymember/fileInput.jsp";
 	} 
 
+	@Description(value="档案文件信息导入")
+	@RequestMapping(value="/fileListImport/{partyMemberCertid}",method=RequestMethod.GET)
+	public String fileListImport(@PathVariable(required=true,value="partyMemberCertid") String partyMemberCertid,ModelMap map){
+		map.addAttribute("partyMemberCertid", partyMemberCertid);
+		return "/partymember/fileListImport.jsp";
+	}
+	
+	@Description(value="excel文件导入")
+	@RequestMapping(value = "/fileListImport", method = RequestMethod.POST)
+	@ResponseBody
+	public BaseResult fileListImport(@RequestParam(value="partyMemberCertid",required=true) String partyMemberCertid,
+									@RequestParam(value = "fileType", required = true) String fileType,
+									@RequestParam(value = "fileName", required = true) String fileName,
+									@RequestParam(value = "fileListImport", required = false) MultipartFile fileListImport,
+									HttpServletRequest request) {
+		
+         if(!fileListImport.isEmpty()){
+        	
+        	 
+        	 MFile mFile = new MFile();
+        	 mFile.setUserid(partyMemberCertid);
+        	 mFile.setMfileid(String.valueOf(System.currentTimeMillis()));
+        	 mFile.setMfilename(fileName);
+        	 mFile.setMfiletype(fileType);
+        	 mFile.setMfileurl("/Dtms/uploadfiles/"+fileListImport.getOriginalFilename());//数据库中展示用的url要加Dtms前缀
+        	 mFile.setCttime(new Date());
+        	 try {
+        		 //先插数据库
+	        	 mFileService.addMFile(mFile);
+	        	 //上传文件
+	        	 String sServerPath = request.getSession().getServletContext().getRealPath("uploadfiles");
+	        	 fileListImport.transferTo(new File(sServerPath+File.separator+fileListImport.getOriginalFilename()));
+	        	 
+	    	 	} catch (Exception e) {
+			    	mFileService.delMFile(mFile);//数据库回滚
+			    	e.printStackTrace();
+			        return new BaseResult(2,"上传出现异常","");
+			    }
+        	 }else{
+        		 return new BaseResult(2,"文件未获取到","");
+        	 }
+		return new BaseResult(2,"档案上传成功","");
+	}
+	
 	@Description(value="党员档案信息浏览")
 	@RequestMapping(value="/fileList/{certid}",method=RequestMethod.GET)
 	public String fileList(@PathVariable(required=true,value="certid") String certid,ModelMap map){
@@ -82,6 +127,26 @@ public class PartyMemberController extends BaseController {
 		return "/partymember/fileList.jsp";
 	}
 	
+	@Description(value="党员档案信息查询")
+	@RequestMapping(value="/fileList/{partyMemberCertid}",method=RequestMethod.POST)
+	@ResponseBody
+	public BasePageResult<MFile> fileList(@PathVariable(required=true,value="partyMemberCertid") String partyMemberCertid,
+			@RequestParam(required=false,value="mFileType") String mfiletype){
+		_log.info("post接受参数:"+partyMemberCertid+"---"+mfiletype);
+		//设置条件
+		MFileExample mfe = new MFileExample();
+		Criteria creteria= mfe.createCriteria();
+		creteria.andUseridEqualTo(partyMemberCertid);
+		
+		if(!StringUtils.isBlank(mfiletype)){
+			creteria.andMfiletypeEqualTo(mfiletype);
+		}
+		
+		int total = mFileService.countMFileByExample(mfe);
+		
+		List<MFile> mFileList = mFileService.selectMFileByExample(mfe);
+		return new BasePageResult<MFile>(total, mFileList);
+	}
 	
 	@Description(value="党员转出页面")
 	@RequestMapping(value="/out/{certid}", method = RequestMethod.GET)
@@ -209,26 +274,6 @@ public class PartyMemberController extends BaseController {
 		
 	}
 
-	@Description(value="党员档案信息浏览")
-	@RequestMapping(value="/fileList/{partyMemberCertid}",method=RequestMethod.POST)
-	@ResponseBody
-	public BasePageResult<MFile> fileList(@PathVariable(required=true,value="partyMemberCertid") String partyMemberCertid,
-			@RequestParam(required=false,value="mFileType") String mfiletype){
-		_log.info("post接受参数:"+partyMemberCertid+"---"+mfiletype);
-		//设置条件
-		MFileExample mfe = new MFileExample();
-		Criteria creteria= mfe.createCriteria();
-		creteria.andUseridEqualTo(partyMemberCertid);
-		
-		if(!StringUtils.isBlank(mfiletype)){
-			creteria.andMfiletypeEqualTo(mfiletype);
-		}
-		
-		int total = mFileService.countMFileByExample(mfe);
-		
-		List<MFile> mFileList = mFileService.selectMFileByExample(mfe);
-		return new BasePageResult<MFile>(total, mFileList);
-	}
 	
 	@Description(value="excel文件导入")
 	@RequestMapping(value = "/importExcel", method = RequestMethod.POST)
@@ -245,24 +290,22 @@ public class PartyMemberController extends BaseController {
 	             }else if(excelFile.getOriginalFilename().endsWith("xls")){
 	            	 datas = ExcelUtil.readXls(excelFile.getInputStream());
 	             }else{
-	            	 return new BaseResult(2,"文件格式无法导入","");
+	            	 return new BaseResult(2,"不是excel文件","");
 	             }
 	             //读到的数据都在datas里面
 	             if(datas!=null && datas.size()>0){
 	            	 for(int i=0;i<datas.size();i++){
 	            		 partyMemberService.importPartyMember(datas.get(i));
 	            	 }
-	                 return new BaseResult(1,"导入成功","");
 	             }
 	         }else{
-	        	 _log.info("出现错误------"+excelFile);
 	             return new BaseResult(2,"无效文件","");
 	         }
 	     } catch (Exception e) {
-	    	 _log.info("出现异常------"+e.getMessage());
+	    	 e.printStackTrace();
 	         return new BaseResult(2,"出现异常","");
 	     }
-	     return new BaseResult(2,"出现异常","");
+        return new BaseResult(1,"导入成功","");
 	 }
 	
 }

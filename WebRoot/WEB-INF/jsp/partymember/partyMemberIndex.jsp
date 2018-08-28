@@ -143,7 +143,8 @@ $(function () {
 		showExport: true,  					//是否显示excel导出按钮 
         exportDataType:'all',				//导出数据 basic:当前页 selected:选中 all:所有
         buttonsAlign:"left",  			//按钮位置  
-        exportTypes:['json', 'xml', 'csv', 'txt', 'sql', 'excel'],  			//导出文件类型  
+        exportTypes:['excel'],
+       //exportTypes:['json', 'xml', 'csv', 'txt', 'sql', 'excel'],  			//导出文件类型  
         Icons:'glyphicon-export',  
         
         queryParams: function (params) {

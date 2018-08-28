@@ -43,6 +43,9 @@ public class ExcelUtil {
             }
             for (int rowNum = 1; rowNum <= xssfSheet.getLastRowNum(); rowNum++) {
                 XSSFRow row = xssfSheet.getRow(rowNum);
+                if(row == null){
+                	continue;
+                }
                 int minCellNum = row.getFirstCellNum();
                 int maxCellNum = row.getLastCellNum();
                 List<String> rowList = new ArrayList<String>();
@@ -76,6 +79,9 @@ public class ExcelUtil {
             }
             for (int rowNum = 1; rowNum <= sheet.getLastRowNum(); rowNum++) {
                 HSSFRow row = sheet.getRow(rowNum);
+                if(row == null){
+                	continue;
+                }
                 int minCellNum = row.getFirstCellNum();
                 int maxCellNum = row.getLastCellNum();
                 List<String> rowList = new ArrayList<String>();

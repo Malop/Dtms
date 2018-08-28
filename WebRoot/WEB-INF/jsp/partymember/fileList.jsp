@@ -21,7 +21,8 @@
     	文件类型：<input type="text" name="mfiletype" id="mfiletype" class="input-default" /> 
     	<button id="btn_que" type="button" class="btn btn-primary btn-sm" >查询</button>
     
-	<table class="filelist table table-bordered table-hover definewidth m10" >
+    <button id="btn_fileListImport" type="button" class="btn btn-primary btn-sm" >档案补充</button>
+	<table id="fileList" class="filelist table table-bordered table-hover definewidth m10" >
     <thead>
     <tr>
         <th>文件id</th>
@@ -38,7 +39,6 @@
     </tr> -->
  	
 	</table>
-	<table id="tb_departments"></table>
 	</div>
 </div>
 
@@ -54,7 +54,7 @@ $(function () {
 		contentType:'application/json',
 		success:function(data){
 			$(data.rows).each(function(i,n){
-				var item = '<tr class="mfiletr"><td>'+n.mfileid+'</td><td>'+n.mfiletype+'</td><td>'+n.mfilename+'</td><td><a href="#" onClick="window.open(\''+n.mfileurl+'\',\'\',\'height=530, width=700, top=180,left=350\')">查看</a>&nbsp;&nbsp;<a href="'+n.mfileurl+'" download="'+n.mfilename+'.tif">下载</a></td></tr>';
+				var item = '<tr class="mfiletr"><td>'+n.mfileid+'</td><td>'+n.mfiletype+'</td><td>'+n.mfilename+'</td><td><a href="#" onClick="window.open(\''+n.mfileurl+'?'+Math.random()+'\',\'_blank\',\'height=530, width=700, top=180,left=350\')">查看</a>&nbsp;&nbsp;<a href="'+n.mfileurl+'" download="'+n.mfilename+'">下载</a></td></tr>';
 				$(item).appendTo('table.filelist');
 			})
 		}
@@ -71,12 +71,24 @@ $(function () {
     		success:function(data){
     			$('.mfiletr').remove();
     			$(data.rows).each(function(i,n){
-    				var item = '<tr class="mfiletr"><td>'+n.mfileid+'</td><td>'+n.mfiletype+'</td><td>'+n.mfilename+'</td><td><a href="#" onClick="window.open(\''+n.mfileurl+'\',\'\',\'height=530, width=700, top=180,left=350\')">查看</a>&nbsp;&nbsp;<a href="'+n.mfileurl+'" download="'+n.mfilename+'.tif">下载</a></td></tr>';
+    				var item = '<tr class="mfiletr"><td>'+n.mfileid+'</td><td>'+n.mfiletype+'</td><td>'+n.mfilename+'</td><td><a href="#" onClick="window.open(\''+n.mfileurl+'\',\'\',\'height=530, width=700, top=180,left=350\')">查看</a>&nbsp;&nbsp;<a href="'+n.mfileurl+'" download="'+n.mfilename+'">下载</a></td></tr>';
     				$(item).appendTo('table.filelist');
     			})
     		}
     	});
     });
-	
+  	
+	//人员档案信息补充
+    $("#btn_fileListImport").click(function(){
+    	$.hdDialog({
+			title: '档案信息补充导入',
+			columnClass:'col-md-offset-2 col-md-8',//配合col-md-offset-x居中
+			containerFluid:true,//最大化
+			content: 'url:${basePath}/partymember/fileListImport/${partyMemberCertid}',
+			onClose: function(){
+				$('#fileList').bootstrapTable('refresh');
+			}
+		});
+    });
 });
 </script>

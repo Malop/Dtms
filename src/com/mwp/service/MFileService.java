@@ -16,4 +16,10 @@ public interface MFileService {
 	
 	//按党员信息查找档案文件信息
 	public List<MFile> selectMFileByExample(MFileExample mFileExample);
+	
+	//增加档案文件信息
+	public void addMFile(MFile mf);
+	
+	//删除档案文件信息
+	public void delMFile(MFile mf);
 }

@@ -32,7 +32,7 @@
 	<mvc:interceptors>
         <!--限流拦截器-->
         <mvc:interceptor>
-            <mvc:mapping path="/index/login"/>
+            <mvc:mapping path="/a/**"/>
             <mvc:exclude-mapping path="/resources/**"/>
             <bean class="com.mwp.base.ControllerLimitInterceptor">
             	<!-- <constructor-arg index="0" value="10"/> -->

@@ -55,11 +55,12 @@ create table mfile(mfileid varchar(20) not null COMMENT '图片id',
 				PRIMARY KEY (mfileid)
 				)charset=utf8;
 				
-insert into mfile(mfileid,mfilename,userid,mfiletype,mfileurl,cttime) values('1','中国共产党党员基本情况登记表','330106195705270012','01','/Dtms/uploadfiles/中国共产党党员基本情况登记表.tif','2018-06-24 00:00:00');
-insert into mfile(mfileid,mfilename,userid,mfiletype,mfileurl,cttime) values('2','发展党员工作全程纪实表','330106195705270012','01','/Dtms/uploadfiles/发展党员工作全程纪实表.tif','2018-06-24 00:00:00');
-insert into mfile(mfileid,mfilename,userid,mfiletype,mfileurl,cttime) values('3','入党申请书','330106195705270012','01','/Dtms/uploadfiles/入党申请书.tif','2018-06-24 00:00:00');
-insert into mfile(mfileid,mfilename,userid,mfiletype,mfileurl,cttime) values('4','党内表彰奖励情况','330106195705270012','01','/Dtms/uploadfiles/党内表彰奖励情况.tif','2018-06-24 00:00:00');
-insert into mfile(mfileid,mfilename,userid,mfiletype,mfileurl,cttime) values('5','党纪处分情况','330106195705270012','01','/Dtms/uploadfiles/党纪处分情况.tif','2018-06-24 00:00:00');
+insert into mfile(mfileid,mfilename,userid,mfiletype,mfileurl,cttime) values('1','中国共产党党员基本情况登记表','330106195705270012','01','/Dtms/uploadfiles/PRO-001-001.pdf','2018-06-24 00:00:00');
+insert into mfile(mfileid,mfilename,userid,mfiletype,mfileurl,cttime) values('2','入党申请书','330106195705270012','01','/Dtms/uploadfiles/PRO-001-002.pdf','2018-06-24 00:00:00');
+insert into mfile(mfileid,mfilename,userid,mfiletype,mfileurl,cttime) values('3','入党积极分子培养考察登记表','330106195705270012','01','/Dtms/uploadfiles/PRO-001-003.pdf','2018-06-24 00:00:00');
+insert into mfile(mfileid,mfilename,userid,mfiletype,mfileurl,cttime) values('4','入党政治审查材料','330106195705270012','01','/Dtms/uploadfiles/PRO-001-004.pdf','2018-06-24 00:00:00');
+insert into mfile(mfileid,mfilename,userid,mfiletype,mfileurl,cttime) values('5','中国共产党入党志愿书','330106195705270012','01','/Dtms/uploadfiles/PRO-001-005.pdf','2018-06-24 00:00:00');
+insert into mfile(mfileid,mfilename,userid,mfiletype,mfileurl,cttime) values('6','预备党员转正申请书','330106195705270012','01','/Dtms/uploadfiles/PRO-001-006.pdf','2018-06-24 00:00:00');
 
 --党员信息表
 --drop table partymember;
