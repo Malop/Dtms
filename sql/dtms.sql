@@ -21,17 +21,17 @@ create table menu(menuid int not NULL,
 				parentid int,
 				menuname varchar(20) DEFAULT NULL,
 				type varchar(10) DEFAULT NULL COMMENT '1目录 2菜单 3按钮',
-				uri varchar(200) DEFAULT NULL 4,
+				uri varchar(200) DEFAULT NULL,
 				icon varchar(100) DEFAULT NULL,
 				cttime DATETIME DEFAULT NULL,
 				PRIMARY KEY (menuid)
 				)charset=utf8;
 
 insert into menu(menuid,parentid,menuname,type,uri,icon,cttime) values(1,0,'人员管理','1','','','2018-04-20');
-insert into menu(menuid,parentid,menuname,type,uri,icon,cttime) values(2,1,'党员信息列表','2','/partymember/index/0','','2018-05-14');
-insert into menu(menuid,parentid,menuname,type,uri,icon,cttime) values(3,1,'转出党员列表','2','/partymember/index/1','','2018-05-14');
-insert into menu(menuid,parentid,menuname,type,uri,icon,cttime) values(4,1,'死亡党员列表','2','/partymember/index/2','','2018-05-14');
-insert into menu(menuid,parentid,menuname,type,uri,icon,cttime) values(5,1,'出党党员列表','2','/partymember/index/3','','2018-05-14');
+insert into menu(menuid,parentid,menuname,type,uri,icon,cttime) values(2,1,'党员信息列表','2','partymember/index/0','','2018-05-14');
+insert into menu(menuid,parentid,menuname,type,uri,icon,cttime) values(3,1,'转出党员列表','2','partymember/index/1','','2018-05-14');
+insert into menu(menuid,parentid,menuname,type,uri,icon,cttime) values(4,1,'死亡党员列表','2','partymember/index/2','','2018-05-14');
+insert into menu(menuid,parentid,menuname,type,uri,icon,cttime) values(5,1,'出党党员列表','2','partymember/index/3','','2018-05-14');
 
 --人员菜单关系表
 --drop table user_menu;

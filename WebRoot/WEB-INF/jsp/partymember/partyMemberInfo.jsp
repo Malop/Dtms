@@ -19,10 +19,7 @@
 		<div class="form-group">
 			<label for="sex" class="col-md-3 control-label">性别</label>
 			<div class="col-md-9">
-				<select id="sex" class="form-control" name="sex" required>
-					<option value="male">男</option>
-					<option value="female">女</option>
-				</select>
+				<input id="sex" type="text" class="form-control" name="sex" maxlength="10" required value="${partyMember.sex}">
 			</div>
 		</div>
 		<div class="form-group">
@@ -40,10 +37,7 @@
 		<div class="form-group">
 			<label for="isTaiwan" class="col-md-3 control-label">是否台湾</label>
 			<div class="col-md-9">
-				<select id="isTaiwan" class="form-control" name="istaiwan" required>
-					<option value="01">是</option>
-					<option value="02">否</option>
-				</select>
+				<input id="isTaiwan" type="text" class="form-control" name="isTaiwan" maxlength="10" required value="${partyMember.istaiwan}">
 			</div>
 		</div>
 		<div class="form-group">
@@ -121,10 +115,7 @@
 		<div class="form-group">
 			<label for="marriage" class="col-md-3 control-label">婚姻状况</label>
 			<div class="col-md-9">
-				<select id="marriage" class="form-control" name="marriage" required>
-					<option value="01">未婚</option>
-					<option value="02">已婚</option>
-				</select>
+				<input id="marriage" type="text" class="form-control" name="marriage" maxlength="10" required value="${partyMember.marriage}">
 			</div>
 		</div>
 		<div class="form-group">
@@ -160,19 +151,13 @@
 		<div class="form-group">
 			<label for="isworker" class="col-md-3 control-label">是否农名工</label>
 			<div class="col-md-9">
-				<select id="isworker" class="form-control" name="isworker" required>
-					<option value="01">是</option>
-					<option value="02">否</option>
-				</select>
+				<input id="isworker" type="text" class="form-control" name="isworker" maxlength="20" value="${partyMember.isworker}">
 			</div>
 		</div>
 		<div class="form-group">
 			<label for="isoffline" class="col-md-3 control-label">是否失联党员</label>
 			<div class="col-md-9">
-				<select id="isoffline" class="form-control" name="isoffline" required>
-					<option value="01">是</option>
-					<option value="02">否</option>
-				</select>
+				<input id="isoffline" type="text" class="form-control" name="isoffline" maxlength="20" value="${partyMember.isoffline}">
 			</div>
 		</div>
 		<div class="form-group">
@@ -184,10 +169,7 @@
 		<div class="form-group">
 			<label for="isfloat" class="col-md-3 control-label">是否流动党员</label>
 			<div class="col-md-9">
-				<select id="isfloat" class="form-control" name="isfloat" required>
-					<option value="01">是</option>
-					<option value="02">否</option>
-				</select>
+				<input id="isfloat" type="text" class="form-control" name="isfloat" maxlength="20" value="${partyMember.isfloat}">
 			</div>
 		</div>
 		<div class="form-group">
@@ -219,12 +201,6 @@
 <script>
 $(function () {
 	$("#createDialog #icon").iconPicker();
-	$('#createDialog #sex').multiselect();
-	$('#createDialog #isTaiwan').multiselect();
-	$('#createDialog #marriage').multiselect();
-	$('#createDialog #isworker').multiselect();
-	$('#createDialog #isoffline').multiselect();
-	$('#createDialog #isfloat').multiselect();
 	$("#createForm").validate();
 	$("#btn_save").click(function(){
 		if(!$("#createForm").valid()){

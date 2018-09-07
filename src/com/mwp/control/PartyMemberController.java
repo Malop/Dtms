@@ -82,43 +82,6 @@ public class PartyMemberController extends BaseController {
 		return "/partymember/fileListImport.jsp";
 	}
 	
-	@Description(value="excel文件导入")
-	@RequestMapping(value = "/fileListImport", method = RequestMethod.POST)
-	@ResponseBody
-	public BaseResult fileListImport(@RequestParam(value="partyMemberCertid",required=true) String partyMemberCertid,
-									@RequestParam(value = "fileType", required = true) String fileType,
-									@RequestParam(value = "fileName", required = true) String fileName,
-									@RequestParam(value = "fileListImport", required = false) MultipartFile fileListImport,
-									HttpServletRequest request) {
-		
-         if(!fileListImport.isEmpty()){
-        	
-        	 
-        	 MFile mFile = new MFile();
-        	 mFile.setUserid(partyMemberCertid);
-        	 mFile.setMfileid(String.valueOf(System.currentTimeMillis()));
-        	 mFile.setMfilename(fileName);
-        	 mFile.setMfiletype(fileType);
-        	 mFile.setMfileurl("/Dtms/uploadfiles/"+fileListImport.getOriginalFilename());//数据库中展示用的url要加Dtms前缀
-        	 mFile.setCttime(new Date());
-        	 try {
-        		 //先插数据库
-	        	 mFileService.addMFile(mFile);
-	        	 //上传文件
-	        	 String sServerPath = request.getSession().getServletContext().getRealPath("uploadfiles");
-	        	 fileListImport.transferTo(new File(sServerPath+File.separator+fileListImport.getOriginalFilename()));
-	        	 
-	    	 	} catch (Exception e) {
-			    	mFileService.delMFile(mFile);//数据库回滚
-			    	e.printStackTrace();
-			        return new BaseResult(2,"上传出现异常","");
-			    }
-        	 }else{
-        		 return new BaseResult(2,"文件未获取到","");
-        	 }
-		return new BaseResult(2,"档案上传成功","");
-	}
-	
 	@Description(value="党员档案信息浏览")
 	@RequestMapping(value="/fileList/{certid}",method=RequestMethod.GET)
 	public String fileList(@PathVariable(required=true,value="certid") String certid,ModelMap map){
@@ -131,15 +94,15 @@ public class PartyMemberController extends BaseController {
 	@RequestMapping(value="/fileList/{partyMemberCertid}",method=RequestMethod.POST)
 	@ResponseBody
 	public BasePageResult<MFile> fileList(@PathVariable(required=true,value="partyMemberCertid") String partyMemberCertid,
-			@RequestParam(required=false,value="mFileType") String mfiletype){
-		_log.info("post接受参数:"+partyMemberCertid+"---"+mfiletype);
+			@RequestParam(required=false,value="mFileName") String mFileName){
+		_log.info("post接受参数:"+partyMemberCertid+"---"+mFileName);
 		//设置条件
 		MFileExample mfe = new MFileExample();
 		Criteria creteria= mfe.createCriteria();
 		creteria.andUseridEqualTo(partyMemberCertid);
 		
-		if(!StringUtils.isBlank(mfiletype)){
-			creteria.andMfiletypeEqualTo(mfiletype);
+		if(!StringUtils.isBlank(mFileName)){
+			creteria.andMfilenameEqualTo(mFileName);
 		}
 		
 		int total = mFileService.countMFileByExample(mfe);
@@ -308,4 +271,43 @@ public class PartyMemberController extends BaseController {
         return new BaseResult(1,"导入成功","");
 	 }
 	
+	@Description(value="档案记录信息导入")
+	@RequestMapping(value = "/fileListImport", method = RequestMethod.POST)
+	@ResponseBody
+	public BaseResult fileListImport(@RequestParam(value = "fileListImport", required = false) MultipartFile fileListImport,HttpServletRequest request) {
+		try {
+	         if(fileListImport!=null){
+	        	 //默认读xls文件
+	             List<List<String>> datas = null;
+	             _log.info("获取文件----"+fileListImport.getOriginalFilename());
+	             //支持读xls文件
+	             if(fileListImport.getOriginalFilename().endsWith("xlsx")){
+	            	 datas = ExcelUtil.readXlsx(fileListImport.getInputStream());
+	             }else if(fileListImport.getOriginalFilename().endsWith("xls")){
+	            	 datas = ExcelUtil.readXls(fileListImport.getInputStream());
+	             }else{
+	            	 return new BaseResult(2,"不是excel文件","");
+	             }
+	             //读到的数据都在datas里面
+	             if(datas!=null && datas.size()>0){
+            		 MFile mFile = new MFile();
+	            	 for(int i=0;i<datas.size();i++){
+	                	 mFile.setUserid(datas.get(i).get(7));
+	                	 mFile.setMfileid(String.valueOf(System.currentTimeMillis()));
+	                	 mFile.setMfilename(datas.get(i).get(3));
+	                	 mFile.setMfiletype("");
+	                	 mFile.setMfileurl("/Dtms/uploadfiles/"+datas.get(i).get(8)+".pdf");//数据库中展示用的url要加Dtms前缀
+	                	 mFile.setCttime(new Date());
+	            		 mFileService.addMFile(mFile);
+	            	 }
+	             }
+	         }else{
+	             return new BaseResult(2,"无效文件","");
+	         }
+	     } catch (Exception e) {
+	    	 e.printStackTrace();
+	         return new BaseResult(2,"出现异常","");
+	     }
+        return new BaseResult(1,"导入成功","");
+	 }
 }

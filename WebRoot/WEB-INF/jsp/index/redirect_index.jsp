@@ -25,7 +25,7 @@ li{
 	background: rgba(255,255,255,0.2);
 	width:900px;
 	position: absolute;   
-    top: 50%;   
+    top: 360px;   
     left: 50%; 
     transform: translate(-50%,30%);
 }

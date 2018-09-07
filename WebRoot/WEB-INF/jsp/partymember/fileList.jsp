@@ -18,7 +18,7 @@
 <!-- 单一页面不用写html,head,body标签 -->
 <div class="panel panel-default">
 	<div class="panel-body" style="padding-left:5px;padding-right:5px">
-    	文件类型：<input type="text" name="mfiletype" id="mfiletype" class="input-default" /> 
+    	文件名称：<input type="text" name="mfilename" id="mfilename" class="input-default" /> 
     	<button id="btn_que" type="button" class="btn btn-primary btn-sm" >查询</button>
     
     <button id="btn_fileListImport" type="button" class="btn btn-primary btn-sm" >档案补充</button>
@@ -62,12 +62,12 @@ $(function () {
 	
 	//初始化页面上面的按钮事件
     $("#btn_que").click(function(){
-    	var mfiletype = $("#mfiletype").val();
+    	var mfilename = $("#mfilename").val();
     	$.ajax({
     		url:'${basePath}/partymember/fileList/${partyMemberCertid}',
     		dataType:'json',
     		type:'POST',
-    		data:{'mFileType':mfiletype},
+    		data:{'mFileName':mfilename},
     		success:function(data){
     			$('.mfiletr').remove();
     			$(data.rows).each(function(i,n){
