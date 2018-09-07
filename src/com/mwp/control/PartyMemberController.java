@@ -76,9 +76,8 @@ public class PartyMemberController extends BaseController {
 	} 
 
 	@Description(value="档案文件信息导入")
-	@RequestMapping(value="/fileListImport/{partyMemberCertid}",method=RequestMethod.GET)
-	public String fileListImport(@PathVariable(required=true,value="partyMemberCertid") String partyMemberCertid,ModelMap map){
-		map.addAttribute("partyMemberCertid", partyMemberCertid);
+	@RequestMapping(value="/fileListImport",method=RequestMethod.GET)
+	public String fileListImport(HttpServletRequest request){
 		return "/partymember/fileListImport.jsp";
 	}
 	
@@ -272,15 +271,15 @@ public class PartyMemberController extends BaseController {
 	 }
 	
 	@Description(value="档案记录信息导入")
-	@RequestMapping(value = "/fileListImport", method = RequestMethod.POST)
+	@RequestMapping(value = "/fileListImport/{type}", method = RequestMethod.POST)
 	@ResponseBody
-	public BaseResult fileListImport(@RequestParam(value = "fileListImport", required = false) MultipartFile fileListImport,HttpServletRequest request) {
+	public BaseResult fileListImport(@PathVariable(value = "type",required = false) String type,
+									@RequestParam(value = "fileListImport", required = false) MultipartFile fileListImport,
+									HttpServletRequest request) {
 		try {
 	         if(fileListImport!=null){
-	        	 //默认读xls文件
 	             List<List<String>> datas = null;
 	             _log.info("获取文件----"+fileListImport.getOriginalFilename());
-	             //支持读xls文件
 	             if(fileListImport.getOriginalFilename().endsWith("xlsx")){
 	            	 datas = ExcelUtil.readXlsx(fileListImport.getInputStream());
 	             }else if(fileListImport.getOriginalFilename().endsWith("xls")){
@@ -290,16 +289,29 @@ public class PartyMemberController extends BaseController {
 	             }
 	             //读到的数据都在datas里面
 	             if(datas!=null && datas.size()>0){
-            		 MFile mFile = new MFile();
-	            	 for(int i=0;i<datas.size();i++){
-	                	 mFile.setUserid(datas.get(i).get(7));
-	                	 mFile.setMfileid(String.valueOf(System.currentTimeMillis()));
-	                	 mFile.setMfilename(datas.get(i).get(3));
-	                	 mFile.setMfiletype("");
-	                	 mFile.setMfileurl("/Dtms/uploadfiles/"+datas.get(i).get(8)+".pdf");//数据库中展示用的url要加Dtms前缀
-	                	 mFile.setCttime(new Date());
-	            		 mFileService.addMFile(mFile);
+	            	 if("0".equals(type)){
+	            		 //卷内文档导入
+	            		 MFile mFile = new MFile();
+		            	 for(int i=0;i<datas.size();i++){
+		                	 mFile.setUserid(datas.get(i).get(7));
+		                	 mFile.setMfileid(String.valueOf(System.currentTimeMillis()));
+		                	 mFile.setMfilename(datas.get(i).get(3));
+		                	 mFile.setMfiletype("");
+		                	 mFile.setMfileurl("/Dtms/uploadfiles/"+datas.get(i).get(8)+".pdf");//数据库中展示用的url要加Dtms前缀
+		                	 mFile.setCttime(new Date());
+		            		 mFileService.addMFile(mFile);
+		            	 }
+	            	 }else if ("1".equals(type)){
+	            		 //档案资料度导入
+	            		 PartyMember partyMember = new PartyMember();
+	            		 for(int i=0;i<datas.size();i++){
+	            			 partyMember.setCertid(datas.get(i).get(5));
+	            			 partyMember.setFileprecent(datas.get(i).get(7));
+	            			 partyMember.setMainfileprecent(datas.get(i).get(6));
+	            			 partyMemberService.updatePartyMember(partyMember);
+	            		 }
 	            	 }
+            		 
 	             }
 	         }else{
 	             return new BaseResult(2,"无效文件","");

@@ -79,8 +79,8 @@
 		
 	<div id="toolbar" class="btn-toolbar pull-right" style="margin-bottom:3px">
 	<c:if test="${isOut == 0}">
-		<button id="btn_scan" type="button" class="btn btn-danger btn-sm" style="display:none">
-            <span class="glyphicon glyphicon-inbox" aria-hidden="true"></span>扫描档案
+		<button id="btn_fileListImport" type="button" class="btn btn-danger btn-sm">
+            <span class="glyphicon glyphicon-inbox" aria-hidden="true"></span>档案补充
         </button>
 		<button id="btn_filelist" type="button" class="btn btn-danger btn-sm">
             <span class="glyphicon glyphicon-inbox" aria-hidden="true"></span>档案查看
@@ -191,6 +191,20 @@ $(function () {
 	$("#btn_reset").click(function(){
 		$(".form-control").val("");
 	});
+	
+
+	//人员档案信息补充
+    $("#btn_fileListImport").click(function(){
+    	$.hdDialog({
+			title: '档案信息补充导入',
+			columnClass:'col-md-offset-2 col-md-8',//配合col-md-offset-x居中
+			containerFluid:true,//最大化
+			content: 'url:${basePath}/partymember/fileListImport',
+			onClose: function(){
+				$('#tb_departments').bootstrapTable('refresh');
+			}
+		});
+    });
 	
 	//档案文件列表
 	$("#btn_filelist").click(function(){

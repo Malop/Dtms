@@ -1,20 +1,26 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jstl/core_rt" prefix="c" %>
 <c:set var="basePath" value="${pageContext.request.contextPath }" />
-<c:set var="partyMemberCertid" value="${partyMemberCertid}" />
 <!-- 单一页面不用写html,head,body标签 -->
 <div class="fileListImportDialog">
 	<div class="modal-body">
 	    <form id="importFile" class="form-horizontal" method="post">
-	        <div class="col-lg-10">
+	    	<div class="col-lg-2">党员卷内导入:</div>
+	        <div class="col-lg-12">
 	            <input id="fileListImport" name="fileListImport" class="file-loading" type="file"/>
+	        </div>
+	        <div></div>
+	        <div class="col-lg-2">资料比例导入:</div>
+	        <div class="col-lg-12">
+	            <input id="filePrecentImport" name="fileListImport" class="file-loading" type="file"/>
 	        </div>
 	    </form>
 	</div>
 </div>
 <script>
 //$("#fileType").multiselect();
-initUpload("fileListImport", "${basePath}/partymember/fileListImport");
+initUpload("fileListImport", "${basePath}/partymember/fileListImport/0");
+initUpload("filePrecentImport","${basePath}/partymember/fileListImport/1");
 function initUpload(ctrlName, uploadUrl) {
     var control = $('#' + ctrlName);
     control.fileinput({
@@ -52,7 +58,7 @@ function initUpload(ctrlName, uploadUrl) {
 }
 
 //文件上传成功回调方法
-$("#fileListImport").on("fileuploaded", function (event, data, previewId, index) {
+$("#fileListImport #filePrecentImport").on("fileuploaded", function (event, data, previewId, index) {
     if(data.response.code == 1){
         alert(data.files[index].name + ":"+data.response.msg);
     	//关闭
@@ -62,8 +68,10 @@ $("#fileListImport").on("fileuploaded", function (event, data, previewId, index)
 	    //重置
 	    $("#fileListImport").fileinput("clear");
 	    $("#fileListImport").fileinput("reset");
-	   	//$('#excelFile').fileinput("refresh");
 	    $("#fileListImport").fileinput('enable');
+	    $("#filePrecentImport").fileinput("clear");
+	    $("#filePrecentImport").fileinput("reset");
+	    $("#filePrecentImport").fileinput('enable');
     }
 });
 </script>

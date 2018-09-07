@@ -42,7 +42,7 @@ public class MFileServiceImpl implements MFileService{
 		Criteria creteria= mfe.createCriteria();
 		creteria.andUseridEqualTo(mf.getUserid());
 		creteria.andMfilenameEqualTo(mf.getMfilename());
-		creteria.andMfiletypeEqualTo(mf.getMfiletype());
+		creteria.andMfileurlEqualTo(mf.getMfileurl());
 		List<MFile> mFileList = mFileMapper.selectByExample(mfe);
 		if(mFileList.size() == 0){
 			mFileMapper.insert(mf);

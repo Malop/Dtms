@@ -38,7 +38,7 @@
 		<header class="main-header">
 			<a href="#" class="logo">
 				<span id="system_name" class="logo-mini" style="font-size:12px">DTMS</span>
-				<span id="system_title" class="logo-lg" style="font-size:15px"><b>XX管理系统</b></span>
+				<span id="system_title" class="logo-lg" style="font-size:15px"><b>党员信息管理系统</b></span>
 			</a>
 			<nav class="navbar navbar-static-top">
 				<a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">

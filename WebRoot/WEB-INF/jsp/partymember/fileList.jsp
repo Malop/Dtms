@@ -20,8 +20,6 @@
 	<div class="panel-body" style="padding-left:5px;padding-right:5px">
     	文件名称：<input type="text" name="mfilename" id="mfilename" class="input-default" /> 
     	<button id="btn_que" type="button" class="btn btn-primary btn-sm" >查询</button>
-    
-    <button id="btn_fileListImport" type="button" class="btn btn-primary btn-sm" >档案补充</button>
 	<table id="fileList" class="filelist table table-bordered table-hover definewidth m10" >
     <thead>
     <tr>
@@ -78,17 +76,5 @@ $(function () {
     	});
     });
   	
-	//人员档案信息补充
-    $("#btn_fileListImport").click(function(){
-    	$.hdDialog({
-			title: '档案信息补充导入',
-			columnClass:'col-md-offset-2 col-md-8',//配合col-md-offset-x居中
-			containerFluid:true,//最大化
-			content: 'url:${basePath}/partymember/fileListImport/${partyMemberCertid}',
-			onClose: function(){
-				$('#fileList').bootstrapTable('refresh');
-			}
-		});
-    });
 });
 </script>
